@@ -57,6 +57,11 @@ export enum MovieListEnum {
   UPCOMING = 'upcoming',
 }
 
+export enum MovieDbMediaType {
+  MOVIE = 'movie',
+  TV_SHOW = 'tv',
+}
+
 export async function getMovieList(
   list: MovieListEnum,
   page: number = 1
@@ -66,6 +71,17 @@ export async function getMovieList(
     { params: { page } }
   );
   return data.data;
+}
+
+export function getMediaCreationDate(
+  item: Partial<MovieResult & TVShowResult>,
+  type: MovieDbMediaType
+) {
+  if (type === MovieDbMediaType.MOVIE) {
+    return new Date(item.release_date as string);
+  } else {
+    return new Date(item.first_air_date as string);
+  }
 }
 
 export async function getTVShowList(

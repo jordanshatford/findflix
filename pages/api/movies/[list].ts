@@ -3,7 +3,7 @@ import moviedb, {
   type MovieDBPagedResults,
   type MovieResult,
   MovieListEnum,
-} from '../../../services/movie-db';
+} from '@/services/movie-db';
 
 type ResponseData = {
   error: boolean;

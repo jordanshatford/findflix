@@ -5,8 +5,9 @@ import moviedb, {
   type MovieDBPagedResults,
   type MovieResult,
   MovieListEnum,
-} from '../../services/movie-db';
-import Poster from '../../components/Poster';
+  MovieDbMediaType,
+} from '@/services/movie-db';
+import Poster from '@/components/Poster';
 
 interface Props {
   results: MovieDBPagedResults<MovieResult>;
@@ -46,7 +47,11 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
       </h1>
       <div>
         {movies.map((movie) => (
-          <Poster key={movie.id} item={movie} type="movie"></Poster>
+          <Poster
+            key={movie.id}
+            item={movie}
+            type={MovieDbMediaType.MOVIE}
+          ></Poster>
         ))}
       </div>
       <button onClick={getNextPage}>

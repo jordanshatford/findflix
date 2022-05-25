@@ -3,56 +3,38 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
   IMAGE_BASE_URL,
+  MovieDbMediaType,
+  getMediaCreationDate,
   type MovieResult,
   type TVShowResult,
-} from '../services/movie-db';
-import { convertTitleToURLSafe } from '../utilities/urls';
+} from '@/services/movie-db';
+import { convertTitleToURLSafe } from '@/utilities/urls';
 
 interface Props {
   item: Partial<MovieResult & TVShowResult>;
-  type: 'movie' | 'tv';
+  type: MovieDbMediaType;
 }
 
 const PosterHoverInfo = ({ item, type }: Props) => {
-  const itemReleased = () => {
-    const today = new Date();
-    if (type === 'movie') {
-      return today > new Date(item.release_date as string);
-    } else {
-      return today > new Date(item.first_air_date as string);
-    }
-  };
-
-  const getYear = () => {
-    if (type === 'movie') {
-      return new Date(item.release_date as string).getFullYear();
-    } else {
-      return new Date(item.first_air_date as string).getFullYear();
-    }
-  };
-
   return (
     <div className="py-4 px-3 w-full h-full bottom-0 hidden absolute group-hover:flex bg-[#0d0d0dbb] backdrop-blur-sm justify-end flex-col">
       <p className="font-semibold text-sm text-[#f2f2f2]">{item.title}</p>
       <p className="line-clamp-3 text-xs font-light text-[#cacaca]">
-        {getYear()}
+        {getMediaCreationDate(item, type).getFullYear()}
       </p>
       <p className="line-clamp-3 text-xs font-light text-[#cacaca]">
         {item.overview}
       </p>
-      {itemReleased() ? (
+      {new Date() > getMediaCreationDate(item, type) ? (
         <Link
           href={{
             pathname: '/movies/[id]/[title]/watch',
             query: { id: item.id, title: convertTitleToURLSafe(item.title) },
           }}
-          passHref
         >
-          <a>
-            <div className="text-white text-sm py-2 px-3 rounded-md mt-3 w-max bg-gray-600">
-              Watch Now
-            </div>
-          </a>
+          <div className="text-white text-sm py-2 px-3 rounded-md mt-3 w-max bg-gray-600">
+            Watch Now
+          </div>
         </Link>
       ) : null}
     </div>
