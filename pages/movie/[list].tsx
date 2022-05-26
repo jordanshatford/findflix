@@ -1,4 +1,5 @@
 import type { NextPage, GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import moviedb, {
@@ -14,6 +15,9 @@ interface Props {
 }
 
 const PopularMovies: NextPage<Props> = ({ results }: Props) => {
+  const router = useRouter();
+  const list = router.query.list as MovieListEnum;
+
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -32,7 +36,7 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
     const response = await axios.get<{
       error: boolean;
       data: MovieDBPagedResults<MovieResult>;
-    }>(`/api/movies/${MovieListEnum.POPULAR}`, { params: { page: page + 1 } });
+    }>(`/api/movie/${list}`, { params: { page: page + 1 } });
     if (!response.data.error) {
       setMovies([...movies, ...response.data.data.results]);
       setPage(response.data.data.page);
@@ -43,7 +47,7 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
   return (
     <>
       <h1>
-        Popular Movies - {page} of {totalPages} with {totalResults} result
+        {list} Movies - {page} of {totalPages} with {totalResults} result
       </h1>
       <div>
         {movies.map((movie) => (
@@ -51,7 +55,7 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
             key={movie.id}
             item={movie}
             type={MovieDbMediaType.MOVIE}
-          ></Poster>
+          />
         ))}
       </div>
       <button onClick={getNextPage}>
@@ -61,8 +65,9 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const results = await moviedb.getMovieList(MovieListEnum.POPULAR);
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const { list } = params as { list: MovieListEnum };
+  const results = await moviedb.getMovieList(list);
   return { props: { results } };
 };
 

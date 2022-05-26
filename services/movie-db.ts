@@ -51,7 +51,6 @@ export interface MovieDBPagedResults<T> {
 
 export enum MovieListEnum {
   POPULAR = 'popular',
-  LATEST = 'latest',
   NOW_PLAYING = 'now_playing',
   TOP_RATED = 'top_rated',
   UPCOMING = 'upcoming',
