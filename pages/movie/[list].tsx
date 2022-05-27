@@ -63,6 +63,9 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { list } = params as { list: MovieListEnum };
+  if (!Object.values(MovieListEnum).includes(list)) {
+    return { notFound: true };
+  }
   const results = await moviedb.getMovieList(list);
   return { props: { results } };
 };
