@@ -2,9 +2,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
-  IMAGE_BASE_URL,
   MovieDbMediaType,
   getMediaCreationDate,
+  getMovieDBImageLink,
   type MovieResult,
   type TVShowResult,
 } from '@/services/movie-db';
@@ -13,27 +13,32 @@ import { toURLSafe } from '@/utilities/urls';
 interface Props {
   item: Partial<MovieResult & TVShowResult>;
   type: MovieDbMediaType;
-  hoverable?: boolean;
+  isHoverable?: boolean;
 }
 
 const PosterHoverInfo = ({ item, type }: Props) => {
+  const creationDate = getMediaCreationDate(item, type);
   return (
     <div className="py-4 px-3 w-full h-full bottom-0 hidden absolute group-hover:flex bg-zinc-800 bg-opacity-80 backdrop-blur-sm justify-end flex-col">
-      <p className="font-semibold text-sm text-[#f2f2f2]">{item.title}</p>
+      <p className="font-semibold text-sm text-[#f2f2f2]">
+        {type === MovieDbMediaType.MOVIE ? item.title : item.name}
+      </p>
       <p className="line-clamp-3 text-xs font-light text-[#cacaca]">
-        {getMediaCreationDate(item, type).getFullYear()}
+        {creationDate ? creationDate.getFullYear() : '???'}
       </p>
       <p className="line-clamp-3 text-xs font-light text-[#cacaca]">
         {item.overview}
       </p>
-      {new Date() > getMediaCreationDate(item, type) && (
+      {creationDate && new Date() > creationDate && (
         <Link
           href={{
             pathname: `/[type]/[id]/[title]/watch`,
             query: {
               type,
               id: item.id,
-              title: toURLSafe(item.title),
+              title: toURLSafe(
+                type === MovieDbMediaType.MOVIE ? item.title : item.name
+              ),
             },
           }}
         >
@@ -46,7 +51,8 @@ const PosterHoverInfo = ({ item, type }: Props) => {
   );
 };
 
-const Poster = ({ item, type, hoverable = true }: Props) => {
+const Poster = ({ item, type, isHoverable = true }: Props) => {
+  const posterImageUrl = getMovieDBImageLink(item.poster_path);
   return (
     <>
       <Link
@@ -55,23 +61,27 @@ const Poster = ({ item, type, hoverable = true }: Props) => {
           query: {
             type,
             id: item.id,
-            title: toURLSafe(item.title),
+            title: toURLSafe(
+              type === MovieDbMediaType.MOVIE ? item.title : item.name
+            ),
           },
         }}
         passHref
       >
         <a className="mx-2 mb-3 group inline-block">
-          <motion.div whileHover={{ scale: hoverable ? 1.05 : 1 }}>
+          <motion.div whileHover={{ scale: isHoverable ? 1.05 : 1 }}>
             <div className="w-40 h-60 overflow-hidden relative rounded-md bg-zinc-800 bg-opacity-80 backdrop-blur-sm">
-              <Image
-                src={`${IMAGE_BASE_URL}/t/p/w780${item.poster_path}`}
-                layout="fill"
-                placeholder="blur"
-                objectFit="cover"
-                blurDataURL={`${IMAGE_BASE_URL}/t/p/w780${item.poster_path}`}
-                alt={type === 'movie' ? item.title : item.name}
-              />
-              {hoverable && <PosterHoverInfo item={item} type={type} />}
+              {posterImageUrl && (
+                <Image
+                  src={posterImageUrl}
+                  layout="fill"
+                  placeholder="blur"
+                  objectFit="cover"
+                  blurDataURL={posterImageUrl}
+                  alt={type === MovieDbMediaType.MOVIE ? item.title : item.name}
+                />
+              )}
+              {isHoverable && <PosterHoverInfo item={item} type={type} />}
             </div>
           </motion.div>
         </a>

@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://api.themoviedb.org/3',
+  baseURL: process.env.MOVIEDB_API_BASE_URL as string,
   params: {
     api_key: process.env.MOVIEDB_API_KEY as string,
   },
 });
 
-export const IMAGE_BASE_URL = 'https://image.tmdb.org';
+const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_MOVIEDB_IMAGE_BASE_URL as string;
 
 export interface MovieResult {
   adult: boolean;
@@ -56,9 +56,26 @@ export enum MovieListEnum {
   UPCOMING = 'upcoming',
 }
 
+export enum TVShowListEnum {
+  AIRING_TODAY = 'airing_today',
+  ON_THE_AIR = 'on_the_air',
+  POPULAR = 'popular',
+  TOP_RATED = 'top_rated',
+}
+
 export enum MovieDbMediaType {
   MOVIE = 'movie',
   TV_SHOW = 'tv',
+}
+
+export function getMovieDBImageLink(
+  path: string | null | undefined,
+  size: string = 'w780'
+) {
+  if (!path) {
+    return '';
+  }
+  return `${IMAGE_BASE_URL}${size}${path}`;
 }
 
 export async function getMovieList(
@@ -72,19 +89,8 @@ export async function getMovieList(
   return data.data;
 }
 
-export function getMediaCreationDate(
-  item: Partial<MovieResult & TVShowResult>,
-  type: MovieDbMediaType
-) {
-  if (type === MovieDbMediaType.MOVIE) {
-    return new Date(item.release_date as string);
-  } else {
-    return new Date(item.first_air_date as string);
-  }
-}
-
 export async function getTVShowList(
-  list: 'latest' | 'airing_today' | 'on_the_air' | 'popular' | 'top_rated',
+  list: TVShowListEnum,
   page: number = 1
 ): Promise<MovieDBPagedResults<TVShowResult>> {
   const data = await axiosInstance.get<MovieDBPagedResults<TVShowResult>>(
@@ -92,6 +98,23 @@ export async function getTVShowList(
     { params: { page } }
   );
   return data.data;
+}
+
+export function getMediaCreationDate(
+  item: Partial<MovieResult & TVShowResult>,
+  type: MovieDbMediaType
+) {
+  if (type === MovieDbMediaType.MOVIE) {
+    if (item.release_date) {
+      return new Date(item.release_date as string);
+    }
+    return null;
+  } else {
+    if (item.first_air_date) {
+      return new Date(item.first_air_date as string);
+    }
+    return null;
+  }
 }
 
 export async function getMovie(mId: string) {}
