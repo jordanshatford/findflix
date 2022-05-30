@@ -68,6 +68,17 @@ export enum MovieDbMediaType {
   TV_SHOW = 'tv',
 }
 
+export function isValidList(
+  mediaType: MovieDbMediaType,
+  value: MovieListEnum | TVShowListEnum
+) {
+  if (mediaType === MovieDbMediaType.MOVIE) {
+    return Object.values(MovieListEnum).includes(value as MovieListEnum);
+  } else {
+    return Object.values(TVShowListEnum).includes(value as TVShowListEnum);
+  }
+}
+
 export function getMovieDBImageLink(
   path: string | null | undefined,
   size: string = 'w780'
