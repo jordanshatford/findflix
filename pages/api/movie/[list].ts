@@ -3,7 +3,7 @@ import moviedb, {
   type MovieDBPagedResults,
   type MovieResult,
   MovieListEnum,
-} from '@/services/movie-db';
+} from '@/services/moviedb';
 
 type ResponseData = {
   error: boolean;
@@ -19,7 +19,7 @@ export default async function handler(
     res.status(404).json({ error: true });
   } else {
     const page: number = parseInt(req.query.page as string) || 1;
-    const results = await moviedb.getMovieList(list, page);
+    const results = await moviedb.getMovieListPagedResults(list, page);
     res.status(200).json({ error: false, data: results });
   }
 }

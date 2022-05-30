@@ -2,26 +2,26 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
-  MovieDbMediaType,
-  getMediaCreationDate,
   getMovieDBImageLink,
+  getMediaCreationDate,
+  MovieDBMediaTypeEnum,
   type MovieResult,
   type TVShowResult,
-} from '@/services/movie-db';
+} from '@/services/moviedb';
 import { toURLSafe } from '@/utilities/urls';
 
 interface Props {
   item: Partial<MovieResult & TVShowResult>;
-  type: MovieDbMediaType;
+  type: MovieDBMediaTypeEnum;
   isHoverable?: boolean;
 }
 
 const PosterHoverInfo = ({ item, type }: Props) => {
   const creationDate = getMediaCreationDate(item, type);
   return (
-    <div className="py-4 px-3 w-full h-full bottom-0 hidden absolute group-hover:flex bg-zinc-800 bg-opacity-80 backdrop-blur-sm justify-end flex-col">
+    <div className="py-4 px-3 w-full h-full hidden absolute group-hover:flex bg-zinc-800 bg-opacity-80 backdrop-blur-sm justify-end flex-col">
       <p className="font-semibold text-sm text-[#f2f2f2]">
-        {type === MovieDbMediaType.MOVIE ? item.title : item.name}
+        {type === MovieDBMediaTypeEnum.MOVIE ? item.title : item.name}
       </p>
       <p className="line-clamp-3 text-xs font-light text-[#cacaca]">
         {creationDate ? creationDate.getFullYear() : '???'}
@@ -37,7 +37,7 @@ const PosterHoverInfo = ({ item, type }: Props) => {
               type,
               id: item.id,
               title: toURLSafe(
-                type === MovieDbMediaType.MOVIE ? item.title : item.name
+                type === MovieDBMediaTypeEnum.MOVIE ? item.title : item.name
               ),
             },
           }}
@@ -62,7 +62,7 @@ const Poster = ({ item, type, isHoverable = true }: Props) => {
             type,
             id: item.id,
             title: toURLSafe(
-              type === MovieDbMediaType.MOVIE ? item.title : item.name
+              type === MovieDBMediaTypeEnum.MOVIE ? item.title : item.name
             ),
           },
         }}
@@ -78,7 +78,9 @@ const Poster = ({ item, type, isHoverable = true }: Props) => {
                   placeholder="blur"
                   objectFit="cover"
                   blurDataURL={posterImageUrl}
-                  alt={type === MovieDbMediaType.MOVIE ? item.title : item.name}
+                  alt={
+                    type === MovieDBMediaTypeEnum.MOVIE ? item.title : item.name
+                  }
                 />
               )}
               {isHoverable && <PosterHoverInfo item={item} type={type} />}
