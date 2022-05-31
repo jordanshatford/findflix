@@ -18,7 +18,7 @@ export function isValidList(
   }
 }
 
-export function getMovieDBImageLink(
+export function getImageLink(
   path: string | null | undefined,
   size: string = 'w780'
 ) {

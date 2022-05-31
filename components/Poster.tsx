@@ -1,9 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import {
-  getMovieDBImageLink,
-  getMediaCreationDate,
+import moviedb, {
   MovieDBMediaTypeEnum,
   type MovieResult,
   type TVShowResult,
@@ -17,7 +15,7 @@ interface Props {
 }
 
 const PosterHoverInfo = ({ item, type }: Props) => {
-  const creationDate = getMediaCreationDate(item, type);
+  const creationDate = moviedb.getMediaCreationDate(item, type);
   return (
     <div className="py-4 px-3 w-full h-full hidden absolute group-hover:flex bg-zinc-800 bg-opacity-80 backdrop-blur-sm justify-end flex-col">
       <p className="font-semibold text-sm text-[#f2f2f2]">
@@ -52,7 +50,7 @@ const PosterHoverInfo = ({ item, type }: Props) => {
 };
 
 const Poster = ({ item, type, isHoverable = true }: Props) => {
-  const posterImageUrl = getMovieDBImageLink(item.poster_path);
+  const posterImageUrl = moviedb.getImageLink(item.poster_path);
   return (
     <>
       <Link

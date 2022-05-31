@@ -7,7 +7,6 @@ import moviedb, {
   type MovieResult,
   MovieListEnum,
   MovieDBMediaTypeEnum,
-  isValidList,
 } from '@/services/moviedb';
 import Poster from '@/components/Poster';
 
@@ -17,7 +16,7 @@ interface Props {
 
 const PopularMovies: NextPage<Props> = ({ results }: Props) => {
   const router = useRouter();
-  const list = router.query.list as MovieListEnum;
+  const list = router.query.id as MovieListEnum;
 
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -67,8 +66,9 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { list } = params as { list: MovieListEnum };
-  if (!isValidList(MovieDBMediaTypeEnum.MOVIE, list)) {
+  // The id in this case is actually the name of the list
+  const list = params?.id as MovieListEnum;
+  if (!moviedb.isValidList(MovieDBMediaTypeEnum.MOVIE, list)) {
     return { notFound: true };
   }
   const results = await moviedb.getMovieListPagedResults(list);

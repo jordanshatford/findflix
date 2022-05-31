@@ -9,16 +9,16 @@ export {
 
 import {
   isValidList,
-  getMovieDBImageLink,
+  getImageLink,
   getMediaCreationDate,
 } from './utilities';
-export { isValidList, getMovieDBImageLink, getMediaCreationDate };
+export { isValidList, getImageLink, getMediaCreationDate };
 
 import { getMovieListPagedResults } from './api';
 
 export default {
   isValidList,
-  getMovieDBImageLink,
+  getImageLink,
   getMediaCreationDate,
   // API calls server side only
   getMovieListPagedResults,
