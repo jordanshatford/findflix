@@ -3,15 +3,15 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import moviedb, {
-  type MovieDBPagedResults,
-  type MovieResult,
+  type PagedResults,
+  type Movie,
   MovieListEnum,
-  MovieDBMediaTypeEnum,
+  MediaTypeEnum,
 } from '@/services/moviedb';
 import Poster from '@/components/Poster';
 
 interface Props {
-  results: MovieDBPagedResults<MovieResult>;
+  results: PagedResults<Movie>;
 }
 
 const PopularMovies: NextPage<Props> = ({ results }: Props) => {
@@ -22,7 +22,7 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
-  const [movies, setMovies] = useState<MovieResult[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
     setMovies(results.results);
@@ -35,7 +35,7 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
     setLoading(true);
     const response = await axios.get<{
       error: boolean;
-      data: MovieDBPagedResults<MovieResult>;
+      data: PagedResults<Movie>;
     }>(`/api/movie/${list}`, { params: { page: page + 1 } });
     if (!response.data.error) {
       setMovies([...movies, ...response.data.data.results]);
@@ -52,7 +52,7 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
       <div>
         {movies.map((movie) => (
           <div className="inline-block mx-2 mb-2" key={movie.id}>
-            <Poster item={movie} type={MovieDBMediaTypeEnum.MOVIE} />
+            <Poster item={movie} type={MediaTypeEnum.MOVIE} />
           </div>
         ))}
       </div>
@@ -66,7 +66,7 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   // The id in this case is actually the name of the list
   const list = params?.id as MovieListEnum;
-  if (!moviedb.isValidList(MovieDBMediaTypeEnum.MOVIE, list)) {
+  if (!moviedb.isValidList(MediaTypeEnum.MOVIE, list)) {
     return { notFound: true };
   }
   const results = await moviedb.getMovieListPagedResults(list);

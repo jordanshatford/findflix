@@ -1,13 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import moviedb, {
-  type MovieDBPagedResults,
-  type MovieResult,
+  type PagedResults,
+  type Movie,
   MovieListEnum,
 } from '@/services/moviedb';
 
 type ResponseData = {
   error: boolean;
-  data?: MovieDBPagedResults<MovieResult>;
+  data?: PagedResults<Movie>;
 };
 
 export default async function handler(

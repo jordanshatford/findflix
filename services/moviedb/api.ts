@@ -2,9 +2,9 @@ import axios from 'axios';
 import config from './config';
 import {
   MovieListEnum,
-  MovieResult,
-  DetailedMovieResult,
-  MovieDBPagedResults,
+  Movie,
+  type DetailedMovie,
+  type PagedResults,
 } from './types';
 
 /**
@@ -22,18 +22,15 @@ const axiosMovieDB = axios.create({
 export async function getMovieListPagedResults(
   list: MovieListEnum,
   page: number = 1
-): Promise<MovieDBPagedResults<MovieResult>> {
-  const data = await axiosMovieDB.get<MovieDBPagedResults<MovieResult>>(
-    `/movie/${list}`,
-    { params: { page } }
-  );
+): Promise<PagedResults<Movie>> {
+  const data = await axiosMovieDB.get<PagedResults<Movie>>(`/movie/${list}`, {
+    params: { page },
+  });
   return data.data;
 }
 
-export async function getMovieDetails(
-  id: string
-): Promise<DetailedMovieResult> {
-  const data = await axiosMovieDB.get<DetailedMovieResult>(`/movie/${id}`, {
+export async function getMovieDetails(id: string): Promise<DetailedMovie> {
+  const data = await axiosMovieDB.get<DetailedMovie>(`/movie/${id}`, {
     params: { append_to_response: `images,videos,recommendations,similar` },
   });
   return data.data;

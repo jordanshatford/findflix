@@ -85,7 +85,7 @@ const AppProgressBar = ({
       router.events.off('routeChangeComplete', routeChangeEnd);
       router.events.off('routeChangeError', routeChangeEnd);
     };
-  }, []);
+  });
 
   const routeChangeStart = () => {
     nprogress.set(startPosition);

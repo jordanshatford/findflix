@@ -1,17 +1,17 @@
 import config from './config';
 import {
-  MovieDBMediaTypeEnum,
+  MediaTypeEnum,
   MovieListEnum,
   TVShowListEnum,
-  MovieResult,
-  TVShowResult,
+  Movie,
+  TVShow,
 } from './types';
 
 export function isValidList(
-  mediaType: MovieDBMediaTypeEnum,
+  mediaType: MediaTypeEnum,
   value: MovieListEnum | TVShowListEnum
 ) {
-  if (mediaType === MovieDBMediaTypeEnum.MOVIE) {
+  if (mediaType === MediaTypeEnum.MOVIE) {
     return Object.values(MovieListEnum).includes(value as MovieListEnum);
   } else {
     return Object.values(TVShowListEnum).includes(value as TVShowListEnum);
@@ -29,10 +29,10 @@ export function getImageLink(
 }
 
 export function getMediaCreationDate(
-  item: Partial<MovieResult & TVShowResult>,
-  type: MovieDBMediaTypeEnum
+  item: Partial<Movie & TVShow>,
+  type: MediaTypeEnum
 ) {
-  if (type === MovieDBMediaTypeEnum.MOVIE) {
+  if (type === MediaTypeEnum.MOVIE) {
     if (item.release_date) {
       return new Date(item.release_date as string);
     }

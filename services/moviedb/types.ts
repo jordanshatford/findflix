@@ -1,4 +1,4 @@
-export interface MovieResult {
+export interface Movie {
   adult: boolean;
   backdrop_path: string | null;
   genre_ids: number[];
@@ -15,7 +15,7 @@ export interface MovieResult {
   vote_count: number;
 }
 
-export interface MovieDBGenre {
+export interface Genre {
   id: number;
   name: string;
 }
@@ -37,7 +37,7 @@ export interface SpokenLanguage {
   name: string;
 }
 
-export interface ImageType {
+export interface Image {
   aspect_ratio: number;
   file_path: string;
   height: number;
@@ -47,7 +47,7 @@ export interface ImageType {
   width: number;
 }
 
-export interface VideoType {
+export interface Video {
   iso_639_1: string;
   iso_3166_1: string;
   name: string;
@@ -60,9 +60,9 @@ export interface VideoType {
   id: string;
 }
 
-export interface DetailedMovieResult extends MovieResult {
+export interface DetailedMovie extends Movie {
   budget: number;
-  genres: MovieDBGenre[];
+  genres: Genre[];
   homepage: string;
   imdb_id: string;
   production_companies: ProductionCompany[];
@@ -72,13 +72,13 @@ export interface DetailedMovieResult extends MovieResult {
   spoken_languages: SpokenLanguage[];
   status: string;
   tagline: string;
-  images: { backdrops: ImageType[]; posters: ImageType[] };
-  videos: { id: number; results: VideoType[] };
-  recommendations: MovieDBPagedResults<MovieResult>;
-  similar: MovieDBPagedResults<MovieResult>;
+  images: { backdrops: Image[]; posters: Image[] };
+  videos: { id: number; results: Video[] };
+  recommendations: PagedResults<Movie>;
+  similar: PagedResults<Movie>;
 }
 
-export interface TVShowResult {
+export interface TVShow {
   backdrop_path: string | null;
   first_air_date: string;
   genre_ids: number[];
@@ -94,7 +94,7 @@ export interface TVShowResult {
   vote_count: number;
 }
 
-export interface MovieDBPagedResults<T> {
+export interface PagedResults<T> {
   page: number;
   total_results: number;
   total_pages: number;
@@ -115,7 +115,7 @@ export enum TVShowListEnum {
   TOP_RATED = 'top_rated',
 }
 
-export enum MovieDBMediaTypeEnum {
+export enum MediaTypeEnum {
   MOVIE = 'movie',
   TV_SHOW = 'tv',
 }
