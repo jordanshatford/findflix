@@ -51,11 +51,9 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
       </h1>
       <div>
         {movies.map((movie) => (
-          <Poster
-            key={movie.id}
-            item={movie}
-            type={MovieDBMediaTypeEnum.MOVIE}
-          />
+          <div className="inline-block mx-2 mb-2" key={movie.id}>
+            <Poster item={movie} type={MovieDBMediaTypeEnum.MOVIE} />
+          </div>
         ))}
       </div>
       <button onClick={getNextPage}>

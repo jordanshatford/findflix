@@ -52,41 +52,39 @@ const PosterHoverInfo = ({ item, type }: Props) => {
 const Poster = ({ item, type, isHoverable = true }: Props) => {
   const posterImageUrl = moviedb.getImageLink(item.poster_path);
   return (
-    <>
-      <Link
-        href={{
-          pathname: '/[type]/[id]/[title]',
-          query: {
-            type,
-            id: item.id,
-            title: toURLSafe(
-              type === MovieDBMediaTypeEnum.MOVIE ? item.title : item.name
-            ),
-          },
-        }}
-        passHref
-      >
-        <a className="mx-2 mb-3 group inline-block">
-          <motion.div whileHover={{ scale: isHoverable ? 1.05 : 1 }}>
-            <div className="w-40 h-60 overflow-hidden relative rounded-md bg-zinc-800 bg-opacity-80 backdrop-blur-sm">
-              {posterImageUrl && (
-                <Image
-                  src={posterImageUrl}
-                  layout="fill"
-                  placeholder="blur"
-                  objectFit="cover"
-                  blurDataURL={posterImageUrl}
-                  alt={
-                    type === MovieDBMediaTypeEnum.MOVIE ? item.title : item.name
-                  }
-                />
-              )}
-              {isHoverable && <PosterHoverInfo item={item} type={type} />}
-            </div>
-          </motion.div>
-        </a>
-      </Link>
-    </>
+    <Link
+      href={{
+        pathname: '/[type]/[id]/[title]',
+        query: {
+          type,
+          id: item.id,
+          title: toURLSafe(
+            type === MovieDBMediaTypeEnum.MOVIE ? item.title : item.name
+          ),
+        },
+      }}
+      passHref
+    >
+      <a className="group">
+        <motion.div whileHover={{ scale: isHoverable ? 1.05 : 1 }}>
+          <div className="w-40 h-60 overflow-hidden relative rounded-lg bg-zinc-800 bg-opacity-80 backdrop-blur-sm">
+            {posterImageUrl && (
+              <Image
+                src={posterImageUrl}
+                layout="fill"
+                placeholder="blur"
+                objectFit="cover"
+                blurDataURL={posterImageUrl}
+                alt={
+                  type === MovieDBMediaTypeEnum.MOVIE ? item.title : item.name
+                }
+              />
+            )}
+            {isHoverable && <PosterHoverInfo item={item} type={type} />}
+          </div>
+        </motion.div>
+      </a>
+    </Link>
   );
 };
 

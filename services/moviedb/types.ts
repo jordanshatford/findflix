@@ -15,6 +15,69 @@ export interface MovieResult {
   vote_count: number;
 }
 
+interface MovieDBGenre {
+  id: number;
+  name: string;
+}
+
+interface ProductionCompany {
+  name: string;
+  id: number;
+  logo_path: string | null;
+  origin_country: string;
+}
+
+interface ProductionCountry {
+  iso_3166_1: string;
+  name: string;
+}
+
+interface SpokenLanguage {
+  iso_639_1: string;
+  name: string;
+}
+
+interface ImageType {
+  aspect_ratio: number;
+  file_path: string;
+  height: number;
+  iso_639_1: string | null;
+  vote_average: number;
+  vote_count: number;
+  width: number;
+}
+
+interface VideoType {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+}
+
+export interface DetailedMovieResult extends MovieResult {
+  budget: number;
+  genres: MovieDBGenre[];
+  homepage: string;
+  imdb_id: string;
+  production_companies: ProductionCompany[];
+  production_countries: ProductionCountry[];
+  revenue: number;
+  runtime: number;
+  spoken_languages: SpokenLanguage[];
+  status: string;
+  tagline: string;
+  images: { backdrops: ImageType[]; posters: ImageType[] };
+  videos: { id: number; results: VideoType[] };
+  recommendations: MovieDBPagedResults<MovieResult>;
+  similar: MovieDBPagedResults<MovieResult>;
+}
+
 export interface TVShowResult {
   backdrop_path: string | null;
   first_air_date: string;

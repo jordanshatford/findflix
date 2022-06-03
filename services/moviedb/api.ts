@@ -1,6 +1,11 @@
 import axios from 'axios';
 import config from './config';
-import { MovieListEnum, MovieResult, MovieDBPagedResults } from './types';
+import {
+  MovieListEnum,
+  MovieResult,
+  DetailedMovieResult,
+  MovieDBPagedResults,
+} from './types';
 
 /**
  * This works on server side only as the env variables are not available on client side.
@@ -10,6 +15,7 @@ const axiosMovieDB = axios.create({
   baseURL: config.baseURL,
   params: {
     api_key: config.apiKey,
+    language: config.language,
   },
 });
 
@@ -21,5 +27,14 @@ export async function getMovieListPagedResults(
     `/movie/${list}`,
     { params: { page } }
   );
+  return data.data;
+}
+
+export async function getMovieDetails(
+  id: string
+): Promise<DetailedMovieResult> {
+  const data = await axiosMovieDB.get<DetailedMovieResult>(`/movie/${id}`, {
+    params: { append_to_response: `images,videos,recommendations,similar` },
+  });
   return data.data;
 }
