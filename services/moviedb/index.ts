@@ -1,23 +1,12 @@
-export {
-  type MovieResult,
-  type TVShowResult,
-  type MovieDBPagedResults,
-  type DetailedMovieResult,
-  MovieDBMediaTypeEnum,
-  MovieListEnum,
-  TVShowListEnum,
-} from './types';
+export * from "./api";
+export * from "./types";
+export * from "./utilities";
 
-import { isValidList, getImageLink, getMediaCreationDate } from './utilities';
-export { isValidList, getImageLink, getMediaCreationDate };
-
-import { getMovieListPagedResults, getMovieDetails } from './api';
+import * as api from "./api";
+import * as utilities from "./utilities";
 
 export default {
-  isValidList,
-  getImageLink,
-  getMediaCreationDate,
   // API calls server side only
-  getMovieListPagedResults,
-  getMovieDetails,
+  ...api,
+  ...utilities,
 };

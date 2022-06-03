@@ -15,29 +15,29 @@ export interface MovieResult {
   vote_count: number;
 }
 
-interface MovieDBGenre {
+export interface MovieDBGenre {
   id: number;
   name: string;
 }
 
-interface ProductionCompany {
+export interface ProductionCompany {
   name: string;
   id: number;
   logo_path: string | null;
   origin_country: string;
 }
 
-interface ProductionCountry {
+export interface ProductionCountry {
   iso_3166_1: string;
   name: string;
 }
 
-interface SpokenLanguage {
+export interface SpokenLanguage {
   iso_639_1: string;
   name: string;
 }
 
-interface ImageType {
+export interface ImageType {
   aspect_ratio: number;
   file_path: string;
   height: number;
@@ -47,7 +47,7 @@ interface ImageType {
   width: number;
 }
 
-interface VideoType {
+export interface VideoType {
   iso_639_1: string;
   iso_3166_1: string;
   name: string;
