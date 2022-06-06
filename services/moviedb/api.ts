@@ -1,11 +1,6 @@
 import axios from 'axios';
 import config from './config';
-import {
-  MovieListEnum,
-  Movie,
-  type DetailedMovie,
-  type PagedResults,
-} from './types';
+import * as types from './types';
 
 /**
  * This works on server side only as the env variables are not available on client side.
@@ -20,17 +15,44 @@ const axiosMovieDB = axios.create({
 });
 
 export async function getMovieListPagedResults(
-  list: MovieListEnum,
+  list: types.MovieListEnum,
   page: number = 1
-): Promise<PagedResults<Movie>> {
-  const data = await axiosMovieDB.get<PagedResults<Movie>>(`/movie/${list}`, {
-    params: { page },
+): Promise<types.PagedResults<types.Movie>> {
+  const data = await axiosMovieDB.get<types.PagedResults<types.Movie>>(
+    `/movie/${list}`,
+    {
+      params: { page },
+    }
+  );
+  return data.data;
+}
+
+export async function getMovieDetails(
+  id: string
+): Promise<types.DetailedMovie> {
+  const data = await axiosMovieDB.get<types.DetailedMovie>(`/movie/${id}`, {
+    params: { append_to_response: `images,videos,recommendations,similar` },
   });
   return data.data;
 }
 
-export async function getMovieDetails(id: string): Promise<DetailedMovie> {
-  const data = await axiosMovieDB.get<DetailedMovie>(`/movie/${id}`, {
+export async function getTVShowListPagedResults(
+  list: types.TVShowListEnum,
+  page: number = 1
+): Promise<types.PagedResults<types.TVShow>> {
+  const data = await axiosMovieDB.get<types.PagedResults<types.TVShow>>(
+    `/tv/${list}`,
+    {
+      params: { page },
+    }
+  );
+  return data.data;
+}
+
+export async function getTVShowDetails(
+  id: string
+): Promise<types.DetailedTVShow> {
+  const data = await axiosMovieDB.get<types.DetailedTVShow>(`/tv/${id}`, {
     params: { append_to_response: `images,videos,recommendations,similar` },
   });
   return data.data;
