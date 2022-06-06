@@ -5,7 +5,7 @@ import AppProgressBar from '@/components/AppProgressBar';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <AppProgressBar color="#c50510" height={4} />
+      <AppProgressBar color="#be123c" height={4} />
       <Component {...pageProps} />
     </>
   );

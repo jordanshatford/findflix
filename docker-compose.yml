@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  web:
+    build:
+      context: .
+    image: findflix:latest
+    restart: always
+    environment:
+      MOVIEDB_API_BASE_URL: ${MOVIEDB_API_BASE_URL}
+      NEXT_PUBLIC_MOVIEDB_IMAGE_BASE_URL: ${NEXT_PUBLIC_MOVIEDB_IMAGE_BASE_URL}
+      MOVIEDB_API_KEY: ${MOVIEDB_API_KEY}
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
