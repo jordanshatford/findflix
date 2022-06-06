@@ -18,13 +18,13 @@ const PosterHoverInfo = ({ item, type }: Props) => {
   const creationDate = moviedb.getMediaCreationDate(item, type);
   return (
     <div className="py-4 px-3 w-full h-full hidden absolute group-hover:flex bg-zinc-800 bg-opacity-80 backdrop-blur-sm justify-end flex-col">
-      <p className="font-semibold text-sm text-[#f2f2f2]">
+      <p className="font-semibold text-sm text-white">
         {type === MediaTypeEnum.MOVIE ? item.title : item.name}
       </p>
-      <p className="line-clamp-3 text-xs font-light text-[#cacaca]">
+      <p className="line-clamp-3 text-xs font-light text-zinc-400">
         {creationDate ? creationDate.getFullYear() : '???'}
       </p>
-      <p className="line-clamp-3 text-xs font-light text-[#cacaca]">
+      <p className="line-clamp-3 text-xs font-light text-zinc-400">
         {item.overview}
       </p>
       {creationDate && new Date() > creationDate && (
