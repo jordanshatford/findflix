@@ -2,12 +2,25 @@ import axios from 'axios';
 import config from './config';
 import * as types from './types';
 
+enum APIVersion {
+  V3 = '3',
+  V4 = '4',
+}
+
 /**
  * This works on server side only as the env variables are not available on client side.
  * DO NOT call any API functions from the client side.
  */
-const axiosMovieDB = axios.create({
-  baseURL: config.baseURL,
+const v3Client = axios.create({
+  baseURL: `${config.baseURL}${APIVersion.V3}/`,
+  params: {
+    api_key: config.apiKey,
+    language: config.language,
+  },
+});
+
+const v4Client = axios.create({
+  baseURL: `${config.baseURL}${APIVersion.V4}/`,
   params: {
     api_key: config.apiKey,
     language: config.language,
@@ -18,7 +31,7 @@ export async function getMovieListPagedResults(
   list: types.MovieListEnum,
   page: number = 1
 ): Promise<types.PagedResults<types.Movie>> {
-  const data = await axiosMovieDB.get<types.PagedResults<types.Movie>>(
+  const data = await v3Client.get<types.PagedResults<types.Movie>>(
     `/movie/${list}`,
     {
       params: { page },
@@ -30,7 +43,7 @@ export async function getMovieListPagedResults(
 export async function getMovieDetails(
   id: string
 ): Promise<types.DetailedMovie> {
-  const data = await axiosMovieDB.get<types.DetailedMovie>(`/movie/${id}`, {
+  const data = await v3Client.get<types.DetailedMovie>(`/movie/${id}`, {
     params: { append_to_response: `images,videos,recommendations,similar` },
   });
   return data.data;
@@ -40,7 +53,7 @@ export async function getTVShowListPagedResults(
   list: types.TVShowListEnum,
   page: number = 1
 ): Promise<types.PagedResults<types.TVShow>> {
-  const data = await axiosMovieDB.get<types.PagedResults<types.TVShow>>(
+  const data = await v3Client.get<types.PagedResults<types.TVShow>>(
     `/tv/${list}`,
     {
       params: { page },
@@ -52,8 +65,21 @@ export async function getTVShowListPagedResults(
 export async function getTVShowDetails(
   id: string
 ): Promise<types.DetailedTVShow> {
-  const data = await axiosMovieDB.get<types.DetailedTVShow>(`/tv/${id}`, {
+  const data = await v3Client.get<types.DetailedTVShow>(`/tv/${id}`, {
     params: { append_to_response: `images,videos,recommendations,similar` },
   });
+  return data.data;
+}
+
+export async function getList(
+  listId: string,
+  page: number = 1
+): Promise<types.PagedResults<Partial<types.ListItem>>> {
+  const data = await v4Client.get<types.PagedResults<types.ListItem>>(
+    `/list/${listId}`,
+    {
+      params: { page },
+    }
+  );
   return data.data;
 }

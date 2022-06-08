@@ -152,6 +152,10 @@ export interface PagedResults<T> {
   results: T[];
 }
 
+export interface ListItem extends Partial<Movie & TVShow> {
+  media_type: MediaTypeEnum;
+}
+
 export enum MovieListEnum {
   POPULAR = 'popular',
   NOW_PLAYING = 'now_playing',
