@@ -40,7 +40,7 @@ const PosterHoverInfo = ({ item, type }: Props) => {
             },
           }}
         >
-          <div className="text-white text-sm py-2 px-3 rounded-md mt-3 w-max bg-zinc-600">
+          <div className="text-white text-sm py-2 px-3 rounded-lg mt-3 w-max bg-zinc-600">
             Watch Now
           </div>
         </Link>

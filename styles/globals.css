@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  font-family: Poppins;
+body {
+  font-family: 'Poppins', sans-serif;
 }
