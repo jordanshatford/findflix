@@ -7,6 +7,10 @@ import {
   TVShow,
 } from './types';
 
+export function hasFavouritesAvailable() {
+  return config.favouritesListId !== undefined;
+}
+
 export function isValidList(
   mediaType: MediaTypeEnum,
   value: MovieListEnum | TVShowListEnum

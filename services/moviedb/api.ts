@@ -74,7 +74,7 @@ export async function getTVShowDetails(
 export async function getList(
   listId: string,
   page: number = 1
-): Promise<types.PagedResults<Partial<types.ListItem>>> {
+): Promise<types.PagedResults<types.ListItem>> {
   const data = await v4Client.get<types.PagedResults<types.ListItem>>(
     `/list/${listId}`,
     {
@@ -82,4 +82,18 @@ export async function getList(
     }
   );
   return data.data;
+}
+
+export async function getFavourites(
+  page: number = 1
+): Promise<types.PagedResults<types.ListItem>> {
+  if (!config.favouritesListId) {
+    return {
+      page,
+      results: [] as types.ListItem[],
+      total_pages: 0,
+      total_results: 0,
+    } as types.PagedResults<types.ListItem>;
+  }
+  return getList(config.favouritesListId, page);
 }

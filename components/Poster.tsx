@@ -1,11 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import moviedb, {
-  MediaTypeEnum,
-  type Movie,
-  type TVShow,
-} from '@/services/moviedb';
+import moviedb, { MediaTypeEnum, Movie, TVShow } from '@/services/moviedb';
 import { toURLSafe } from '@/utilities/urls';
 
 interface Props {
