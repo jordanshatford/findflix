@@ -7,7 +7,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <AppProgressBar color="#be123c" height={4} />
-      <Component {...pageProps} />
+      <div className="w-full relative min-h-screen overflow-y-auto bg-zinc-900">
+        <Component {...pageProps} />
+      </div>
     </>
   );
 }

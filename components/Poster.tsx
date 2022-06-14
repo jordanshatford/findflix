@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { Play } from 'phosphor-react';
 import moviedb, { MediaTypeEnum, Movie, TVShow } from '@/services/moviedb';
 import { toURLSafe } from '@/utilities/index';
 
@@ -12,6 +13,10 @@ interface Props {
 
 const PosterHoverInfo = ({ item, type }: Props) => {
   const creationDate = moviedb.getMediaCreationDate(item, type);
+  const availableToWatch =
+    creationDate &&
+    new Date() > creationDate &&
+    moviedb.hasWatchLinkAvailable();
   return (
     <div className="py-4 px-3 w-full h-full hidden absolute group-hover:flex bg-zinc-800 bg-opacity-80 backdrop-blur-sm justify-end flex-col">
       <p className="font-semibold text-sm text-white">
@@ -23,7 +28,7 @@ const PosterHoverInfo = ({ item, type }: Props) => {
       <p className="line-clamp-3 text-xs font-light text-zinc-400">
         {item.overview}
       </p>
-      {creationDate && new Date() > creationDate && (
+      {availableToWatch && (
         <Link
           href={{
             pathname: `/[type]/[id]/[title]/watch`,
@@ -36,7 +41,8 @@ const PosterHoverInfo = ({ item, type }: Props) => {
             },
           }}
         >
-          <div className="text-white text-sm py-2 px-3 rounded-lg mt-3 w-max bg-zinc-600">
+          <div className="flex items-center text-white text-sm py-2 px-3 rounded-lg mt-3 w-max bg-zinc-600">
+            <Play size={15} weight="fill" className="mr-1" />
             Watch Now
           </div>
         </Link>
