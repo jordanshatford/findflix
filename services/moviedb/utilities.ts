@@ -7,14 +7,14 @@ import {
   TVShow,
 } from './types';
 
-export function hasFavouritesAvailable() {
+export function hasFavouritesAvailable(): boolean {
   return config.favouritesListId !== undefined;
 }
 
 export function isValidList(
   mediaType: MediaTypeEnum,
   value: MovieListEnum | TVShowListEnum
-) {
+): boolean {
   if (mediaType === MediaTypeEnum.MOVIE) {
     return Object.values(MovieListEnum).includes(value as MovieListEnum);
   } else {
@@ -25,26 +25,26 @@ export function isValidList(
 export function getImageLink(
   path: string | null | undefined,
   size: string = 'w780'
-) {
+): string {
   if (!path) {
     return '';
   }
   return `${config.imageBaseURL}${size}${path}`;
 }
 
+export function toDate(date: string): Date {
+  const [year, month, day] = date.split('-');
+  return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+}
+
 export function getMediaCreationDate(
   item: Partial<Movie & TVShow>,
   type: MediaTypeEnum
-) {
-  if (type === MediaTypeEnum.MOVIE) {
-    if (item.release_date) {
-      return new Date(item.release_date as string);
-    }
-    return null;
-  } else {
-    if (item.first_air_date) {
-      return new Date(item.first_air_date as string);
-    }
-    return null;
+): Date | null {
+  if (type === MediaTypeEnum.MOVIE && item?.release_date) {
+    return toDate(item.release_date);
+  } else if (type === MediaTypeEnum.TV_SHOW && item?.first_air_date) {
+    return toDate(item.first_air_date);
   }
+  return null;
 }

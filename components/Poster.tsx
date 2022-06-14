@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import moviedb, { MediaTypeEnum, Movie, TVShow } from '@/services/moviedb';
-import { toURLSafe } from '@/utilities/urls';
+import { toURLSafe } from '@/utilities/index';
 
 interface Props {
   item: Partial<Movie & TVShow>;

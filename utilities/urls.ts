@@ -1,4 +1,4 @@
-export function toURLSafe(str?: string) {
+export function toURLSafe(str?: string): string {
   if (!str) {
     return '';
   }
