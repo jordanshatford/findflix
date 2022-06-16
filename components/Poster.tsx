@@ -9,7 +9,6 @@ interface Props {
   item: Partial<Movie & TVShow>;
   type: MediaTypeEnum;
   isHoverable?: boolean;
-  className?: string;
 }
 
 const PosterHoverInfo = ({ item, type }: Props) => {
@@ -52,7 +51,7 @@ const PosterHoverInfo = ({ item, type }: Props) => {
   );
 };
 
-const Poster = ({ item, type, isHoverable = true, className = '' }: Props) => {
+const Poster = ({ item, type, isHoverable = true }: Props) => {
   const posterImageUrl = moviedb.getImageLink(item.poster_path);
   return (
     <Link
@@ -73,9 +72,7 @@ const Poster = ({ item, type, isHoverable = true, className = '' }: Props) => {
           whileHover={{ scale: isHoverable ? 1.05 : 1 }}
           className="flex justify-center"
         >
-          <div
-            className={`w-40 h-60 overflow-hidden relative rounded-lg bg-zinc-800 bg-opacity-80 backdrop-blur-sm ${className}`}
-          >
+          <div className="w-44 h-64 overflow-hidden relative rounded-lg bg-zinc-800 bg-opacity-80 backdrop-blur-sm">
             {posterImageUrl && (
               <Image
                 src={posterImageUrl}

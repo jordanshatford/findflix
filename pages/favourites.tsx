@@ -36,7 +36,9 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
+      <h1 className="text-white capitalize">My Favourites</h1>
+
       <div className="flex flex-wrap justify-center">
         {items.map((item) => (
           <div key={item.id} className="m-2">
@@ -44,7 +46,10 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
           </div>
         ))}
       </div>
-      <button onClick={getNextPage} className="text-white">
+      <button
+        onClick={getNextPage}
+        className="flex items-center text-white text-sm py-2 px-3 rounded-lg mt-3 w-max bg-zinc-600"
+      >
         {loading ? 'Loading' : 'More Results'}
       </button>
     </div>

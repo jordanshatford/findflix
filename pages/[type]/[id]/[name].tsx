@@ -41,12 +41,7 @@ const MoviePage: NextPage<Props> = ({
           }}
         >
           <div className="flex flex-col sm:flex-row justify-center sm:justify-start">
-            <Poster
-              item={item}
-              type={type}
-              isHoverable={false}
-              className="w-56 h-80"
-            />
+            <Poster item={item} type={type} isHoverable={false} />
             <div className="pt-[10px] sm:pl-[30px] flex flex-col justify-end max-w-[1000px] min-w-[450px]">
               <h2 className="font-semibold text-white text-3xl mb-[4px]">
                 {type === MediaTypeEnum.MOVIE ? item.title : item.name}

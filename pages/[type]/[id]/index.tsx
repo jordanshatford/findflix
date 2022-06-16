@@ -48,21 +48,24 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
   };
 
   return (
-    <>
-      <h1>
-        {list} Movies - {page} of {totalPages} with {totalResults} result
+    <div className="flex flex-col items-center">
+      <h1 className="text-white capitalize">
+        {list} {type === MediaTypeEnum.MOVIE ? 'Movies' : 'TV Shows'}
       </h1>
-      <div>
+      <div className="flex flex-wrap justify-center">
         {items.map((item) => (
-          <div className="inline-block mx-2 mb-2" key={item.id}>
+          <div key={item.id} className="m-2">
             <Poster item={item} type={type} />
           </div>
         ))}
       </div>
-      <button onClick={getNextPage}>
+      <button
+        onClick={getNextPage}
+        className="flex items-center text-white text-sm py-2 px-3 rounded-lg mt-3 w-max bg-zinc-600"
+      >
         {loading ? 'Loading' : 'More Results'}
       </button>
-    </>
+    </div>
   );
 };
 
