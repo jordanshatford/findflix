@@ -36,21 +36,18 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
   };
 
   return (
-    <>
-      <h1>
-        Favourite Movies - {page} of {totalPages} with {totalResults} result
-      </h1>
-      <div>
+    <div>
+      <div className="flex flex-wrap justify-center">
         {items.map((item) => (
-          <div className="inline-block mx-2 mb-2" key={item.id}>
+          <div key={item.id} className="m-2">
             <Poster item={item} type={item.media_type} />
           </div>
         ))}
       </div>
-      <button onClick={getNextPage}>
+      <button onClick={getNextPage} className="text-white">
         {loading ? 'Loading' : 'More Results'}
       </button>
-    </>
+    </div>
   );
 };
 
