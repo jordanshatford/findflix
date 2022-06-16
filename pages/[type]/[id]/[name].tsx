@@ -1,22 +1,26 @@
+import type { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Calendar, Clock, Star, Play } from 'phosphor-react';
-import Tag from '@/components/Tag';
-import { toHourMinutes, toReadableDate, toURLSafe } from '@/utilities/index';
 import moviedb, {
   MediaTypeEnum,
   DetailedMovie,
   DetailedTVShow,
 } from '@/services/moviedb';
+import Tag from '@/components/Tag';
+import Poster from '@/components/Poster';
+import { toHourMinutes, toReadableDate, toURLSafe } from '@/utilities/index';
 
 interface Props {
   item: Partial<DetailedMovie & DetailedTVShow>;
   type: MediaTypeEnum;
-  availableToWatch?: boolean;
+  availableToWatch: boolean;
 }
 
-const DetailedMediaInfo = ({ item, type, availableToWatch = false }: Props) => {
-  const posterImageUrl = moviedb.getImageLink(item.poster_path);
+const MoviePage: NextPage<Props> = ({
+  item,
+  type,
+  availableToWatch = false,
+}: Props) => {
   const creationDate = moviedb.getMediaCreationDate(item, type);
   return (
     <div>
@@ -36,22 +40,14 @@ const DetailedMediaInfo = ({ item, type, availableToWatch = false }: Props) => {
             background: `linear-gradient(360deg, #18181B 30%, transparent)`,
           }}
         >
-          <div className="flex">
-            <div className="w-[210px] h-[320px] bg-zinc-800 rounded-lg relative self-end">
-              <div className="w-[210px] h-[320px] rounded-lg object-cover object-top overflow-hidden relative bg-zinc-800">
-                {posterImageUrl && (
-                  <Image
-                    src={posterImageUrl}
-                    layout="fill"
-                    placeholder="blur"
-                    objectFit="cover"
-                    blurDataURL={posterImageUrl}
-                    alt={type === MediaTypeEnum.MOVIE ? item.title : item.name}
-                  />
-                )}
-              </div>
-            </div>
-            <div className="pt-[10px] pl-[30px] flex flex-col justify-end max-w-[1000px] min-w-[450px]">
+          <div className="flex flex-col sm:flex-row justify-center sm:justify-start">
+            <Poster
+              item={item}
+              type={type}
+              isHoverable={false}
+              className="w-56 h-80"
+            />
+            <div className="pt-[10px] sm:pl-[30px] flex flex-col justify-end max-w-[1000px] min-w-[450px]">
               <h2 className="font-semibold text-white text-3xl mb-[4px]">
                 {type === MediaTypeEnum.MOVIE ? item.title : item.name}
               </h2>
@@ -113,4 +109,36 @@ const DetailedMediaInfo = ({ item, type, availableToWatch = false }: Props) => {
   );
 };
 
-export default DetailedMediaInfo;
+export default MoviePage;
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const { id, type } = params as { id: string; type: MediaTypeEnum };
+  if (type === MediaTypeEnum.MOVIE) {
+    try {
+      const movie = await moviedb.getMovieDetails(id);
+      const creationDate = moviedb.getMediaCreationDate(
+        movie,
+        MediaTypeEnum.MOVIE
+      );
+      const availableToWatch =
+        creationDate &&
+        new Date() > creationDate &&
+        moviedb.hasWatchLinkAvailable();
+      return { props: { item: movie, availableToWatch, type } };
+    } catch (e) {
+      return { notFound: true };
+    }
+  } else if (type === MediaTypeEnum.TV_SHOW) {
+    const tvShow = await moviedb.getTVShowDetails(id);
+    const creationDate = moviedb.getMediaCreationDate(
+      tvShow,
+      MediaTypeEnum.TV_SHOW
+    );
+    const availableToWatch =
+      creationDate &&
+      new Date() > creationDate &&
+      moviedb.hasWatchLinkAvailable();
+    return { props: { item: tvShow, availableToWatch, type } };
+  }
+  return { notFound: true };
+};
