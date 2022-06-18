@@ -89,11 +89,12 @@ const MoviePage: NextPage<Props> = ({
                       ),
                     },
                   }}
+                  passHref
                 >
-                  <div className="flex items-center text-white text-sm py-2 px-3 rounded-lg mt-3 w-max bg-zinc-600">
+                  <a className="flex items-center text-white text-sm py-2 px-3 rounded-lg mt-3 w-max bg-zinc-600">
                     <Play size={15} weight="fill" className="mr-1" />
                     Watch Now
-                  </div>
+                  </a>
                 </Link>
               )}
             </div>
