@@ -1,6 +1,7 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import useInfiniteScroll from 'react-infinite-scroll-hook';
 import axios from 'axios';
 import moviedb, {
   type PagedResults,
@@ -26,6 +27,7 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
   const [totalPages, setTotalPages] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
   const [items, setItems] = useState<Partial<Movie & TVShow>[]>([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setItems(results.results);
@@ -47,6 +49,18 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
     }
   };
 
+  const [sentryRef] = useInfiniteScroll({
+    loading,
+    hasNextPage: page <= totalPages,
+    onLoadMore: getNextPage,
+    // When there is an error, we stop infinite loading.
+    disabled: error,
+    // `rootMargin` is passed to `IntersectionObserver`.
+    // We can use it to trigger 'onLoadMore' when the sentry comes near to become
+    // visible, instead of becoming fully visible on the screen.
+    rootMargin: '0px 0px 400px 0px',
+  });
+
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-white capitalize">
@@ -58,6 +72,7 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
             <Poster item={item} type={type} />
           </div>
         ))}
+        <div ref={sentryRef}></div>
       </div>
       <button
         onClick={getNextPage}

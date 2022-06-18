@@ -19,7 +19,8 @@
     "nprogress": "^0.2.0",
     "phosphor-react": "^1.4.1",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "react-infinite-scroll-hook": "^4.0.3"
   },
   "devDependencies": {
     "@types/node": "17.0.33",
