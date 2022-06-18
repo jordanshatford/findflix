@@ -2,7 +2,7 @@ import type { NextPage, GetServerSideProps } from 'next';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
-import moviedb, { PagedResults, ListItem } from '@/services/moviedb';
+import tmdb, { PagedResults, ListItem } from '@/services/tmdb';
 import Poster from '@/components/Poster';
 
 interface Props {
@@ -72,10 +72,10 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   // If no favourites are available, then 404 this page
-  if (!moviedb.hasFavouritesAvailable()) {
+  if (!tmdb.hasFavouritesAvailable()) {
     return { notFound: true };
   }
-  const results = await moviedb.getFavourites();
+  const results = await tmdb.getFavourites();
   return { props: { results } };
 };
 

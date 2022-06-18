@@ -58,6 +58,18 @@ export function getImageLink(
   return `${config.imageBaseURL}${size}${path}`;
 }
 
+export function getMovieWatchLink(movie: Partial<Movie>) {
+  return `${config.watchBaseURL}movie?id=${movie.id}`;
+}
+
+export function getTVShowEpisodeWatchLink(
+  showId: string,
+  seasonNum: string,
+  episodeNum: string
+): string {
+  return `${config.watchBaseURL}tv/?id=${showId}&s=${seasonNum}&e=${episodeNum}`;
+}
+
 /**
  * Convert a date from TMDB to a date object. These dates are in the format
  * YYYY-MM-DD.

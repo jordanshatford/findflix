@@ -1,5 +1,5 @@
 import type { NextPage, GetServerSideProps } from 'next';
-import { MovieListEnum, MediaTypeEnum } from '@/services/moviedb';
+import { MovieListEnum, MediaTypeEnum } from '@/services/tmdb';
 
 const Home: NextPage = () => {
   return <></>;

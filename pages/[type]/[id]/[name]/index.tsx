@@ -1,11 +1,11 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 import { Calendar, Clock, Star, Play } from 'phosphor-react';
-import moviedb, {
+import tmdb, {
   MediaTypeEnum,
   DetailedMovie,
   DetailedTVShow,
-} from '@/services/moviedb';
+} from '@/services/tmdb';
 import Tag from '@/components/Tag';
 import Poster from '@/components/Poster';
 import { toHourMinutes, toReadableDate, toURLSafe } from '@/utilities/index';
@@ -21,13 +21,13 @@ const MoviePage: NextPage<Props> = ({
   type,
   availableToWatch = false,
 }: Props) => {
-  const creationDate = moviedb.getMediaCreationDate(item, type);
+  const creationDate = tmdb.getMediaCreationDate(item, type);
   return (
     <div>
       <div
         className="absolute top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
         style={{
-          backgroundImage: `url(${moviedb.getImageLink(
+          backgroundImage: `url(${tmdb.getImageLink(
             item.backdrop_path,
             'original'
           )})`,
@@ -111,29 +111,27 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id, type } = params as { id: string; type: MediaTypeEnum };
   if (type === MediaTypeEnum.MOVIE) {
     try {
-      const movie = await moviedb.getMovieDetails(id);
-      const creationDate = moviedb.getMediaCreationDate(
+      const movie = await tmdb.getMovieDetails(id);
+      const creationDate = tmdb.getMediaCreationDate(
         movie,
         MediaTypeEnum.MOVIE
       );
       const availableToWatch =
         creationDate &&
         new Date() > creationDate &&
-        moviedb.hasWatchLinkAvailable();
+        tmdb.hasWatchLinkAvailable();
       return { props: { item: movie, availableToWatch, type } };
     } catch (e) {
       return { notFound: true };
     }
   } else if (type === MediaTypeEnum.TV_SHOW) {
-    const tvShow = await moviedb.getTVShowDetails(id);
-    const creationDate = moviedb.getMediaCreationDate(
+    const tvShow = await tmdb.getTVShowDetails(id);
+    const creationDate = tmdb.getMediaCreationDate(
       tvShow,
       MediaTypeEnum.TV_SHOW
     );
     const availableToWatch =
-      creationDate &&
-      new Date() > creationDate &&
-      moviedb.hasWatchLinkAvailable();
+      creationDate && new Date() > creationDate && tmdb.hasWatchLinkAvailable();
     return { props: { item: tvShow, availableToWatch, type } };
   }
   return { notFound: true };

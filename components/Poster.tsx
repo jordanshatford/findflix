@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Play } from 'phosphor-react';
-import moviedb, { MediaTypeEnum, Movie, TVShow } from '@/services/moviedb';
+import tmdb, { MediaTypeEnum, Movie, TVShow } from '@/services/tmdb';
 import { toURLSafe } from '@/utilities/index';
 
 interface Props {
@@ -12,11 +12,9 @@ interface Props {
 }
 
 const PosterHoverInfo = ({ item, type }: Props) => {
-  const creationDate = moviedb.getMediaCreationDate(item, type);
+  const creationDate = tmdb.getMediaCreationDate(item, type);
   const availableToWatch =
-    creationDate &&
-    new Date() > creationDate &&
-    moviedb.hasWatchLinkAvailable();
+    creationDate && new Date() > creationDate && tmdb.hasWatchLinkAvailable();
   return (
     <div className="py-4 px-3 w-full h-full hidden absolute group-hover:flex bg-zinc-800 bg-opacity-80 backdrop-blur-sm justify-end flex-col">
       <p className="font-semibold text-sm text-white">
@@ -52,7 +50,7 @@ const PosterHoverInfo = ({ item, type }: Props) => {
 };
 
 const Poster = ({ item, type, isHoverable = true }: Props) => {
-  const posterImageUrl = moviedb.getImageLink(item.poster_path);
+  const posterImageUrl = tmdb.getImageLink(item.poster_path);
   return (
     <Link
       href={{

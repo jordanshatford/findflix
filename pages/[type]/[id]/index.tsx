@@ -3,14 +3,14 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import axios from 'axios';
-import moviedb, {
+import tmdb, {
   type PagedResults,
   type Movie,
   type TVShow,
   MovieListEnum,
   MediaTypeEnum,
   TVShowListEnum,
-} from '@/services/moviedb';
+} from '@/services/tmdb';
 import Poster from '@/components/Poster';
 
 interface Props {
@@ -90,18 +90,18 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   if (type === MediaTypeEnum.MOVIE) {
     // The id in this case is actually the name of the list
     const list = params?.id as MovieListEnum;
-    if (!moviedb.isValidList(type, list)) {
+    if (!tmdb.isValidList(type, list)) {
       return { notFound: true };
     }
-    const results = await moviedb.getMovieListPagedResults(list);
+    const results = await tmdb.getMovieListPagedResults(list);
     return { props: { results } };
   } else if (type === MediaTypeEnum.TV_SHOW) {
     // The id in this case is actually the name of the list
     const list = params?.id as TVShowListEnum;
-    if (!moviedb.isValidList(type, list)) {
+    if (!tmdb.isValidList(type, list)) {
       return { notFound: true };
     }
-    const results = await moviedb.getTVShowListPagedResults(list);
+    const results = await tmdb.getTVShowListPagedResults(list);
     return { props: { results } };
   }
   return { notFound: true };
