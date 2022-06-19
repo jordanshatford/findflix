@@ -35,15 +35,15 @@ const MoviePage: NextPage<Props> = ({
       ></div>
       <div className="w-full relative">
         <div
-          className="w-full min-h-screen flex items-end backdrop-blur-[1px] px-[50px] pb-[50px]"
+          className="w-full min-h-screen flex items-end backdrop-blur-sm px-5 md:px-20 pb-14"
           style={{
             background: `linear-gradient(360deg, #18181B 30%, transparent)`,
           }}
         >
           <div className="flex flex-col sm:flex-row justify-center sm:justify-start">
             <Poster item={item} type={type} isHoverable={false} />
-            <div className="pt-[10px] sm:pl-[30px] flex flex-col justify-end max-w-[1000px] min-w-[450px]">
-              <h2 className="font-semibold text-white text-3xl mb-[4px]">
+            <div className="pt-2 sm:pl-5 flex flex-col justify-end w-full">
+              <h2 className="font-semibold text-white text-3xl mb-2">
                 {type === MediaTypeEnum.MOVIE ? item.title : item.name}
               </h2>
               <p className="text-sm text-zinc-300">{item.tagline}</p>
