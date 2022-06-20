@@ -11,7 +11,7 @@ import tmdb, {
   MediaTypeEnum,
   TVShowListEnum,
 } from '@/services/tmdb';
-import Poster from '@/components/Poster';
+import MediaPoster from '@/components/MediaPoster';
 
 interface Props {
   results: PagedResults<Partial<Movie & TVShow>>;
@@ -69,7 +69,7 @@ const MediaListPage: NextPage<Props> = ({ results }: Props) => {
       <div className="flex flex-wrap justify-center sm:mx-2">
         {items.map((item) => (
           <div key={item.id} className="m-2">
-            <Poster item={item} type={type} />
+            <MediaPoster item={item} type={type} />
           </div>
         ))}
         <div ref={sentryRef} />

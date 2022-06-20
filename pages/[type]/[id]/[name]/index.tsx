@@ -7,7 +7,7 @@ import tmdb, {
   DetailedTVShow,
 } from '@/services/tmdb';
 import Tag from '@/components/Tag';
-import Poster from '@/components/Poster';
+import MediaPoster from '@/components/MediaPoster';
 import { toHourMinutes, toReadableDate, toURLSafe } from '@/utilities/index';
 
 interface Props {
@@ -41,7 +41,7 @@ const MediaDetailPage: NextPage<Props> = ({
           }}
         >
           <div className="w-full flex flex-col sm:flex-row justify-center sm:justify-start">
-            <Poster item={item} type={type} isHoverable={false} />
+            <MediaPoster item={item} type={type} isHoverable={false} />
             <div className="pt-2 sm:pl-5 flex flex-col justify-end w-full">
               <h2 className="font-semibold text-white text-3xl mb-2">
                 {type === MediaTypeEnum.MOVIE ? item.title : item.name}

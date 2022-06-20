@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import tmdb, { PagedResults, ListItem } from '@/services/tmdb';
-import Poster from '@/components/Poster';
+import MediaPoster from '@/components/MediaPoster';
 
 interface Props {
   results: PagedResults<ListItem>;
@@ -53,7 +53,7 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
       <div className="flex flex-wrap justify-center sm:mx-2">
         {items.map((item) => (
           <div key={item.id} className="m-2">
-            <Poster item={item} type={item.media_type} />
+            <MediaPoster item={item} type={item.media_type} />
           </div>
         ))}
         <div ref={sentryRef} />
