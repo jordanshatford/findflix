@@ -30,11 +30,11 @@ const PosterHoverInfo = ({ item, type }: Props) => {
       {availableToWatch && type === MediaTypeEnum.MOVIE && (
         <Link
           href={{
-            pathname: `/[type]/[id]/[title]/watch`,
+            pathname: `/[type]/[id]/[name]/watch`,
             query: {
               type,
               id: item.id,
-              title: toURLSafe(
+              name: toURLSafe(
                 type === MediaTypeEnum.MOVIE ? item.title : item.name
               ),
             },
@@ -55,11 +55,11 @@ const Poster = ({ item, type, isHoverable = true }: Props) => {
   return (
     <Link
       href={{
-        pathname: '/[type]/[id]/[title]',
+        pathname: '/[type]/[id]/[name]',
         query: {
           type,
           id: item.id,
-          title: toURLSafe(
+          name: toURLSafe(
             type === MediaTypeEnum.MOVIE ? item.title : item.name
           ),
         },
