@@ -8,7 +8,7 @@ const IndexPage: NextPage = () => {
 export const getServerSideProps: GetServerSideProps = async () => {
   return {
     redirect: {
-      destination: `/${MediaTypeEnum.MOVIE}/${MovieListEnum.POPULAR}`,
+      destination: `/${MediaTypeEnum.MOVIE}/${MovieListEnum.TRENDING}`,
       permanent: true,
     },
   };
