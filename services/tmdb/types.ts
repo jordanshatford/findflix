@@ -37,29 +37,6 @@ export interface SpokenLanguage {
   name: string;
 }
 
-export interface Image {
-  aspect_ratio: number;
-  file_path: string;
-  height: number;
-  iso_639_1: string | null;
-  vote_average: number;
-  vote_count: number;
-  width: number;
-}
-
-export interface Video {
-  iso_639_1: string;
-  iso_3166_1: string;
-  name: string;
-  key: string;
-  site: string;
-  size: number;
-  type: string;
-  official: boolean;
-  published_at: string;
-  id: string;
-}
-
 export interface DetailedMovie extends Movie {
   budget: number;
   genres: Genre[];
@@ -72,8 +49,6 @@ export interface DetailedMovie extends Movie {
   spoken_languages: SpokenLanguage[];
   status: string;
   tagline: string;
-  images: { backdrops: Image[]; posters: Image[] };
-  videos: { id: number; results: Video[] };
   recommendations: PagedResults<Movie>;
   similar: PagedResults<Movie>;
 }
@@ -109,14 +84,29 @@ export interface Network {
   origin_country: string;
 }
 
+export interface Episode {
+  air_date: string;
+  episode_number: number;
+  // crew: any[];
+  // guest_stars: any[];
+  id: number;
+  name: string;
+  overview: string;
+  production_code: string;
+  season_number: number;
+  still_path: string;
+  vote_average: number;
+  vote_count: number;
+}
+
 export interface Season {
   air_date: string;
-  episode_count: number;
   id: number;
   name: string;
   overview: string;
   poster_path: string;
   season_number: number;
+  episodes?: Episode[];
 }
 
 export interface DetailedTVShow extends TVShow {
@@ -139,8 +129,6 @@ export interface DetailedTVShow extends TVShow {
   status: string;
   tagline: string;
   type: string;
-  images: { backdrops: Image[]; posters: Image[] };
-  videos: { id: number; results: Video[] };
   recommendations: PagedResults<Movie>;
   similar: PagedResults<Movie>;
 }

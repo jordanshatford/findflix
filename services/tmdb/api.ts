@@ -53,7 +53,7 @@ export async function getMovieDetails(
   id: string
 ): Promise<types.DetailedMovie> {
   const data = await v3Client.get<types.DetailedMovie>(`/movie/${id}`, {
-    params: { append_to_response: `images,videos,recommendations,similar` },
+    params: { append_to_response: 'recommendations,similar' },
   });
   return data.data;
 }
@@ -84,8 +84,16 @@ export async function getTVShowDetails(
   id: string
 ): Promise<types.DetailedTVShow> {
   const data = await v3Client.get<types.DetailedTVShow>(`/tv/${id}`, {
-    params: { append_to_response: `images,videos,recommendations,similar` },
+    params: { append_to_response: 'recommendations,similar' },
   });
+  return data.data;
+}
+
+export async function getTVShowSeason(
+  id: string,
+  seasonId: string
+): Promise<types.Season> {
+  const data = await v3Client.get<types.Season>(`/tv/${id}/season/${seasonId}`);
   return data.data;
 }
 

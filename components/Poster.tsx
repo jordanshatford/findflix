@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Play } from 'phosphor-react';
 import tmdb, { MediaTypeEnum, Movie, TVShow } from '@/services/tmdb';
 import { toURLSafe } from '@/utilities/index';
+import BasicPoster from '@/components/BasicPoster';
 
 interface Props {
   item: Partial<Movie & TVShow>;
@@ -70,19 +71,12 @@ const Poster = ({ item, type, isHoverable = true }: Props) => {
           whileHover={{ scale: isHoverable ? 1.05 : 1 }}
           className="flex justify-center"
         >
-          <div className="w-44 h-64 overflow-hidden relative rounded-lg bg-zinc-800 bg-opacity-80 backdrop-blur-sm">
-            {posterImageUrl && (
-              <Image
-                src={posterImageUrl}
-                layout="fill"
-                placeholder="blur"
-                objectFit="cover"
-                blurDataURL={posterImageUrl}
-                alt={type === MediaTypeEnum.MOVIE ? item.title : item.name}
-              />
-            )}
+          <BasicPoster
+            image={posterImageUrl}
+            alt={type === MediaTypeEnum.MOVIE ? item.title : item.name}
+          >
             {isHoverable && <PosterHoverInfo item={item} type={type} />}
-          </div>
+          </BasicPoster>
         </motion.div>
       </a>
     </Link>
