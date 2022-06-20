@@ -16,7 +16,7 @@ interface Props {
   availableToWatch: boolean;
 }
 
-const MoviePage: NextPage<Props> = ({
+const MediaDetailPage: NextPage<Props> = ({
   item,
   type,
   availableToWatch = false,
@@ -77,7 +77,7 @@ const MoviePage: NextPage<Props> = ({
               <p className="mt-3 text-sm text-justify text-zinc-300">
                 {item.overview}
               </p>
-              {availableToWatch && (
+              {availableToWatch && type === MediaTypeEnum.MOVIE && (
                 <Link
                   href={{
                     pathname: `/[type]/[id]/[title]/watch`,
@@ -105,7 +105,7 @@ const MoviePage: NextPage<Props> = ({
   );
 };
 
-export default MoviePage;
+export default MediaDetailPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id, type } = params as { id: string; type: MediaTypeEnum };

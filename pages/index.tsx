@@ -1,7 +1,7 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import { MovieListEnum, MediaTypeEnum } from '@/services/tmdb';
 
-const Home: NextPage = () => {
+const IndexPage: NextPage = () => {
   return <></>;
 };
 
@@ -14,4 +14,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   };
 };
 
-export default Home;
+export default IndexPage;

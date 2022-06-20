@@ -9,7 +9,7 @@ interface Props {
   results: PagedResults<ListItem>;
 }
 
-const PopularMovies: NextPage<Props> = ({ results }: Props) => {
+const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -70,6 +70,8 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
   );
 };
 
+export default FavouritesListPage;
+
 export const getServerSideProps: GetServerSideProps = async () => {
   // If no favourites are available, then 404 this page
   if (!tmdb.hasFavouritesAvailable()) {
@@ -78,5 +80,3 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const results = await tmdb.getFavourites();
   return { props: { results } };
 };
-
-export default PopularMovies;

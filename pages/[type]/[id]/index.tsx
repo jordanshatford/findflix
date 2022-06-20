@@ -17,7 +17,7 @@ interface Props {
   results: PagedResults<Partial<Movie & TVShow>>;
 }
 
-const PopularMovies: NextPage<Props> = ({ results }: Props) => {
+const MediaListPage: NextPage<Props> = ({ results }: Props) => {
   const router = useRouter();
   const type = router.query.type as MediaTypeEnum;
   const list = router.query.id as MovieListEnum;
@@ -84,6 +84,8 @@ const PopularMovies: NextPage<Props> = ({ results }: Props) => {
   );
 };
 
+export default MediaListPage;
+
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const type = params?.type as MediaTypeEnum;
 
@@ -106,5 +108,3 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   }
   return { notFound: true };
 };
-
-export default PopularMovies;
