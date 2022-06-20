@@ -5,5 +5,5 @@ export default {
   trendingTimeWindow: 'week',
   imageBaseURL: process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL as string,
   favouritesListId: process.env.TMDB_FAVOURITES_LIST_ID,
-  watchBaseURL: undefined,
+  watchBaseURL: process.env.TMDB_WATCH_BASE_URL,
 };
