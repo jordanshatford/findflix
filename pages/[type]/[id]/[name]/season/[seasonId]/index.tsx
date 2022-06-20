@@ -29,7 +29,7 @@ const SeasonDetailPage: NextPage<Props> = ({ show, season }: Props) => {
             background: `linear-gradient(360deg, #18181B 30%, transparent)`,
           }}
         >
-          <div className="flex flex-col sm:flex-row justify-center sm:justify-start">
+          <div className="w-full flex flex-col sm:flex-row justify-center sm:justify-start">
             <BasicPoster
               image={tmdb.getImageLink(season.poster_path)}
               alt={`${season.name} ${season.season_number}`}
@@ -56,7 +56,7 @@ const SeasonDetailPage: NextPage<Props> = ({ show, season }: Props) => {
                 </div>
               </div>
               <p className="mt-3 text-sm text-justify text-zinc-300">
-                {season.overview}
+                {season.overview ? show.overview : 'No overview available.'}
               </p>
             </div>
           </div>

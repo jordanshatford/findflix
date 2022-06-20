@@ -40,7 +40,7 @@ const MediaDetailPage: NextPage<Props> = ({
             background: `linear-gradient(360deg, #18181B 30%, transparent)`,
           }}
         >
-          <div className="flex flex-col sm:flex-row justify-center sm:justify-start">
+          <div className="w-full flex flex-col sm:flex-row justify-center sm:justify-start">
             <Poster item={item} type={type} isHoverable={false} />
             <div className="pt-2 sm:pl-5 flex flex-col justify-end w-full">
               <h2 className="font-semibold text-white text-3xl mb-2">
