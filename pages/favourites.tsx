@@ -13,14 +13,12 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [totalResults, setTotalResults] = useState(0);
   const [items, setItems] = useState<ListItem[]>([]);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     setItems(results.results);
     setTotalPages(results.total_pages);
-    setTotalResults(results.total_results);
     setPage(results.page);
   }, [results]);
 
@@ -39,7 +37,7 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
 
   const [sentryRef] = useInfiniteScroll({
     loading,
-    hasNextPage: page <= totalPages,
+    hasNextPage: page < totalPages,
     onLoadMore: getNextPage,
     // When there is an error, we stop infinite loading.
     disabled: error,
@@ -52,20 +50,18 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-white capitalize">My Favourites</h1>
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center sm:mx-2">
         {items.map((item) => (
           <div key={item.id} className="m-2">
             <Poster item={item} type={item.media_type} />
           </div>
         ))}
-        <div ref={sentryRef}></div>
+        <div ref={sentryRef} />
       </div>
-      <button
-        onClick={getNextPage}
-        className="flex items-center text-white text-sm py-2 px-3 rounded-lg mt-3 w-max bg-zinc-600"
-      >
-        {loading ? 'Loading' : 'More Results'}
-      </button>
+      <div className="flex flex-col items-center mt-1 mb-5 text-white">
+        {loading && page !== totalPages && <div>Loading...</div>}
+        {page === totalPages && <div>No more results</div>}
+      </div>
     </div>
   );
 };
@@ -73,7 +69,6 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
 export default FavouritesListPage;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  // If no favourites are available, then 404 this page
   if (!tmdb.hasFavouritesAvailable()) {
     return { notFound: true };
   }
