@@ -31,6 +31,15 @@ export async function getMovieListPagedResults(
   list: types.MovieListEnum,
   page: number = 1
 ): Promise<types.PagedResults<types.Movie>> {
+  if (list === types.MovieListEnum.TRENDING) {
+    const data = await v3Client.get<types.PagedResults<types.Movie>>(
+      `/trending/movie/${config.trendingTimeWindow}`,
+      {
+        params: { page },
+      }
+    );
+    return data.data;
+  }
   const data = await v3Client.get<types.PagedResults<types.Movie>>(
     `/movie/${list}`,
     {
@@ -53,6 +62,15 @@ export async function getTVShowListPagedResults(
   list: types.TVShowListEnum,
   page: number = 1
 ): Promise<types.PagedResults<types.TVShow>> {
+  if (list === types.TVShowListEnum.TRENDING) {
+    const data = await v3Client.get<types.PagedResults<types.TVShow>>(
+      `/trending/tv/${config.trendingTimeWindow}`,
+      {
+        params: { page },
+      }
+    );
+    return data.data;
+  }
   const data = await v3Client.get<types.PagedResults<types.TVShow>>(
     `/tv/${list}`,
     {

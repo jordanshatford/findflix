@@ -161,6 +161,7 @@ export enum MovieListEnum {
   NOW_PLAYING = 'now_playing',
   TOP_RATED = 'top_rated',
   UPCOMING = 'upcoming',
+  TRENDING = 'trending',
 }
 
 export enum TVShowListEnum {
@@ -168,6 +169,7 @@ export enum TVShowListEnum {
   ON_THE_AIR = 'on_the_air',
   POPULAR = 'popular',
   TOP_RATED = 'top_rated',
+  TRENDING = 'trending',
 }
 
 export enum MediaTypeEnum {
