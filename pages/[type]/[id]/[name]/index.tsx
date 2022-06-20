@@ -109,30 +109,26 @@ export default MediaDetailPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id, type } = params as { id: string; type: MediaTypeEnum };
-  if (type === MediaTypeEnum.MOVIE) {
-    try {
-      const movie = await tmdb.getMovieDetails(id);
-      const creationDate = tmdb.getMediaCreationDate(
-        movie,
-        MediaTypeEnum.MOVIE
-      );
-      const availableToWatch =
-        creationDate &&
-        new Date() > creationDate &&
-        tmdb.hasWatchLinkAvailable();
-      return { props: { item: movie, availableToWatch, type } };
-    } catch (e) {
+  switch (type) {
+    case MediaTypeEnum.MOVIE:
+    case MediaTypeEnum.TV_SHOW: {
+      try {
+        const item =
+          type === MediaTypeEnum.MOVIE
+            ? await tmdb.getMovieDetails(id)
+            : await tmdb.getTVShowDetails(id);
+        const creationDate = tmdb.getMediaCreationDate(item, type);
+        const availableToWatch =
+          creationDate &&
+          new Date() > creationDate &&
+          tmdb.hasWatchLinkAvailable();
+        return { props: { item, availableToWatch, type } };
+      } catch (e) {
+        return { notFound: true };
+      }
+    }
+    default: {
       return { notFound: true };
     }
-  } else if (type === MediaTypeEnum.TV_SHOW) {
-    const tvShow = await tmdb.getTVShowDetails(id);
-    const creationDate = tmdb.getMediaCreationDate(
-      tvShow,
-      MediaTypeEnum.TV_SHOW
-    );
-    const availableToWatch =
-      creationDate && new Date() > creationDate && tmdb.hasWatchLinkAvailable();
-    return { props: { item: tvShow, availableToWatch, type } };
   }
-  return { notFound: true };
 };

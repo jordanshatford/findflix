@@ -26,7 +26,7 @@ const PosterHoverInfo = ({ item, type }: Props) => {
       <p className="line-clamp-3 text-xs font-light text-zinc-400">
         {item.overview}
       </p>
-      {availableToWatch && (
+      {availableToWatch && type === MediaTypeEnum.MOVIE && (
         <Link
           href={{
             pathname: `/[type]/[id]/[title]/watch`,

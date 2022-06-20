@@ -1,6 +1,6 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import axios from 'axios';
 import tmdb, {
@@ -23,26 +23,28 @@ const MediaListPage: NextPage<Props> = ({ results }: Props) => {
   const list = router.query.id as MovieListEnum;
 
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [items, setItems] = useState<Partial<Movie & TVShow>[]>([]);
+  const [page, setPage] = useState(results.page);
+  const [totalPages, setTotalPages] = useState(results.total_pages);
+  const [items, setItems] = useState<Partial<Movie & TVShow>[]>(
+    results.results
+  );
   const [error, setError] = useState(false);
-
-  useEffect(() => {
-    setItems(results.results);
-    setTotalPages(results.total_pages);
-    setPage(results.page);
-  }, [results]);
 
   const getNextPage = async () => {
     setLoading(true);
-    const response = await axios.get<{
-      error: boolean;
-      data: PagedResults<Movie>;
-    }>(`/api/${type}/${list}`, { params: { page: page + 1 } });
-    if (!response.data.error) {
-      setItems([...items, ...response.data.data.results]);
-      setPage(response.data.data.page);
+    try {
+      const response = await axios.get<PagedResults<Partial<Movie & TVShow>>>(
+        `/api/${type}/${list}`,
+        { params: { page: page + 1 } }
+      );
+      const data = response.data;
+      setItems([...items, ...data.results]);
+      setPage(data.page);
+      setTotalPages(data.total_pages);
+    } catch (e: any) {
+      console.error(`Failed to fetch ${type} ${list} page: `, e);
+      setError(true);
+    } finally {
       setLoading(false);
     }
   };
@@ -84,23 +86,27 @@ export default MediaListPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const type = params?.type as MediaTypeEnum;
-
-  if (type === MediaTypeEnum.MOVIE) {
-    // The id in this case is actually the name of the list
-    const list = params?.id as MovieListEnum;
-    if (!tmdb.isValidList(type, list)) {
+  switch (type) {
+    case MediaTypeEnum.MOVIE: {
+      // The id in this case is actually the name of the list
+      const list = params?.id as MovieListEnum;
+      if (!tmdb.isValidList(type, list)) {
+        return { notFound: true };
+      }
+      const results = await tmdb.getMovieListPagedResults(list);
+      return { props: { results } };
+    }
+    case MediaTypeEnum.TV_SHOW: {
+      // The id in this case is actually the name of the list
+      const list = params?.id as TVShowListEnum;
+      if (!tmdb.isValidList(type, list)) {
+        return { notFound: true };
+      }
+      const results = await tmdb.getTVShowListPagedResults(list);
+      return { props: { results } };
+    }
+    default: {
       return { notFound: true };
     }
-    const results = await tmdb.getMovieListPagedResults(list);
-    return { props: { results } };
-  } else if (type === MediaTypeEnum.TV_SHOW) {
-    // The id in this case is actually the name of the list
-    const list = params?.id as TVShowListEnum;
-    if (!tmdb.isValidList(type, list)) {
-      return { notFound: true };
-    }
-    const results = await tmdb.getTVShowListPagedResults(list);
-    return { props: { results } };
   }
-  return { notFound: true };
 };
