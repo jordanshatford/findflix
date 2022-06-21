@@ -7,7 +7,7 @@ import tmdb, {
   Season,
   Episode,
 } from '@/services/tmdb';
-import BasicPoster from '@/components/BasicPoster';
+import SeasonPoster from '@/components/SeasonPoster';
 import { toReadableDate, toURLSafe } from '@/utilities/index';
 
 interface Props {
@@ -43,10 +43,7 @@ const EpisodeDetailPage: NextPage<Props> = ({
           }}
         >
           <div className="w-full flex flex-col sm:flex-row justify-center sm:justify-start">
-            <BasicPoster
-              image={tmdb.getImageLink(season.poster_path)}
-              alt={`${season.name} ${season.season_number}`}
-            />
+            <SeasonPoster show={show} season={season} isHoverable={false} />
             <div className="pt-2 sm:pl-5 flex flex-col justify-end w-full">
               <h2 className="font-semibold text-white text-3xl mb-2">
                 {show.name}
