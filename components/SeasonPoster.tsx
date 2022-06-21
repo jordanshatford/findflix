@@ -19,7 +19,7 @@ const SeasonPoster = ({ show, season, isHoverable = true }: Props) => {
           id: show.id,
           name: toURLSafe(show.name),
           seasonId: season.season_number,
-        }
+        },
       }}
       title={show.name}
       subtitle={`Season ${season.season_number}`}

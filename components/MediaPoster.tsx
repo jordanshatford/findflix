@@ -18,8 +18,10 @@ const MediaPoster = ({ item, type, isHoverable = true }: Props) => {
         query: {
           type,
           id: item.id,
-          name: toURLSafe(type === MediaTypeEnum.MOVIE ? item.title : item.name)
-        }
+          name: toURLSafe(
+            type === MediaTypeEnum.MOVIE ? item.title : item.name
+          ),
+        },
       }}
       title={type === MediaTypeEnum.MOVIE ? item.title : item.name}
       subtitle={creationDate ? creationDate.getFullYear().toString() : '???'}

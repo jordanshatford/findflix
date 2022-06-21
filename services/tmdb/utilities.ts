@@ -1,11 +1,5 @@
 import config from './config';
-import {
-  MediaTypeEnum,
-  MovieListEnum,
-  TVShowListEnum,
-  Movie,
-  TVShow,
-} from './types';
+import * as types from './types';
 
 /**
  * Check wether a list of favourite movies and TV shows has been provided.
@@ -32,13 +26,17 @@ export function hasWatchLinkAvailable(): boolean {
  * @returns - true if the list is valid, false otherwise
  */
 export function isValidList(
-  mediaType: MediaTypeEnum,
-  value: MovieListEnum | TVShowListEnum
+  mediaType: types.MediaTypeEnum,
+  value: types.MovieListEnum | types.TVShowListEnum
 ): boolean {
-  if (mediaType === MediaTypeEnum.MOVIE) {
-    return Object.values(MovieListEnum).includes(value as MovieListEnum);
+  if (mediaType === types.MediaTypeEnum.MOVIE) {
+    return Object.values(types.MovieListEnum).includes(
+      value as types.MovieListEnum
+    );
   } else {
-    return Object.values(TVShowListEnum).includes(value as TVShowListEnum);
+    return Object.values(types.TVShowListEnum).includes(
+      value as types.TVShowListEnum
+    );
   }
 }
 
@@ -58,16 +56,27 @@ export function getImageLink(
   return `${config.imageBaseURL}${size}${path}`;
 }
 
-export function getMovieWatchLink(movie: Partial<Movie>) {
+/**
+ * Get the url to watch a specific movie.
+ * @param movie - the movie to get url for
+ * @returns - the string url
+ */
+export function getMovieWatchLink(movie: Partial<types.Movie>): string {
   return `${config.watchBaseURL}movie?id=${movie.id}`;
 }
 
+/**
+ * Get the url to watch a specific TV show.
+ * @param showId
+ * @param seasonNum
+ * @param episodeNum
+ * @returns - the string url
+ */
 export function getTVShowEpisodeWatchLink(
-  showId: string,
-  seasonNum: string,
-  episodeNum: string
+  show: Partial<types.TVShow>,
+  episode: Partial<types.Episode>
 ): string {
-  return `${config.watchBaseURL}tv/?id=${showId}&s=${seasonNum}&e=${episodeNum}`;
+  return `${config.watchBaseURL}tv/?id=${show.id}&s=${episode.season_number}&e=${episode.episode_number}`;
 }
 
 /**
@@ -88,12 +97,12 @@ export function toDate(date: string): Date {
  * @returns - the creation date of the media item
  */
 export function getMediaCreationDate(
-  item: Partial<Movie & TVShow>,
-  type: MediaTypeEnum
+  item: Partial<types.Movie & types.TVShow>,
+  type: types.MediaTypeEnum
 ): Date | null {
-  if (type === MediaTypeEnum.MOVIE && item?.release_date) {
+  if (type === types.MediaTypeEnum.MOVIE && item?.release_date) {
     return toDate(item.release_date);
-  } else if (type === MediaTypeEnum.TV_SHOW && item?.first_air_date) {
+  } else if (type === types.MediaTypeEnum.TV_SHOW && item?.first_air_date) {
     return toDate(item.first_air_date);
   }
   return null;
