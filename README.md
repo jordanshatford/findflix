@@ -1,34 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FindFlix
 
-## Getting Started
+[![Powered By Next.js](https://img.shields.io/badge/powered%20by-Next.js-%23000000.svg?style=flat&logo=Next.js)](https://nextjs.org/)
+[![Powered By React](https://img.shields.io/badge/powered%20by-React-%2361DAFB.svg?style=flat&logo=React)](https://reactjs.org/)
+[![Powered By TMDb](https://img.shields.io/badge/powered%20by-TMDb-%2301B4E4.svg?style=flat&logo=The%20Movie%20Database)](https://reactjs.org/)
+[![Language: TypeScript](https://img.shields.io/badge/language-typescript-%233178C6.svg?style=flat&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwindcss](https://img.shields.io/badge/css--framework-tailwindcss-%2306B6D4?logo=tailwindcss)](https://tailwindcss.com)
+[![Postcss](https://img.shields.io/badge/style-postcss-%23DD3A0A?style=flat&logo=postcss)](https://postcss.org)
+[![Prettier](https://img.shields.io/badge/code--formatter-prettier-%23F7B93E?style=flat&logo=prettier)](https://prettier.io/)
+[![Eslint](https://img.shields.io/badge/linter-eslint-%234B32C3?style=flat&logo=eslint)](https://eslint.org/)
+[![Hosted On Vercel](https://img.shields.io/badge/hosted%20on-vercel-%23000000.svg?style=flat&logo=vercel)](https://vercel.com/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat&logo=license)](https://github.com/jordanshatford/clip-queue/blob/main/LICENSE.md)
 
-First, run the development server:
+FindFlix is a Next.js application created to allow users to find movies and television shows they want to watch. It utilizes the TMDb API to provide users with updated information about trending content.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Screenshot
+TODO
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## More Information
+More information can be found in the respective doc in the docs folder.
+  - [DEVELOPMENT](./docs/DEVELOPMENT.md)
+  - [DEPLOYMENT](./docs/DEPLOYMENT.md)
+  - [TMDb](./services/tmdb/README.md)
