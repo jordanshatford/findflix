@@ -14,10 +14,13 @@
 FindFlix is a Next.js application created to allow users to find movies and television shows they want to watch. It utilizes the TMDb API to provide users with updated information about trending content.
 
 ## Screenshot
-TODO
+
+![Screenshot of Web View](https://user-images.githubusercontent.com/37837288/174911757-8dd4b3e6-0391-4991-aeb8-2747ff45007c.png)
 
 ## More Information
+
 More information can be found in the respective doc in the docs folder.
-  - [DEVELOPMENT](./docs/DEVELOPMENT.md)
-  - [DEPLOYMENT](./docs/DEPLOYMENT.md)
-  - [TMDb](./services/tmdb/README.md)
+
+- [DEVELOPMENT](./docs/DEVELOPMENT.md)
+- [DEPLOYMENT](./docs/DEPLOYMENT.md)
+- [TMDb](./services/tmdb/README.md)
