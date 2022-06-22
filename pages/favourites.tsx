@@ -4,6 +4,7 @@ import axios from 'axios';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import tmdb, { PagedResults, ListItem } from '@/services/tmdb';
 import MediaPoster from '@/components/MediaPoster';
+import PagedResultIndicator from '@/components/PagedResultIndicator';
 
 interface Props {
   results: PagedResults<ListItem>;
@@ -48,9 +49,9 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
   });
 
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-white capitalize">My Favourites</h1>
-      <div className="flex flex-wrap justify-center sm:mx-2">
+    <div className="flex flex-col items-center sm:mx-2">
+      <h1 className="text-white capitalize text-2xl">My Favourites</h1>
+      <div className="flex flex-wrap justify-center">
         {items.map((item) => (
           <div key={item.id} className="m-2">
             <MediaPoster item={item} type={item.media_type} />
@@ -58,10 +59,7 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
         ))}
         <div ref={sentryRef} />
       </div>
-      <div className="flex flex-col items-center mt-1 mb-5 text-white">
-        {loading && page !== totalPages && <div>Loading...</div>}
-        {page === totalPages && <div>No more results</div>}
-      </div>
+      <PagedResultIndicator isLoading={loading} hasMore={page !== totalPages} />
     </div>
   );
 };

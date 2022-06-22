@@ -12,6 +12,7 @@ import tmdb, {
   TVShowListEnum,
 } from '@/services/tmdb';
 import MediaPoster from '@/components/MediaPoster';
+import PagedResultIndicator from '@/components/PagedResultIndicator';
 
 interface Props {
   results: PagedResults<Partial<Movie & TVShow>>;
@@ -62,11 +63,11 @@ const MediaListPage: NextPage<Props> = ({ results }: Props) => {
   });
 
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-white capitalize">
+    <div className="flex flex-col items-center sm:mx-2">
+      <h1 className="text-white capitalize text-2xl">
         {list} {type === MediaTypeEnum.MOVIE ? 'Movies' : 'TV Shows'}
       </h1>
-      <div className="flex flex-wrap justify-center sm:mx-2">
+      <div className="flex flex-wrap justify-center">
         {items.map((item) => (
           <div key={item.id} className="m-2">
             <MediaPoster item={item} type={type} />
@@ -74,10 +75,7 @@ const MediaListPage: NextPage<Props> = ({ results }: Props) => {
         ))}
         <div ref={sentryRef} />
       </div>
-      <div className="flex flex-col items-center mt-1 mb-5 text-white">
-        {loading && page !== totalPages && <div>Loading...</div>}
-        {page === totalPages && <div>No more results</div>}
-      </div>
+      <PagedResultIndicator isLoading={loading} hasMore={page !== totalPages} />
     </div>
   );
 };
