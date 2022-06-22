@@ -75,7 +75,7 @@ const MediaListPage: NextPage<Props> = ({ results }: Props) => {
         ))}
         <div ref={sentryRef} />
       </div>
-      <PagedResultIndicator isLoading={loading} hasMore={page !== totalPages} />
+      <PagedResultIndicator isLoading={loading} hasMore={page < totalPages} />
     </div>
   );
 };

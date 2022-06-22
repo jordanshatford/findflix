@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
-import { Calendar, Clock, Star, Play } from 'phosphor-react';
+import { Calendar, Clock, Star, Play, MonitorPlay } from 'phosphor-react';
 import tmdb, {
   MediaTypeEnum,
   DetailedMovie,
@@ -64,6 +64,15 @@ const MediaDetailPage: NextPage<Props> = ({
                       <Clock className="ml-2" size={20} weight="fill" />
                       <span className="ml-1">
                         {toHourMinutes(item.runtime)}
+                      </span>
+                    </>
+                  )}
+                  {item.seasons && (
+                    <>
+                      <MonitorPlay className="ml-2" size={20} weight="fill" />
+                      <span className="ml-1">
+                        {Math.max(...item.seasons.map((s) => s.season_number))}{' '}
+                        season(s)
                       </span>
                     </>
                   )}
