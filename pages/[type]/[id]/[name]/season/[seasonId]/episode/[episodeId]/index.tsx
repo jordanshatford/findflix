@@ -14,14 +14,14 @@ interface Props {
   show: DetailedTVShow;
   season: Season;
   episode: Episode;
-  availableToWatch?: boolean;
+  hasWatchLink?: boolean;
 }
 
 const EpisodeDetailPage: NextPage<Props> = ({
   show,
   season,
   episode,
-  availableToWatch = false,
+  hasWatchLink,
 }: Props) => {
   const airDate = tmdb.toDate(episode.air_date);
   return (
@@ -67,7 +67,7 @@ const EpisodeDetailPage: NextPage<Props> = ({
               <p className="mt-3 text-sm text-justify text-zinc-300">
                 {episode.overview ? episode.overview : 'No overview available.'}
               </p>
-              {availableToWatch && (
+              {hasWatchLink && (
                 <Link
                   href={{
                     pathname: `/[type]/[id]/[name]/season/[seasonId]/episode/[episodeId]/watch`,
@@ -116,9 +116,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       return { notFound: true };
     }
     const airDate = tmdb.toDate(episode.air_date);
-    const availableToWatch =
+    const hasWatchLink =
       airDate && new Date() > airDate && tmdb.hasWatchLinkAvailable();
-    return { props: { show, season, episode, availableToWatch } };
+    return { props: { show, season, episode, hasWatchLink } };
   } catch (e) {
     return { notFound: true };
   }

@@ -13,13 +13,13 @@ import { toHourMinutes, toReadableDate, toURLSafe } from '@/utilities/index';
 interface Props {
   item: Partial<DetailedMovie & DetailedTVShow>;
   type: MediaTypeEnum;
-  availableToWatch: boolean;
+  hasWatchLink?: boolean;
 }
 
 const MediaDetailPage: NextPage<Props> = ({
   item,
   type,
-  availableToWatch = false,
+  hasWatchLink,
 }: Props) => {
   const creationDate = tmdb.getMediaCreationDate(item, type);
   return (
@@ -77,7 +77,7 @@ const MediaDetailPage: NextPage<Props> = ({
               <p className="mt-3 text-sm text-justify text-zinc-300">
                 {item.overview}
               </p>
-              {availableToWatch && type === MediaTypeEnum.MOVIE && (
+              {hasWatchLink && type === MediaTypeEnum.MOVIE && (
                 <Link
                   href={{
                     pathname: `/[type]/[id]/[name]/watch`,
@@ -118,11 +118,11 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
             ? await tmdb.getMovieDetails(id)
             : await tmdb.getTVShowDetails(id);
         const creationDate = tmdb.getMediaCreationDate(item, type);
-        const availableToWatch =
+        const hasWatchLink =
           creationDate &&
           new Date() > creationDate &&
           tmdb.hasWatchLinkAvailable();
-        return { props: { item, availableToWatch, type } };
+        return { props: { item, hasWatchLink, type } };
       } catch (e) {
         return { notFound: true };
       }
