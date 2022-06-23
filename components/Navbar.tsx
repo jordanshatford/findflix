@@ -81,6 +81,7 @@ const Navbar = () => {
                   router.query.type === route.id ||
                   router.pathname === route.href
                 }
+                onClick={() => setShowMobileMenu(false)}
               />
             ))}
           </div>
