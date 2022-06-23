@@ -1,7 +1,6 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import useInfiniteScroll from 'react-infinite-scroll-hook';
 import axios from 'axios';
 import tmdb, {
   type PagedResults,
@@ -13,8 +12,8 @@ import tmdb, {
 } from '@/services/tmdb';
 import MediaPoster from '@/components/MediaPoster';
 import MediaCategoryTabs from '@/components/MediaCategoryTabs';
-import PagedResultIndicator from '@/components/PagedResultIndicator';
 import MetaHead from '@/components/MetaHead';
+import InfiniteScroller from '@/components/InfiniteScroller';
 import { toReadableString } from '@/utilities/index';
 
 interface Props {
@@ -53,24 +52,18 @@ const MediaListPage: NextPage<Props> = ({ results }: Props) => {
     }
   };
 
-  const [sentryRef] = useInfiniteScroll({
-    loading,
-    hasNextPage: page < totalPages,
-    onLoadMore: getNextPage,
-    // When there is an error, we stop infinite loading.
-    disabled: error,
-    // `rootMargin` is passed to `IntersectionObserver`.
-    // We can use it to trigger 'onLoadMore' when the sentry comes near to become
-    // visible, instead of becoming fully visible on the screen.
-    rootMargin: '0px 0px 200px 0px',
-  });
-
   return (
     <>
       <MetaHead
         title={`${toReadableString(list)} - ${toReadableString(type)}`}
       />
-      <div className="flex flex-col items-center sm:mx-2">
+      <InfiniteScroller
+        loading={loading}
+        hasMore={page < totalPages}
+        disabled={error}
+        onLoadMore={getNextPage}
+        className="flex flex-col items-center sm:mx-2"
+      >
         <MediaCategoryTabs />
         <div className="mt-2 flex flex-wrap justify-center">
           {items.map((item) => (
@@ -79,9 +72,7 @@ const MediaListPage: NextPage<Props> = ({ results }: Props) => {
             </div>
           ))}
         </div>
-        <div ref={sentryRef} />
-        <PagedResultIndicator isLoading={loading} hasMore={page < totalPages} />
-      </div>
+      </InfiniteScroller>
     </>
   );
 };
