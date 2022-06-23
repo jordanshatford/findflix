@@ -23,6 +23,7 @@ export default async function handler(
       }
       const results = await tmdb.getMovieListPagedResults(list, page);
       res.status(200).json(results);
+      break;
     }
     case MediaTypeEnum.TV_SHOW: {
       const list = req.query.list as TVShowListEnum;
@@ -32,9 +33,11 @@ export default async function handler(
       }
       const results = await tmdb.getTVShowListPagedResults(list, page);
       res.status(200).json(results);
+      break;
     }
     default: {
       res.status(404).json({});
+      break;
     }
   }
 }
