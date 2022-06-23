@@ -45,7 +45,7 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
     // `rootMargin` is passed to `IntersectionObserver`.
     // We can use it to trigger 'onLoadMore' when the sentry comes near to become
     // visible, instead of becoming fully visible on the screen.
-    rootMargin: '0px 0px 400px 0px',
+    rootMargin: '0px 0px 200px 0px',
   });
 
   return (
@@ -57,8 +57,8 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
             <MediaPoster item={item} type={item.media_type} />
           </div>
         ))}
-        <div ref={sentryRef} />
       </div>
+      <div ref={sentryRef} />
       <PagedResultIndicator isLoading={loading} hasMore={page < totalPages} />
     </div>
   );
