@@ -9,7 +9,7 @@ interface Props {
 
 const NavbarItem = ({ label, href, isActive = false }: Props) => {
   return (
-    <Link href={href} replace>
+    <Link href={href} passHref>
       <a
         className={`${
           isActive

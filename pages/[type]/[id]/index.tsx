@@ -12,6 +12,7 @@ import tmdb, {
   TVShowListEnum,
 } from '@/services/tmdb';
 import MediaPoster from '@/components/MediaPoster';
+import MediaCategoryTabs from '@/components/MediaCategoryTabs';
 import PagedResultIndicator from '@/components/PagedResultIndicator';
 
 interface Props {
@@ -21,7 +22,7 @@ interface Props {
 const MediaListPage: NextPage<Props> = ({ results }: Props) => {
   const router = useRouter();
   const type = router.query.type as MediaTypeEnum;
-  const list = router.query.id as MovieListEnum;
+  const list = router.query.id as string;
 
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(results.page);
@@ -64,10 +65,8 @@ const MediaListPage: NextPage<Props> = ({ results }: Props) => {
 
   return (
     <div className="flex flex-col items-center sm:mx-2">
-      <h1 className="text-white capitalize text-2xl">
-        {list} {type === MediaTypeEnum.MOVIE ? 'Movies' : 'TV Shows'}
-      </h1>
-      <div className="flex flex-wrap justify-center">
+      <MediaCategoryTabs />
+      <div className="mt-2 flex flex-wrap justify-center">
         {items.map((item) => (
           <div key={item.id} className="m-2">
             <MediaPoster item={item} type={type} />

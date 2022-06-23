@@ -2,7 +2,7 @@ import type { NextPage, GetServerSideProps } from 'next';
 import { useState } from 'react';
 import axios from 'axios';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
-import tmdb, { PagedResults, ListItem } from '@/services/tmdb';
+import tmdb, { PagedResults, ListItem, MovieListEnum } from '@/services/tmdb';
 import MediaPoster from '@/components/MediaPoster';
 import PagedResultIndicator from '@/components/PagedResultIndicator';
 
@@ -50,7 +50,6 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
 
   return (
     <div className="flex flex-col items-center sm:mx-2">
-      <h1 className="text-white capitalize text-2xl">My Favourites</h1>
       <div className="flex flex-wrap justify-center">
         {items.map((item) => (
           <div key={item.id} className="m-2">

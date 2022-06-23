@@ -7,7 +7,6 @@ import { MediaTypeEnum } from '@/services/tmdb';
 const Navbar = () => {
   const router = useRouter();
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
-  console.log(router.pathname);
   const routes = [
     {
       label: 'Movies',
