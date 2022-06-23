@@ -5,6 +5,7 @@ import useInfiniteScroll from 'react-infinite-scroll-hook';
 import tmdb, { PagedResults, ListItem, MovieListEnum } from '@/services/tmdb';
 import MediaPoster from '@/components/MediaPoster';
 import PagedResultIndicator from '@/components/PagedResultIndicator';
+import MetaHead from '@/components/MetaHead';
 
 interface Props {
   results: PagedResults<ListItem>;
@@ -49,17 +50,20 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
   });
 
   return (
-    <div className="flex flex-col items-center sm:mx-2">
-      <div className="flex flex-wrap justify-center">
-        {items.map((item) => (
-          <div key={item.id} className="m-2">
-            <MediaPoster item={item} type={item.media_type} />
-          </div>
-        ))}
+    <>
+      <MetaHead title="My Favourites" />
+      <div className="flex flex-col items-center sm:mx-2">
+        <div className="flex flex-wrap justify-center">
+          {items.map((item) => (
+            <div key={item.id} className="m-2">
+              <MediaPoster item={item} type={item.media_type} />
+            </div>
+          ))}
+        </div>
+        <div ref={sentryRef} />
+        <PagedResultIndicator isLoading={loading} hasMore={page < totalPages} />
       </div>
-      <div ref={sentryRef} />
-      <PagedResultIndicator isLoading={loading} hasMore={page < totalPages} />
-    </div>
+    </>
   );
 };
 

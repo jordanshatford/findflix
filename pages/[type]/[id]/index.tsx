@@ -14,6 +14,8 @@ import tmdb, {
 import MediaPoster from '@/components/MediaPoster';
 import MediaCategoryTabs from '@/components/MediaCategoryTabs';
 import PagedResultIndicator from '@/components/PagedResultIndicator';
+import MetaHead from '@/components/MetaHead';
+import { toReadableString } from '@/utilities/index';
 
 interface Props {
   results: PagedResults<Partial<Movie & TVShow>>;
@@ -64,18 +66,23 @@ const MediaListPage: NextPage<Props> = ({ results }: Props) => {
   });
 
   return (
-    <div className="flex flex-col items-center sm:mx-2">
-      <MediaCategoryTabs />
-      <div className="mt-2 flex flex-wrap justify-center">
-        {items.map((item) => (
-          <div key={item.id} className="m-2">
-            <MediaPoster item={item} type={type} />
-          </div>
-        ))}
+    <>
+      <MetaHead
+        title={`${toReadableString(list)} - ${toReadableString(type)}`}
+      />
+      <div className="flex flex-col items-center sm:mx-2">
+        <MediaCategoryTabs />
+        <div className="mt-2 flex flex-wrap justify-center">
+          {items.map((item) => (
+            <div key={item.id} className="m-2">
+              <MediaPoster item={item} type={type} />
+            </div>
+          ))}
+        </div>
+        <div ref={sentryRef} />
+        <PagedResultIndicator isLoading={loading} hasMore={page < totalPages} />
       </div>
-      <div ref={sentryRef} />
-      <PagedResultIndicator isLoading={loading} hasMore={page < totalPages} />
-    </div>
+    </>
   );
 };
 
