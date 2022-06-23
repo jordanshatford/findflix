@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
-import { Calendar, Clock, Star, Play, MonitorPlay } from 'phosphor-react';
+import { Play } from 'phosphor-react';
 import tmdb, {
   MediaTypeEnum,
   DetailedMovie,
@@ -8,7 +8,8 @@ import tmdb, {
 } from '@/services/tmdb';
 import Tag from '@/components/Tag';
 import MediaPoster from '@/components/MediaPoster';
-import { toHourMinutes, toReadableDate, toURLSafe } from '@/utilities/index';
+import MediaStats from '@/components/MediaStats';
+import { toURLSafe } from '@/utilities/index';
 
 interface Props {
   item: Partial<DetailedMovie & DetailedTVShow>;
@@ -21,7 +22,6 @@ const MediaDetailPage: NextPage<Props> = ({
   type,
   hasWatchLink,
 }: Props) => {
-  const creationDate = tmdb.getMediaCreationDate(item, type);
   return (
     <div>
       <div
@@ -42,48 +42,23 @@ const MediaDetailPage: NextPage<Props> = ({
         >
           <div className="w-full flex flex-col sm:flex-row justify-center sm:justify-start">
             <MediaPoster item={item} type={type} isHoverable={false} />
-            <div className="pt-2 sm:pl-5 flex flex-col justify-end w-full">
-              <h2 className="font-semibold text-white text-3xl mb-2">
+            <div className="pt-2 sm:pl-5 flex flex-col gap-y-2 justify-end w-full">
+              <h2 className="font-semibold text-white text-3xl">
                 {type === MediaTypeEnum.MOVIE ? item.title : item.name}
               </h2>
               <p className="text-sm text-zinc-300">{item.tagline}</p>
-              <div className="mt-2">
-                <div className="flex items-center text-xs text-zinc-300">
-                  {creationDate && (
-                    <>
-                      <Calendar size={20} weight="fill" />
-                      <span className="ml-1">
-                        {toReadableDate(creationDate)}
-                      </span>
-                    </>
-                  )}
-                  <Star className="ml-2" size={20} weight="fill" />
-                  <span className="ml-1">{item.vote_average}</span>
-                  {item.runtime && (
-                    <>
-                      <Clock className="ml-2" size={20} weight="fill" />
-                      <span className="ml-1">
-                        {toHourMinutes(item.runtime)}
-                      </span>
-                    </>
-                  )}
-                  {item.seasons && (
-                    <>
-                      <MonitorPlay className="ml-2" size={20} weight="fill" />
-                      <span className="ml-1">
-                        {Math.max(...item.seasons.map((s) => s.season_number))}{' '}
-                        season(s)
-                      </span>
-                    </>
-                  )}
-                </div>
-              </div>
-              <div className="mt-2 flex flex-wrap">
+              <MediaStats
+                airDate={tmdb.getMediaCreationDate(item, type)}
+                voteAverage={item.vote_average}
+                duration={item.runtime}
+                seasons={item.seasons?.length}
+              />
+              <div className="flex flex-wrap">
                 {item?.genres?.map((genre) => (
                   <Tag key={genre.id} text={genre.name} />
                 ))}
               </div>
-              <p className="mt-3 text-sm text-justify text-zinc-300">
+              <p className="text-sm text-justify text-zinc-300">
                 {item.overview}
               </p>
               {hasWatchLink && type === MediaTypeEnum.MOVIE && (
@@ -100,7 +75,7 @@ const MediaDetailPage: NextPage<Props> = ({
                   }}
                   passHref
                 >
-                  <a className="flex items-center text-white text-sm py-2 px-3 rounded-lg mt-3 w-max bg-zinc-600">
+                  <a className="flex items-center text-white text-sm py-2 px-3 rounded-lg w-max bg-zinc-600">
                     <Play size={15} weight="fill" className="mr-1" />
                     Watch Now
                   </a>

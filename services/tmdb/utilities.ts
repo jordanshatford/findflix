@@ -99,11 +99,10 @@ export function toDate(date: string): Date {
 export function getMediaCreationDate(
   item: Partial<types.Movie & types.TVShow>,
   type: types.MediaTypeEnum
-): Date | null {
+): Date | undefined {
   if (type === types.MediaTypeEnum.MOVIE && item?.release_date) {
     return toDate(item.release_date);
   } else if (type === types.MediaTypeEnum.TV_SHOW && item?.first_air_date) {
     return toDate(item.first_air_date);
   }
-  return null;
 }

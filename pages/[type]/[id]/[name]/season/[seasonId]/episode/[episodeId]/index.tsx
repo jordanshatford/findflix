@@ -9,6 +9,7 @@ import tmdb, {
 } from '@/services/tmdb';
 import SeasonPoster from '@/components/SeasonPoster';
 import { toReadableDate, toURLSafe } from '@/utilities/index';
+import MediaStats from "@/components/MediaStats"
 
 interface Props {
   show: DetailedTVShow;
@@ -44,27 +45,19 @@ const EpisodeDetailPage: NextPage<Props> = ({
         >
           <div className="w-full flex flex-col sm:flex-row justify-center sm:justify-start">
             <SeasonPoster show={show} season={season} isHoverable={false} />
-            <div className="pt-2 sm:pl-5 flex flex-col justify-end w-full">
-              <h2 className="font-semibold text-white text-3xl mb-2">
+            <div className="pt-2 sm:pl-5 flex flex-col gap-y-2 justify-end w-full">
+              <h2 className="font-semibold text-white text-3xl">
                 {show.name}
               </h2>
               <p className="text-sm text-zinc-300">
                 S{season.season_number} E{episode.episode_number} -{' '}
                 {episode.name}
               </p>
-              <div className="mt-2">
-                <div className="flex items-center text-xs text-zinc-300">
-                  {airDate && (
-                    <>
-                      <Calendar size={20} weight="fill" />
-                      <span className="ml-1">{toReadableDate(airDate)}</span>
-                    </>
-                  )}
-                  <Star className="ml-2" size={20} weight="fill" />
-                  <span className="ml-1">{episode.vote_average}</span>
-                </div>
-              </div>
-              <p className="mt-3 text-sm text-justify text-zinc-300">
+              <MediaStats
+                airDate={airDate}
+                voteAverage={episode.vote_average}
+              />
+              <p className="text-sm text-justify text-zinc-300">
                 {episode.overview ? episode.overview : 'No overview available.'}
               </p>
               {hasWatchLink && (
@@ -81,7 +74,7 @@ const EpisodeDetailPage: NextPage<Props> = ({
                   }}
                   passHref
                 >
-                  <a className="flex items-center text-white text-sm py-2 px-3 rounded-lg mt-3 w-max bg-zinc-600">
+                  <a className="flex items-center text-white text-sm py-2 px-3 rounded-lg w-max bg-zinc-600">
                     <Play size={15} weight="fill" className="mr-1" />
                     Watch Now
                   </a>
