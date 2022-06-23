@@ -1,9 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next';
-import { Calendar, MonitorPlay } from 'phosphor-react';
 import tmdb, { MediaTypeEnum, DetailedTVShow, Season } from '@/services/tmdb';
 import SeasonPoster from '@/components/SeasonPoster';
 import MediaStats from '@/components/MediaStats';
-import { toReadableDate } from '@/utilities/index';
 import Tag from '@/components/Tag';
 
 interface Props {
@@ -34,9 +32,7 @@ const SeasonDetailPage: NextPage<Props> = ({ show, season }: Props) => {
           <div className="w-full flex flex-col sm:flex-row justify-center sm:justify-start">
             <SeasonPoster show={show} season={season} isHoverable={false} />
             <div className="pt-2 sm:pl-5 flex flex-col gap-y-2 justify-end w-full">
-              <h2 className="font-semibold text-white text-3xl">
-                {show.name}
-              </h2>
+              <h2 className="font-semibold text-white text-3xl">{show.name}</h2>
               <p className="text-sm text-zinc-300">
                 Season {season.season_number}
               </p>

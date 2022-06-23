@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
-import { Calendar, Play, Star } from 'phosphor-react';
+import { Play } from 'phosphor-react';
 import tmdb, {
   MediaTypeEnum,
   DetailedTVShow,
@@ -8,8 +8,8 @@ import tmdb, {
   Episode,
 } from '@/services/tmdb';
 import SeasonPoster from '@/components/SeasonPoster';
-import { toReadableDate, toURLSafe } from '@/utilities/index';
-import MediaStats from "@/components/MediaStats"
+import { toURLSafe } from '@/utilities/index';
+import MediaStats from '@/components/MediaStats';
 
 interface Props {
   show: DetailedTVShow;
@@ -46,9 +46,7 @@ const EpisodeDetailPage: NextPage<Props> = ({
           <div className="w-full flex flex-col sm:flex-row justify-center sm:justify-start">
             <SeasonPoster show={show} season={season} isHoverable={false} />
             <div className="pt-2 sm:pl-5 flex flex-col gap-y-2 justify-end w-full">
-              <h2 className="font-semibold text-white text-3xl">
-                {show.name}
-              </h2>
+              <h2 className="font-semibold text-white text-3xl">{show.name}</h2>
               <p className="text-sm text-zinc-300">
                 S{season.season_number} E{episode.episode_number} -{' '}
                 {episode.name}
@@ -108,10 +106,10 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     if (episode === undefined) {
       return { notFound: true };
     }
-    const airDate = tmdb.toDate(episode.air_date);
-    const hasWatchLink =
-      airDate && new Date() > airDate && tmdb.hasWatchLinkAvailable();
-    return { props: { show, season, episode, hasWatchLink } };
+
+    return {
+      props: { show, season, episode, hasWatchLink: tmdb.isWatchable(episode) },
+    };
   } catch (e) {
     return { notFound: true };
   }
