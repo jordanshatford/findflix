@@ -96,7 +96,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
           type === MediaTypeEnum.MOVIE
             ? await tmdb.getMovieDetails(id)
             : await tmdb.getTVShowDetails(id);
-        return { props: { item, type, hasWatchLink: tmdb.isWatchable(item) } };
+        const hasWatchLink = tmdb.isWatchable(item);
+        return { props: { item, type, hasWatchLink } };
       } catch (e) {
         return { notFound: true };
       }

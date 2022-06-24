@@ -36,7 +36,8 @@ export function isWatchable(
   if (!date) {
     return false;
   }
-  return new Date() < date && hasWatchLink();
+  const today = new Date();
+  return today >= date && hasWatchLink();
 }
 
 /**

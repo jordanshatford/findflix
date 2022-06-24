@@ -125,9 +125,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
         },
       };
     }
-
+    const hasWatchLink = tmdb.isWatchable(episode);
     return {
-      props: { show, season, episode, hasWatchLink: tmdb.isWatchable(episode) },
+      props: { show, season, episode, hasWatchLink },
     };
   } catch (e) {
     return { notFound: true };
