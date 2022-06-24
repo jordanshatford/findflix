@@ -10,7 +10,7 @@ const TMDbPage: NextPage = () => {
         <Image
           src="/tmdb.svg"
           layout="fixed"
-          width={400}
+          width={300}
           height={200}
           placeholder="blur"
           blurDataURL="/tmdb.svg"
@@ -19,7 +19,7 @@ const TMDbPage: NextPage = () => {
       </div>
       <div className="flex justify-center text-zinc-200">
         <div className="flex flex-col items-center">
-          <p>
+          <p className="text-center mx-2">
             This product uses the TMDB API but is not endorsed or certified by
             TMDB.
           </p>
