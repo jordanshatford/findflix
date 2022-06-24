@@ -6,10 +6,10 @@ import tmdb, {
   DetailedMovie,
   DetailedTVShow,
 } from '@/services/tmdb';
-import Tag from '@/components/Tag';
 import MediaPoster from '@/components/MediaPoster';
 import BackdropImage from '@/components/BackdropImage';
 import MediaStats from '@/components/MediaStats';
+import MediaTags from '@/components/MediaTags';
 import MetaHead from '@/components/MetaHead';
 import { toURLSafe } from '@/utilities/index';
 
@@ -51,11 +51,7 @@ const MediaDetailPage: NextPage<Props> = ({
                   duration={item.runtime}
                   seasons={item.seasons?.length}
                 />
-                <div className="flex flex-wrap">
-                  {item?.genres?.map((genre) => (
-                    <Tag key={genre.id} text={genre.name} />
-                  ))}
-                </div>
+                <MediaTags values={item?.genres} />
                 <p className="text-sm text-justify text-zinc-300">
                   {item.overview}
                 </p>

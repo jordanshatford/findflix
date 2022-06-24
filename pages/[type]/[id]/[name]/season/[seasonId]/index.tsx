@@ -2,9 +2,10 @@ import type { GetServerSideProps, NextPage } from 'next';
 import tmdb, { MediaTypeEnum, DetailedTVShow, Season } from '@/services/tmdb';
 import SeasonPoster from '@/components/SeasonPoster';
 import MediaStats from '@/components/MediaStats';
-import Tag from '@/components/Tag';
+import MediaTags from '@/components/MediaTags';
 import MetaHead from '@/components/MetaHead';
 import BackdropImage from '@/components/BackdropImage';
+import { toURLSafe } from '@/utilities/index';
 
 interface Props {
   show: DetailedTVShow;
@@ -40,11 +41,7 @@ const SeasonDetailPage: NextPage<Props> = ({ show, season }: Props) => {
                   voteAverage={show.vote_average}
                   episodes={season.episodes?.length ?? 0}
                 />
-                <div className="flex flex-wrap">
-                  {show?.genres?.map((genre) => (
-                    <Tag key={genre.id} text={genre.name} />
-                  ))}
-                </div>
+                <MediaTags values={show?.genres} />
                 <p className="text-sm text-justify text-zinc-300">
                   {season.overview ? show.overview : 'No overview available.'}
                 </p>
@@ -76,7 +73,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     } catch (e) {
       return {
         redirect: {
-          destination: `/${MediaTypeEnum.TV_SHOW}/${show.id}/${show.name}`,
+          destination: `/${MediaTypeEnum.TV_SHOW}/${show.id}/${toURLSafe(
+            show.name
+          )}`,
           permanent: true,
         },
       };

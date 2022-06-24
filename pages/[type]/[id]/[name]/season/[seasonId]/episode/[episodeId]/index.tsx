@@ -12,6 +12,7 @@ import { toURLSafe } from '@/utilities/index';
 import MediaStats from '@/components/MediaStats';
 import MetaHead from '@/components/MetaHead';
 import BackdropImage from '@/components/BackdropImage';
+import MediaTags from '@/components/MediaTags';
 
 interface Props {
   show: DetailedTVShow;
@@ -59,6 +60,7 @@ const EpisodeDetailPage: NextPage<Props> = ({
                   airDate={tmdb.toDate(episode.air_date)}
                   voteAverage={episode.vote_average}
                 />
+                <MediaTags values={show?.genres} />
                 <p className="text-sm text-justify text-zinc-300">
                   {episode.overview
                     ? episode.overview
@@ -116,7 +118,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     if (episode === undefined) {
       return {
         redirect: {
-          destination: `/${MediaTypeEnum.TV_SHOW}/${show.id}/${show.name}/season/${season.season_number}`,
+          destination: `/${MediaTypeEnum.TV_SHOW}/${show.id}/${toURLSafe(
+            show.name
+          )}/season/${season.season_number}`,
           permanent: true,
         },
       };
