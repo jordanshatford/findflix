@@ -46,13 +46,11 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
         onLoadMore={getNextPage}
         className="flex flex-col items-center sm:mx-2"
       >
-        <div className="flex flex-wrap justify-center">
-          {items.map((item) => (
-            <div key={item.id} className="m-2">
-              <MediaPoster item={item} type={item.media_type} />
-            </div>
-          ))}
-        </div>
+        {items.map((item) => (
+          <div key={item.id} className="m-2">
+            <MediaPoster item={item} type={item.media_type} />
+          </div>
+        ))}
       </InfiniteScroller>
     </>
   );

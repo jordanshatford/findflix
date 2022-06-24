@@ -26,7 +26,7 @@ const SeasonDetailPage: NextPage<Props> = ({ show, season }: Props) => {
         ></div>
         <div className="w-full relative">
           <div
-            className="w-full min-h-screen flex items-end backdrop-blur-sm px-5 md:px-20 pb-14"
+            className="w-full min-h-[95vh] flex items-end backdrop-blur-sm px-5 md:px-20 pb-14"
             style={{
               background: `linear-gradient(360deg, #18181B 30%, transparent)`,
             }}
