@@ -8,6 +8,7 @@ import tmdb, {
 } from '@/services/tmdb';
 import Tag from '@/components/Tag';
 import MediaPoster from '@/components/MediaPoster';
+import BackdropImage from '@/components/BackdropImage';
 import MediaStats from '@/components/MediaStats';
 import MetaHead from '@/components/MetaHead';
 import { toURLSafe } from '@/utilities/index';
@@ -27,15 +28,9 @@ const MediaDetailPage: NextPage<Props> = ({
     <>
       <MetaHead title={type === MediaTypeEnum.MOVIE ? item.title : item.name} />
       <div>
-        <div
-          className="absolute top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
-          style={{
-            backgroundImage: `url(${tmdb.getImageLink(
-              item.backdrop_path,
-              'original'
-            )})`,
-          }}
-        ></div>
+        <BackdropImage
+          src={tmdb.getImageLink(item.backdrop_path, 'original')}
+        />
         <div className="w-full relative">
           <div
             className="w-full min-h-[95vh] flex items-end backdrop-blur-sm px-5 md:px-20 pb-14"

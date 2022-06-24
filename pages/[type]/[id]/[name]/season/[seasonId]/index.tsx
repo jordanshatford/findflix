@@ -4,6 +4,7 @@ import SeasonPoster from '@/components/SeasonPoster';
 import MediaStats from '@/components/MediaStats';
 import Tag from '@/components/Tag';
 import MetaHead from '@/components/MetaHead';
+import BackdropImage from '@/components/BackdropImage';
 
 interface Props {
   show: DetailedTVShow;
@@ -15,15 +16,9 @@ const SeasonDetailPage: NextPage<Props> = ({ show, season }: Props) => {
     <>
       <MetaHead title={`S${season.season_number} - ${show.name}`} />
       <div>
-        <div
-          className="absolute top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
-          style={{
-            backgroundImage: `url(${tmdb.getImageLink(
-              show.backdrop_path,
-              'original'
-            )})`,
-          }}
-        ></div>
+        <BackdropImage
+          src={tmdb.getImageLink(show.backdrop_path, 'original')}
+        />
         <div className="w-full relative">
           <div
             className="w-full min-h-[95vh] flex items-end backdrop-blur-sm px-5 md:px-20 pb-14"
