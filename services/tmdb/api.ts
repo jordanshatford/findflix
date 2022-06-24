@@ -123,3 +123,16 @@ export async function getFavourites(
   }
   return getList(config.favouritesListId, page);
 }
+
+export async function search(
+  query: string,
+  page: number = 1
+): Promise<types.PagedResults<types.ListItem>> {
+  const data = await v3Client.get<types.PagedResults<types.ListItem>>(
+    `/search/multi`,
+    {
+      params: { query, page },
+    }
+  );
+  return data.data;
+}
