@@ -33,7 +33,10 @@ const EpisodeDetailPage: NextPage<Props> = ({
       />
       <div>
         <BackdropImage
-          src={tmdb.getImageLink(episode.still_path, 'original')}
+          src={tmdb.getImageLink(
+            episode?.still_path ?? show.backdrop_path,
+            'original'
+          )}
         />
         <div className="w-full relative">
           <div
@@ -105,10 +108,18 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   try {
     const show = await tmdb.getTVShowDetails(id);
     const season = await tmdb.getTVShowSeason(id, seasonId);
-    const eNum = parseInt(episodeId, 10);
-    const episode = season?.episodes?.find((e) => e.episode_number === eNum);
+    const episodeNumber = parseInt(episodeId, 10);
+    const episode = season?.episodes?.find(
+      (e) => e.episode_number === episodeNumber
+    );
+
     if (episode === undefined) {
-      return { notFound: true };
+      return {
+        redirect: {
+          destination: `/${MediaTypeEnum.TV_SHOW}/${show.id}/${show.name}/season/${season.season_number}`,
+          permanent: true,
+        },
+      };
     }
 
     return {

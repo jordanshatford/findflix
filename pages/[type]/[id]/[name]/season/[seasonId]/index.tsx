@@ -70,8 +70,17 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   }
   try {
     const show = await tmdb.getTVShowDetails(id);
-    const season = await tmdb.getTVShowSeason(id, seasonId);
-    return { props: { show, season } };
+    try {
+      const season = await tmdb.getTVShowSeason(id, seasonId);
+      return { props: { show, season } };
+    } catch (e) {
+      return {
+        redirect: {
+          destination: `/${MediaTypeEnum.TV_SHOW}/${show.id}/${show.name}`,
+          permanent: true,
+        },
+      };
+    }
   } catch (e) {
     return { notFound: true };
   }
