@@ -145,19 +145,19 @@ export interface ListItem extends Partial<Movie & TVShow> {
 }
 
 export enum MovieListEnum {
+  TRENDING = 'trending',
   POPULAR = 'popular',
   NOW_PLAYING = 'now_playing',
   TOP_RATED = 'top_rated',
   UPCOMING = 'upcoming',
-  TRENDING = 'trending',
 }
 
 export enum TVShowListEnum {
+  TRENDING = 'trending',
   AIRING_TODAY = 'airing_today',
   ON_THE_AIR = 'on_the_air',
   POPULAR = 'popular',
   TOP_RATED = 'top_rated',
-  TRENDING = 'trending',
 }
 
 export enum MediaTypeEnum {

@@ -23,6 +23,11 @@ const Navbar = () => {
       href: '/favourites',
       id: 'favourites',
     },
+    {
+      label: 'Search',
+      href: '/search',
+      id: 'search',
+    },
   ];
 
   return (
