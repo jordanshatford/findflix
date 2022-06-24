@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { GithubLogo } from 'phosphor-react';
 
 const Footer = () => {
@@ -9,11 +10,17 @@ const Footer = () => {
         <p className="text-zinc-400">
           © {new Date().getFullYear()} {creator}
         </p>
+        <span className="inline-flex justify-end mt-4 space-x-5 sm:ml-auto sm:mt-0 sm:justify-start text-zinc-200">
+          <Link href={{ pathname: '/tmdb' }} passHref>
+            <a className="hover:text-red-700">TMDb</a>
+          </Link>
+        </span>
         <span className="inline-flex justify-center mt-4 space-x-5 sm:ml-auto sm:mt-0 sm:justify-start">
           <a
             href={githubLink}
             className="text-2xl hover:text-red-700 text-zinc-200"
             target="_blank"
+            rel="noreferrer"
           >
             <GithubLogo size={30} />
           </a>

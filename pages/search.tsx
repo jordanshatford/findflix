@@ -12,7 +12,7 @@ interface Props {
   results?: PagedResults<ListItem>;
 }
 
-const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
+const SearchPage: NextPage<Props> = ({ results }: Props) => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(results?.page ?? 0);
@@ -77,7 +77,7 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
   );
 };
 
-export default FavouritesListPage;
+export default SearchPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const q = query.q as string;

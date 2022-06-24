@@ -1,4 +1,4 @@
-![TMDB](./tmdb.svg)
+![TMDB](../../public/tmdb.svg)
 
 # The Movie Database (TMDb)
 
