@@ -25,9 +25,11 @@ const InfiniteScroller = (props: Props) => {
 
   return (
     <div className={props.className}>
-      <div className="flex flex-wrap justify-center">{props.children}</div>
+      <div className="flex flex-wrap justify-center gap-4">
+        {props.children}
+      </div>
       <div ref={sentryRef}></div>
-      <div className="flex flex-col items-center mt-1 mb-5 text-white">
+      <div className="flex flex-col items-center mt-2 mb-5 text-white">
         {props.loading && props.hasMore && <div>Loading...</div>}
         {!props.hasMore && <div>No more results</div>}
       </div>

@@ -5,7 +5,7 @@ import { MediaTypeEnum, MovieListEnum, TVShowListEnum } from '@/services/tmdb';
 const MediaCategoryTabs = () => {
   const router = useRouter();
   return (
-    <div className="px-2 py-2 sm:px-0">
+    <div className="px-2 py-2 sm:px-0 flex justify-center">
       <div className="flex rounded-xl bg-zinc-800 p-1">
         {Object.keys(
           router.query.type === MediaTypeEnum.MOVIE

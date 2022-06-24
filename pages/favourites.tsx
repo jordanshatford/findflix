@@ -44,12 +44,10 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
         hasMore={page < totalPages}
         disabled={error}
         onLoadMore={getNextPage}
-        className="flex flex-col items-center sm:mx-2"
+        className="sm:mx-2"
       >
         {items.map((item) => (
-          <div key={item.id} className="m-2">
-            <MediaPoster item={item} type={item.media_type} />
-          </div>
+          <MediaPoster key={item.id} item={item} type={item.media_type} />
         ))}
       </InfiniteScroller>
     </>

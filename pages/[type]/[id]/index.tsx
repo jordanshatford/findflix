@@ -57,21 +57,17 @@ const MediaListPage: NextPage<Props> = ({ results }: Props) => {
       <MetaHead
         title={`${toReadableString(list)} - ${toReadableString(type)}`}
       />
+      <MediaCategoryTabs />
       <InfiniteScroller
         loading={loading}
         hasMore={page < totalPages}
         disabled={error}
         onLoadMore={getNextPage}
-        className="flex flex-col items-center sm:mx-2"
+        className="sm:mx-2 mt-2"
       >
-        <MediaCategoryTabs />
-        <div className="mt-2 flex flex-wrap justify-center">
-          {items.map((item) => (
-            <div key={item.id} className="m-2">
-              <MediaPoster item={item} type={type} />
-            </div>
-          ))}
-        </div>
+        {items.map((item) => (
+          <MediaPoster key={item.id} item={item} type={type} />
+        ))}
       </InfiniteScroller>
     </>
   );
