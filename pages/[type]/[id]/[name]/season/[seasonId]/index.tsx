@@ -5,7 +5,7 @@ import MediaStats from '@/components/MediaStats';
 import MediaTags from '@/components/MediaTags';
 import MetaHead from '@/components/MetaHead';
 import BackdropImage from '@/components/BackdropImage';
-import { toURLSafe } from '@/utilities/index';
+import { toURLSafe } from '@/common/utils';
 
 interface Props {
   show: DetailedTVShow;

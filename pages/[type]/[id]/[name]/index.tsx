@@ -11,7 +11,7 @@ import BackdropImage from '@/components/BackdropImage';
 import MediaStats from '@/components/MediaStats';
 import MediaTags from '@/components/MediaTags';
 import MetaHead from '@/components/MetaHead';
-import { toURLSafe } from '@/utilities/index';
+import { toURLSafe } from '@/common/utils';
 
 interface Props {
   item: Partial<DetailedMovie & DetailedTVShow>;

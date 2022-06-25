@@ -1,5 +1,5 @@
 import tmdb, { MediaTypeEnum, Movie, TVShow } from '@/services/tmdb';
-import { toURLSafe } from '@/utilities/index';
+import { toURLSafe } from '@/common/utils';
 import Poster from '@/components/Poster';
 
 interface Props {

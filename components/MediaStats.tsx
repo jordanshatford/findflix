@@ -5,7 +5,7 @@ import {
   Star,
   MonitorPlay,
 } from 'phosphor-react';
-import { toHourMinutes, toReadableDate } from '@/utilities/index';
+import { toHourMinutes, toReadableDate } from '@/common/utils';
 
 interface Props {
   airDate?: Date;

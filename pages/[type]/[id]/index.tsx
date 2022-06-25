@@ -14,7 +14,7 @@ import MediaPoster from '@/components/MediaPoster';
 import MediaCategoryTabs from '@/components/MediaCategoryTabs';
 import MetaHead from '@/components/MetaHead';
 import { VerticalInfiniteScroller } from '@/components/InfiniteScroller';
-import { toReadableString } from '@/utilities/index';
+import { toReadableString } from '@/common/utils';
 
 interface Props {
   results: PagedResults<Partial<Movie & TVShow>>;

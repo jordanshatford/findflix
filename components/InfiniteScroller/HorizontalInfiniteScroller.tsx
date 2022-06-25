@@ -76,7 +76,7 @@ const RightArrow = ({ hasMore, onLoadMore }: RightArrowProps) => {
     if (!hasMore) {
       setDisabled(isLastItemVisible);
     }
-  }, [items, hasMore, isLastItemVisible]);
+  }, [items, hasMore, isLastItemVisible, onLoadMore]);
 
   return (
     <Arrow
