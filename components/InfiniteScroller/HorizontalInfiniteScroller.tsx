@@ -117,7 +117,7 @@ const HorizontalInfiniteScroller = (props: Props) => {
         <RightArrow hasMore={props.hasMore} onLoadMore={props.onLoadMore} />
       }
       wrapperClassName={props.className}
-      itemClassName="mx-2"
+      separatorClassName="mx-2"
     >
       {props.children}
     </ScrollMenu>

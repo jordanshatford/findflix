@@ -7,7 +7,7 @@ interface Props {
 
 const BackdropImage = ({ src, alt = '' }: Props) => {
   return (
-    <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat z-0">
+    <div className="absolute top-0 left-0 w-full h-[100vh] bg-cover bg-center bg-no-repeat z-0">
       {src && (
         <Image
           src={src}
