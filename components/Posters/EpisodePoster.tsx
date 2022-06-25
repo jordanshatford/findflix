@@ -18,7 +18,6 @@ const EpisodePoster = ({
   isHoverable = true,
 }: Props) => {
   const imageUrl = tmdb.getImageLink(episode?.still_path ?? show.backdrop_path);
-  const description = episode?.overview?.substring(0, 100);
   return (
     <Link
       href={{
@@ -61,11 +60,13 @@ const EpisodePoster = ({
                   {toReadableDate(tmdb.toDate(episode.air_date))}
                 </p>
                 {isHoverable && (
-                  <p className="hidden group-hover:flex text-xs font-light text-zinc-400">
-                    {description
-                      ? `${description}...`
-                      : 'No overview available.'}
-                  </p>
+                  <div className="hidden group-hover:flex">
+                    <p className="line-clamp-3 text-xs font-light text-zinc-400">
+                      {episode.overview
+                        ? episode.overview
+                        : 'No overview available.'}
+                    </p>
+                  </div>
                 )}
               </div>
             </div>
