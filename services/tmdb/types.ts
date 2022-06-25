@@ -130,8 +130,8 @@ export interface DetailedTVShow extends TVShow {
   status: string;
   tagline: string;
   type: string;
-  recommendations: PagedResults<Movie>;
-  similar: PagedResults<Movie>;
+  recommendations: PagedResults<TVShow>;
+  similar: PagedResults<TVShow>;
 }
 
 export interface PagedResults<T> {

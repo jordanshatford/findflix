@@ -12,7 +12,7 @@ import MediaStats from '@/components/MediaStats';
 import MediaTags from '@/components/MediaTags';
 import MetaHead from '@/components/MetaHead';
 import { toURLSafe } from '@/common/utils';
-import { SeasonsContainer } from '@/components/Containers';
+import { SeasonsContainer, RelatedMediaContainer } from '@/components/Containers';
 
 interface Props {
   item: Partial<DetailedMovie & DetailedTVShow>;
@@ -82,6 +82,8 @@ const MediaDetailPage: NextPage<Props> = ({
           {type === MediaTypeEnum.TV_SHOW && (
             <SeasonsContainer show={item as DetailedTVShow} />
           )}
+          <RelatedMediaContainer title="Similiar:" results={item.similar} type={type} />
+          <RelatedMediaContainer title="Recommendations:" results={item.recommendations} type={type} />
         </div>
       </div>
     </>
