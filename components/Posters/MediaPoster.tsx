@@ -9,7 +9,6 @@ interface Props {
 }
 
 const MediaPoster = ({ item, type, isHoverable = true }: Props) => {
-  const creationDate = tmdb.getMediaCreationDate(item, type);
   return (
     <Poster
       imageUrl={tmdb.getImageLink(item.poster_path)}
@@ -24,7 +23,10 @@ const MediaPoster = ({ item, type, isHoverable = true }: Props) => {
         },
       }}
       title={type === MediaTypeEnum.MOVIE ? item.title : item.name}
-      subtitle={creationDate ? creationDate.getFullYear().toString() : '???'}
+      subtitle={tmdb
+        .toDate(item.release_date ?? item.first_air_date)
+        ?.getFullYear()
+        ?.toString()}
       description={item.overview}
       isHoverable={isHoverable}
     />

@@ -107,20 +107,3 @@ export function toDate(date?: string): Date | undefined {
   const [year, month, day] = date.split('-');
   return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 }
-
-/**
- * Get the creation date of a media item based on type.
- * @param item - the Movie or TVShow
- * @param type - the type of media (Movie or TVShow)
- * @returns - the creation date of the media item
- */
-export function getMediaCreationDate(
-  item: Partial<types.Movie & types.TVShow>,
-  type: types.MediaTypeEnum
-): Date | undefined {
-  if (type === types.MediaTypeEnum.MOVIE && item?.release_date) {
-    return toDate(item.release_date);
-  } else if (type === types.MediaTypeEnum.TV_SHOW && item?.first_air_date) {
-    return toDate(item.first_air_date);
-  }
-}
