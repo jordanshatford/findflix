@@ -19,7 +19,7 @@ const Navbar = () => {
       id: MediaTypeEnum.TV_SHOW,
     },
     {
-      label: 'My Favourites',
+      label: 'Jordans Favourites',
       href: '/favourites',
       id: 'favourites',
     },
@@ -75,21 +75,18 @@ const Navbar = () => {
         </div>
       </div>
       {showMobileMenu && (
-        <div>
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {routes.map((route) => (
-              <NavbarItem
-                key={route.id}
-                label={route.label}
-                href={route.href}
-                isActive={
-                  router.query.type === route.id ||
-                  router.pathname === route.href
-                }
-                onClick={() => setShowMobileMenu(false)}
-              />
-            ))}
-          </div>
+        <div className="block sm:hidden px-3 pt-2 pb-3 space-y-1">
+          {routes.map((route) => (
+            <NavbarItem
+              key={route.id}
+              label={route.label}
+              href={route.href}
+              isActive={
+                router.query.type === route.id || router.pathname === route.href
+              }
+              onClick={() => setShowMobileMenu(false)}
+            />
+          ))}
         </div>
       )}
     </nav>
