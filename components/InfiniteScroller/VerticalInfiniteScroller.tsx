@@ -6,11 +6,11 @@ interface Props {
   hasMore: boolean;
   disabled: boolean;
   onLoadMore: () => void;
-  children: ReactNode;
+  children: ReactNode[];
   className?: string;
 }
 
-const InfiniteScroller = (props: Props) => {
+const VerticalInfiniteScroller = (props: Props) => {
   const [sentryRef] = useInfiniteScroll({
     loading: props.loading,
     hasNextPage: props.hasMore,
@@ -37,4 +37,4 @@ const InfiniteScroller = (props: Props) => {
   );
 };
 
-export default InfiniteScroller;
+export default VerticalInfiniteScroller;

@@ -13,7 +13,7 @@ import tmdb, {
 import MediaPoster from '@/components/MediaPoster';
 import MediaCategoryTabs from '@/components/MediaCategoryTabs';
 import MetaHead from '@/components/MetaHead';
-import InfiniteScroller from '@/components/InfiniteScroller';
+import { VerticalInfiniteScroller } from '@/components/InfiniteScroller';
 import { toReadableString } from '@/utilities/index';
 
 interface Props {
@@ -58,17 +58,17 @@ const MediaListPage: NextPage<Props> = ({ results }: Props) => {
         title={`${toReadableString(list)} - ${toReadableString(type)}`}
       />
       <MediaCategoryTabs />
-      <InfiniteScroller
+      <VerticalInfiniteScroller
         loading={loading}
         hasMore={page < totalPages}
         disabled={error}
         onLoadMore={getNextPage}
-        className="sm:mx-2 mt-2"
+        className="sm:mx-5 mt-2"
       >
         {items.map((item) => (
           <MediaPoster key={item.id} item={item} type={type} />
         ))}
-      </InfiniteScroller>
+      </VerticalInfiniteScroller>
     </>
   );
 };

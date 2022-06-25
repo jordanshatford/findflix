@@ -4,7 +4,7 @@ import axios from 'axios';
 import tmdb, { PagedResults, ListItem } from '@/services/tmdb';
 import MediaPoster from '@/components/MediaPoster';
 import MetaHead from '@/components/MetaHead';
-import InfiniteScroller from '@/components/InfiniteScroller';
+import { VerticalInfiniteScroller } from '@/components/InfiniteScroller';
 
 interface Props {
   results: PagedResults<ListItem>;
@@ -39,17 +39,17 @@ const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
   return (
     <>
       <MetaHead title="My Favourites" />
-      <InfiniteScroller
+      <VerticalInfiniteScroller
         loading={loading}
         hasMore={page < totalPages}
         disabled={error}
         onLoadMore={getNextPage}
-        className="sm:mx-2"
+        className="sm:mx-5"
       >
         {items.map((item) => (
           <MediaPoster key={item.id} item={item} type={item.media_type} />
         ))}
-      </InfiniteScroller>
+      </VerticalInfiniteScroller>
     </>
   );
 };

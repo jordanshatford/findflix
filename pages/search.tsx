@@ -5,7 +5,7 @@ import axios from 'axios';
 import tmdb, { PagedResults, ListItem, MediaTypeEnum } from '@/services/tmdb';
 import MediaPoster from '@/components/MediaPoster';
 import MetaHead from '@/components/MetaHead';
-import InfiniteScroller from '@/components/InfiniteScroller';
+import { VerticalInfiniteScroller } from '@/components/InfiniteScroller';
 import SearchBar from '@/components/SearchBar';
 
 interface Props {
@@ -58,12 +58,12 @@ const SearchPage: NextPage<Props> = ({ results }: Props) => {
     <>
       <MetaHead title="Search" />
       <SearchBar onSearch={(v) => setQuery(v)} value={query} />
-      <InfiniteScroller
+      <VerticalInfiniteScroller
         loading={loading}
         hasMore={page < totalPages}
         disabled={error}
         onLoadMore={getNextPage}
-        className="sm:mx-2 mt-2"
+        className="sm:mx-5 mt-2"
       >
         {items
           .filter((item) =>
@@ -72,7 +72,7 @@ const SearchPage: NextPage<Props> = ({ results }: Props) => {
           .map((item) => (
             <MediaPoster key={item.id} item={item} type={item.media_type} />
           ))}
-      </InfiniteScroller>
+      </VerticalInfiniteScroller>
     </>
   );
 };
