@@ -1,6 +1,6 @@
 import tmdb, { MediaTypeEnum, Movie, TVShow } from '@/services/tmdb';
 import { toURLSafe } from '@/common/utils';
-import Poster from '@/components/Poster';
+import { Poster } from '@/components/Posters';
 
 interface Props {
   item: Partial<Movie & TVShow>;

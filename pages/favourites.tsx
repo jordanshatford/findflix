@@ -1,6 +1,6 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import tmdb, { PagedResults, ListItem } from '@/services/tmdb';
-import MediaPoster from '@/components/MediaPoster';
+import { MediaPoster } from '@/components/Posters';
 import MetaHead from '@/components/MetaHead';
 import { VerticalInfiniteScroller } from '@/components/InfiniteScroller';
 import { usePagedResults } from '@/common/hooks';

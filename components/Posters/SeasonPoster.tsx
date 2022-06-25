@@ -1,6 +1,6 @@
 import tmdb, { MediaTypeEnum, Season, TVShow } from '@/services/tmdb';
 import { toURLSafe, toReadableDate } from '@/common/utils';
-import Poster from '@/components/Poster';
+import { Poster } from '@/components/Posters';
 
 interface Props {
   show: TVShow;

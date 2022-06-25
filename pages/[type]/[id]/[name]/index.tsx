@@ -6,7 +6,7 @@ import tmdb, {
   DetailedMovie,
   DetailedTVShow,
 } from '@/services/tmdb';
-import MediaPoster from '@/components/MediaPoster';
+import { MediaPoster } from '@/components/Posters';
 import BackdropImage from '@/components/BackdropImage';
 import MediaStats from '@/components/MediaStats';
 import MediaTags from '@/components/MediaTags';

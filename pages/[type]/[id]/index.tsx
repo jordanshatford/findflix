@@ -8,7 +8,7 @@ import tmdb, {
   MediaTypeEnum,
   TVShowListEnum,
 } from '@/services/tmdb';
-import MediaPoster from '@/components/MediaPoster';
+import { MediaPoster } from '@/components/Posters';
 import MediaCategoryTabs from '@/components/MediaCategoryTabs';
 import MetaHead from '@/components/MetaHead';
 import { VerticalInfiniteScroller } from '@/components/InfiniteScroller';

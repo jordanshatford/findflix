@@ -1,8 +1,6 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState, useContext } from 'react';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
-import { useContext } from 'react';
 import { CaretLeft, CaretRight } from 'phosphor-react';
-import { useEffect, useState } from 'react';
 
 interface ArrowProps {
   children: ReactNode;
@@ -47,7 +45,7 @@ const LeftArrow = () => {
       disabled={disabled}
       onClick={() => scrollPrev()}
     >
-      <CaretLeft size={40} className="h-full flex align-middle text-white" />
+      <CaretLeft size={30} className="h-full flex align-middle text-white" />
     </Arrow>
   );
 };
@@ -84,7 +82,7 @@ const RightArrow = ({ hasMore, onLoadMore }: RightArrowProps) => {
       disabled={disabled}
       onClick={() => scrollNext()}
     >
-      <CaretRight size={40} className="h-full flex align-middle text-white" />
+      <CaretRight size={30} className="h-full flex align-middle text-white" />
     </Arrow>
   );
 };

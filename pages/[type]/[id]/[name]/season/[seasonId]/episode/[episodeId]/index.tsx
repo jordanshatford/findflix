@@ -7,7 +7,7 @@ import tmdb, {
   Season,
   Episode,
 } from '@/services/tmdb';
-import SeasonPoster from '@/components/SeasonPoster';
+import { SeasonPoster } from '@/components/Posters';
 import { toURLSafe } from '@/common/utils';
 import MediaStats from '@/components/MediaStats';
 import MetaHead from '@/components/MetaHead';

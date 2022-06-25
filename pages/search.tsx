@@ -2,7 +2,7 @@ import type { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import tmdb, { PagedResults, ListItem, MediaTypeEnum } from '@/services/tmdb';
-import MediaPoster from '@/components/MediaPoster';
+import { MediaPoster } from '@/components/Posters';
 import MetaHead from '@/components/MetaHead';
 import { VerticalInfiniteScroller } from '@/components/InfiniteScroller';
 import SearchBar from '@/components/SearchBar';
