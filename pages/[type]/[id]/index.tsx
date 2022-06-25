@@ -56,7 +56,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     case MediaTypeEnum.MOVIE: {
       // The id in this case is actually the name of the list
       const list = params?.id as MovieListEnum;
-      if (!tmdb.isValidList(type, list)) {
+      if (!Object.values(MovieListEnum).includes(list)) {
         return { notFound: true };
       }
       const results = await tmdb.getMovieListPagedResults(list);
@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     case MediaTypeEnum.TV_SHOW: {
       // The id in this case is actually the name of the list
       const list = params?.id as TVShowListEnum;
-      if (!tmdb.isValidList(type, list)) {
+      if (!Object.values(TVShowListEnum).includes(list)) {
         return { notFound: true };
       }
       const results = await tmdb.getTVShowListPagedResults(list);

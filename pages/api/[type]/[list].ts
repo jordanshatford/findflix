@@ -17,7 +17,7 @@ export default async function handler(
   switch (type) {
     case MediaTypeEnum.MOVIE: {
       const list = req.query.list as MovieListEnum;
-      if (!tmdb.isValidList(type, list)) {
+      if (!Object.values(MovieListEnum).includes(list)) {
         res.status(404).json({});
         return;
       }
@@ -27,7 +27,7 @@ export default async function handler(
     }
     case MediaTypeEnum.TV_SHOW: {
       const list = req.query.list as TVShowListEnum;
-      if (!tmdb.isValidList(type, list)) {
+      if (!Object.values(TVShowListEnum).includes(list)) {
         res.status(404).json({});
         return;
       }

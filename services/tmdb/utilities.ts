@@ -35,27 +35,6 @@ export function isWatchable(
 }
 
 /**
- * Check whether a list is a valid list for a given media type.
- * @param mediaType - the type of media (Movie or TVShow)
- * @param value - the list value to check
- * @returns - true if the list is valid, false otherwise
- */
-export function isValidList(
-  mediaType: types.MediaTypeEnum,
-  value: types.MovieListEnum | types.TVShowListEnum
-): boolean {
-  if (mediaType === types.MediaTypeEnum.MOVIE) {
-    return Object.values(types.MovieListEnum).includes(
-      value as types.MovieListEnum
-    );
-  } else {
-    return Object.values(types.TVShowListEnum).includes(
-      value as types.TVShowListEnum
-    );
-  }
-}
-
-/**
  * Get the url for a image on the The Movie Database.
  * @param path - the path to the image
  * @param size - a string representing the size of the image

@@ -42,7 +42,9 @@ const MediaDetailPage: NextPage<Props> = ({ item, type }: Props) => {
                 </h2>
                 <p className="text-sm text-zinc-300">{item.tagline}</p>
                 <MediaStats
-                  airDate={tmdb.toDate(item.release_date ?? item.first_air_date)}
+                  airDate={tmdb.toDate(
+                    item.release_date ?? item.first_air_date
+                  )}
                   voteAverage={item.vote_average}
                   duration={item.runtime}
                   seasons={item.seasons?.length}
