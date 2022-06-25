@@ -1,5 +1,5 @@
 import { List, X } from 'phosphor-react';
-import NavbarItem from '@/components/NavbarItem';
+import NavbarItem from '@/components/Navbar/NavbarItem';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { MediaTypeEnum } from '@/services/tmdb';
