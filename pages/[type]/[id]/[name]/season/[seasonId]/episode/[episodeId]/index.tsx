@@ -13,6 +13,7 @@ import MediaStats from '@/components/MediaStats';
 import MetaHead from '@/components/MetaHead';
 import BackdropImage from '@/components/BackdropImage';
 import MediaTags from '@/components/MediaTags';
+import { EpisodesContainer, SeasonsContainer } from '@/components/Containers';
 
 interface Props {
   show: DetailedTVShow;
@@ -89,6 +90,8 @@ const EpisodeDetailPage: NextPage<Props> = ({
               </div>
             </div>
           </div>
+          <EpisodesContainer show={show} season={season} />
+          <SeasonsContainer show={show} />
         </div>
       </div>
     </>

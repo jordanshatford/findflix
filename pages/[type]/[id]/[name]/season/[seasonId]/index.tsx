@@ -1,7 +1,11 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import tmdb, { MediaTypeEnum, DetailedTVShow, Season } from '@/services/tmdb';
 import { SeasonPoster } from '@/components/Posters';
-import { SeasonsContainer, EpisodesContainer } from '@/components/Containers';
+import {
+  SeasonsContainer,
+  EpisodesContainer,
+  RelatedMediaContainer,
+} from '@/components/Containers';
 import MediaStats from '@/components/MediaStats';
 import MediaTags from '@/components/MediaTags';
 import MetaHead from '@/components/MetaHead';
@@ -51,6 +55,16 @@ const SeasonDetailPage: NextPage<Props> = ({ show, season }: Props) => {
           </div>
           <EpisodesContainer show={show} season={season} />
           <SeasonsContainer show={show} />
+          <RelatedMediaContainer
+            title="Similiar:"
+            results={show.similar}
+            type={MediaTypeEnum.TV_SHOW}
+          />
+          <RelatedMediaContainer
+            title="Recommendations:"
+            results={show.recommendations}
+            type={MediaTypeEnum.TV_SHOW}
+          />
         </div>
       </div>
     </>
