@@ -12,7 +12,10 @@ export function toHourMinutes(minutes: number): string {
  * @param date - the Date
  * @returns string
  */
-export function toReadableDate(date: Date): string {
+export function toReadableDate(date?: Date): string | undefined {
+  if (!date) {
+    return;
+  }
   return date.toLocaleString('en-us', {
     day: 'numeric',
     month: 'short',

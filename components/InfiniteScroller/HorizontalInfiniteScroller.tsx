@@ -14,7 +14,7 @@ interface ArrowProps {
 const Arrow = ({ children, disabled, onClick, className }: ArrowProps) => {
   return (
     <button
-      className={`disabled:opacity-0 h-full bg-zinc-800 border border-zinc-800 hover:bg-zinc-700 ${className}`}
+      className={`block disabled:hidden h-full bg-zinc-800 border border-zinc-800 hover:bg-zinc-700 ${className}`}
       disabled={disabled}
       onClick={onClick}
     >
@@ -119,7 +119,7 @@ const HorizontalInfiniteScroller = (props: Props) => {
         <RightArrow hasMore={props.hasMore} onLoadMore={props.onLoadMore} />
       }
       wrapperClassName={props.className}
-      itemClassName="mx-1"
+      itemClassName="mx-2"
     >
       {props.children}
     </ScrollMenu>

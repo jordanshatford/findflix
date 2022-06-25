@@ -106,7 +106,10 @@ export function getTVShowEpisodeWatchLink(
  * @param date - the string representation of a date
  * @returns - a date object
  */
-export function toDate(date: string): Date {
+export function toDate(date?: string): Date | undefined {
+  if (!date) {
+    return;
+  }
   const [year, month, day] = date.split('-');
   return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 }

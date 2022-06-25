@@ -106,6 +106,7 @@ export interface Season {
   overview: string;
   poster_path: string | null;
   season_number: number;
+  episode_count: number;
   episodes?: Episode[];
 }
 
