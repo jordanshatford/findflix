@@ -27,7 +27,7 @@ export function hasWatchLink(): boolean {
 export function isWatchable(
   media: Partial<types.Movie & types.Episode>
 ): boolean {
-  let date: Date | null = null;
+  let date: Date | undefined = undefined;
   if (media.release_date) {
     date = toDate(media.release_date);
   } else if (media.air_date) {
