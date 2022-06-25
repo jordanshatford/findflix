@@ -1,7 +1,5 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import axios from 'axios';
 import tmdb, {
   type PagedResults,
   type Movie,
@@ -15,6 +13,7 @@ import MediaCategoryTabs from '@/components/MediaCategoryTabs';
 import MetaHead from '@/components/MetaHead';
 import { VerticalInfiniteScroller } from '@/components/InfiniteScroller';
 import { toReadableString } from '@/common/utils';
+import { usePagedResults } from '@/common/hooks';
 
 interface Props {
   results: PagedResults<Partial<Movie & TVShow>>;
@@ -25,32 +24,8 @@ const MediaListPage: NextPage<Props> = ({ results }: Props) => {
   const type = router.query.type as MediaTypeEnum;
   const list = router.query.id as string;
 
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(results.page);
-  const [totalPages, setTotalPages] = useState(results.total_pages);
-  const [items, setItems] = useState<Partial<Movie & TVShow>[]>(
-    results.results
-  );
-  const [error, setError] = useState(false);
-
-  const getNextPage = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get<PagedResults<Partial<Movie & TVShow>>>(
-        `/api/${type}/${list}`,
-        { params: { page: page + 1 } }
-      );
-      const data = response.data;
-      setItems([...items, ...data.results]);
-      setPage(data.page);
-      setTotalPages(data.total_pages);
-    } catch (e: any) {
-      console.error(`Failed to fetch ${type} ${list} page: `, e);
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { loading, page, totalPages, items, getNextPage, error } =
+    usePagedResults<Partial<Movie & TVShow>>(`/api/${type}/${list}`, results);
 
   return (
     <>

@@ -1,40 +1,17 @@
 import type { NextPage, GetServerSideProps } from 'next';
-import { useState } from 'react';
-import axios from 'axios';
 import tmdb, { PagedResults, ListItem } from '@/services/tmdb';
 import MediaPoster from '@/components/MediaPoster';
 import MetaHead from '@/components/MetaHead';
 import { VerticalInfiniteScroller } from '@/components/InfiniteScroller';
+import { usePagedResults } from '@/common/hooks';
 
 interface Props {
   results: PagedResults<ListItem>;
 }
 
 const FavouritesListPage: NextPage<Props> = ({ results }: Props) => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [page, setPage] = useState<number>(results.page);
-  const [totalPages, setTotalPages] = useState<number>(results.total_pages);
-  const [items, setItems] = useState<ListItem[]>(results.results);
-  const [error, setError] = useState<boolean>(false);
-
-  const getNextPage = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get<PagedResults<ListItem>>(
-        '/api/favourites',
-        { params: { page: page + 1 } }
-      );
-      const data = response.data;
-      setItems([...items, ...data.results]);
-      setPage(data.page);
-      setTotalPages(data.total_pages);
-    } catch (e: any) {
-      console.error('Failed to fetch favourites page: ', e);
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { loading, page, totalPages, items, getNextPage, error } =
+    usePagedResults<ListItem>('/api/favourites', results);
 
   return (
     <>
