@@ -9,7 +9,8 @@ export default async function handler(
   const term: string = req.query.q as string;
   if (!term.length) {
     res.status(404).send({});
+  } else {
+    const results = await tmdb.search(term, page);
+    res.status(200).json(results);
   }
-  const results = await tmdb.search(term, page);
-  res.status(200).json(results);
 }

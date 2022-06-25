@@ -20,15 +20,11 @@ const SearchPage: NextPage<Props> = ({ results }: Props) => {
 
   useEffect(() => {
     const { q, ...others } = router.query;
-    if (query?.length && query.length > 0) {
-      router.replace({
-        query: { ...others, q: query },
-      });
-    } else {
-      router.replace({
-        query: { ...others },
-      });
-    }
+    const queryParams =
+      query?.length > 0 ? { ...others, q: query } : { ...others };
+    router.replace({
+      query: { ...queryParams },
+    });
   }, [query]);
 
   return (
