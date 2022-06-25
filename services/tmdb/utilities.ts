@@ -11,15 +11,6 @@ export function hasFavouritesAvailable(): boolean {
 }
 
 /**
- * Check whether a baseUrl is provided for watch links. These links allow
- * the user to watch a specific media content via its Movie DB id.
- * @returns - true if a watch url is available and false otherwise
- */
-export function hasWatchLink(): boolean {
-  return config.watchBaseURL !== undefined;
-}
-
-/**
  * Check if a peice of media is available to watch.
  * @param media - the media to check (Movie or Episode)
  * @returns
@@ -27,6 +18,9 @@ export function hasWatchLink(): boolean {
 export function isWatchable(
   media: Partial<types.Movie & types.Episode>
 ): boolean {
+  if (!config.watchBaseURL) {
+    return false;
+  }
   let date: Date | undefined = undefined;
   if (media.release_date) {
     date = toDate(media.release_date);
@@ -37,7 +31,7 @@ export function isWatchable(
     return false;
   }
   const today = new Date();
-  return today >= date && hasWatchLink();
+  return today >= date;
 }
 
 /**

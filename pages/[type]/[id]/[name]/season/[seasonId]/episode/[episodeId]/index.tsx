@@ -1,6 +1,4 @@
 import type { GetServerSideProps, NextPage } from 'next';
-import Link from 'next/link';
-import { Play } from 'phosphor-react';
 import tmdb, {
   MediaTypeEnum,
   DetailedTVShow,
@@ -19,14 +17,12 @@ interface Props {
   show: DetailedTVShow;
   season: Season;
   episode: Episode;
-  hasWatchLink?: boolean;
 }
 
 const EpisodeDetailPage: NextPage<Props> = ({
   show,
   season,
   episode,
-  hasWatchLink,
 }: Props) => {
   return (
     <>
@@ -67,26 +63,6 @@ const EpisodeDetailPage: NextPage<Props> = ({
                     ? episode.overview
                     : 'No overview available.'}
                 </p>
-                {hasWatchLink && (
-                  <Link
-                    href={{
-                      pathname: `/[type]/[id]/[name]/season/[seasonId]/episode/[episodeId]/watch`,
-                      query: {
-                        type: MediaTypeEnum.TV_SHOW,
-                        id: show.id,
-                        name: toURLSafe(show.name),
-                        seasonId: season.season_number,
-                        episodeId: episode.episode_number,
-                      },
-                    }}
-                    passHref
-                  >
-                    <a className="flex items-center text-white text-sm py-2 px-3 rounded-lg w-max bg-zinc-600">
-                      <Play size={15} weight="fill" className="mr-1" />
-                      Watch Now
-                    </a>
-                  </Link>
-                )}
               </div>
             </div>
           </div>
@@ -128,9 +104,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
         },
       };
     }
-    const hasWatchLink = tmdb.isWatchable(episode);
     return {
-      props: { show, season, episode, hasWatchLink },
+      props: { show, season, episode },
     };
   } catch (e) {
     return { notFound: true };

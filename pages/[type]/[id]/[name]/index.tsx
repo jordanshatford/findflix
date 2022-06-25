@@ -1,6 +1,4 @@
 import type { GetServerSideProps, NextPage } from 'next';
-import Link from 'next/link';
-import { Play } from 'phosphor-react';
 import tmdb, {
   MediaTypeEnum,
   DetailedMovie,
@@ -11,7 +9,6 @@ import BackdropImage from '@/components/BackdropImage';
 import MediaStats from '@/components/MediaStats';
 import MediaTags from '@/components/MediaTags';
 import MetaHead from '@/components/MetaHead';
-import { toURLSafe } from '@/common/utils';
 import {
   SeasonsContainer,
   RelatedMediaContainer,
@@ -20,14 +17,9 @@ import {
 interface Props {
   item: Partial<DetailedMovie & DetailedTVShow>;
   type: MediaTypeEnum;
-  hasWatchLink?: boolean;
 }
 
-const MediaDetailPage: NextPage<Props> = ({
-  item,
-  type,
-  hasWatchLink,
-}: Props) => {
+const MediaDetailPage: NextPage<Props> = ({ item, type }: Props) => {
   return (
     <>
       <MetaHead title={type === MediaTypeEnum.MOVIE ? item.title : item.name} />
@@ -59,26 +51,6 @@ const MediaDetailPage: NextPage<Props> = ({
                 <p className="text-sm text-justify text-zinc-300">
                   {item.overview}
                 </p>
-                {hasWatchLink && type === MediaTypeEnum.MOVIE && (
-                  <Link
-                    href={{
-                      pathname: `/[type]/[id]/[name]/watch`,
-                      query: {
-                        type,
-                        id: item.id,
-                        name: toURLSafe(
-                          type === MediaTypeEnum.MOVIE ? item.title : item.name
-                        ),
-                      },
-                    }}
-                    passHref
-                  >
-                    <a className="flex items-center text-white text-sm py-2 px-3 rounded-lg w-max bg-zinc-600">
-                      <Play size={15} weight="fill" className="mr-1" />
-                      Watch Now
-                    </a>
-                  </Link>
-                )}
               </div>
             </div>
           </div>
@@ -113,8 +85,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
           type === MediaTypeEnum.MOVIE
             ? await tmdb.getMovieDetails(id)
             : await tmdb.getTVShowDetails(id);
-        const hasWatchLink = tmdb.isWatchable(item);
-        return { props: { item, type, hasWatchLink } };
+        return { props: { item, type } };
       } catch (e) {
         return { notFound: true };
       }
