@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   return (
     <>
-      <AppProgressBar color="#be123c" height={4} />
+      <AppProgressBar color="#B91C1C" height={4} />
       <Navbar />
       <div className="w-full pt-20 relative overflow-y-auto bg-zinc-900 min-h-screen">
         <Component {...pageProps} key={router.asPath} />
