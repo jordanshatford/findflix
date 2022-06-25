@@ -12,6 +12,7 @@ import MetaHead from '@/components/MetaHead';
 import BackdropImage from '@/components/BackdropImage';
 import MediaTags from '@/components/MediaTags';
 import { EpisodesContainer, SeasonsContainer } from '@/components/Containers';
+import { Text, Title } from '@/components/Typography';
 
 interface Props {
   show: DetailedTVShow;
@@ -46,23 +47,21 @@ const EpisodeDetailPage: NextPage<Props> = ({
             <div className="w-full flex flex-col sm:flex-row justify-center sm:justify-start">
               <SeasonPoster show={show} season={season} isHoverable={false} />
               <div className="pt-2 sm:pl-5 flex flex-col gap-y-2 justify-end w-full">
-                <h2 className="font-semibold text-white text-3xl">
-                  {show.name}
-                </h2>
-                <p className="text-sm text-zinc-300">
+                <Title>{show.name}</Title>
+                <Text>
                   S{season.season_number} E{episode.episode_number} -{' '}
                   {episode.name}
-                </p>
+                </Text>
                 <MediaStats
                   airDate={tmdb.toDate(episode.air_date)}
                   voteAverage={episode.vote_average}
                 />
                 <MediaTags values={show?.genres} />
-                <p className="text-sm text-justify text-zinc-300">
+                <Text>
                   {episode.overview
                     ? episode.overview
                     : 'No overview available.'}
-                </p>
+                </Text>
               </div>
             </div>
           </div>

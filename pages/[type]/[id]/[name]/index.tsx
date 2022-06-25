@@ -13,6 +13,7 @@ import {
   SeasonsContainer,
   RelatedMediaContainer,
 } from '@/components/Containers';
+import { Text, Title } from '@/components/Typography';
 
 interface Props {
   item: Partial<DetailedMovie & DetailedTVShow>;
@@ -37,10 +38,10 @@ const MediaDetailPage: NextPage<Props> = ({ item, type }: Props) => {
             <div className="w-full flex flex-col sm:flex-row justify-center sm:justify-start">
               <MediaPoster item={item} type={type} isHoverable={false} />
               <div className="pt-2 sm:pl-5 flex flex-col gap-y-2 justify-end w-full">
-                <h2 className="font-semibold text-white text-3xl">
+                <Title>
                   {type === MediaTypeEnum.MOVIE ? item.title : item.name}
-                </h2>
-                <p className="text-sm text-zinc-300">{item.tagline}</p>
+                </Title>
+                <Text>{item.tagline}</Text>
                 <MediaStats
                   airDate={tmdb.toDate(
                     item.release_date ?? item.first_air_date
@@ -50,9 +51,7 @@ const MediaDetailPage: NextPage<Props> = ({ item, type }: Props) => {
                   seasons={item.seasons?.length}
                 />
                 <MediaTags values={item?.genres} />
-                <p className="text-sm text-justify text-zinc-300">
-                  {item.overview}
-                </p>
+                <Text>{item.overview}</Text>
               </div>
             </div>
           </div>
