@@ -21,7 +21,7 @@ const SeasonPoster = ({ show, season, isHoverable = true }: Props) => {
           seasonId: season.season_number,
         },
       }}
-      title={`Season ${season.season_number}`}
+      title={season.name}
       subtitle={`${season.episode_count} Episode(s)`}
       description={toReadableDate(tmdb.toDate(season.air_date))}
       isHoverable={isHoverable}

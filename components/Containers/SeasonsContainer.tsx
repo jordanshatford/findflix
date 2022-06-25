@@ -16,16 +16,14 @@ const SeasonsContainer = ({ show }: Props) => {
       {show?.seasons?.length ? (
         <Container title={`Seasons (${show.seasons.length}):`}>
           <HorizontalInfiniteScroller hasMore={false} onLoadMore={() => {}}>
-            {show.seasons
-              .filter((s) => s.season_number > 0)
-              .map((season) => (
-                <HorizontalInfiniteScroller.Item
-                  key={season.id}
-                  itemId={`${season.id}`}
-                >
-                  <SeasonPoster season={season} show={show} />
-                </HorizontalInfiniteScroller.Item>
-              ))}
+            {show.seasons.map((season) => (
+              <HorizontalInfiniteScroller.Item
+                key={season.id}
+                itemId={`${season.id}`}
+              >
+                <SeasonPoster season={season} show={show} />
+              </HorizontalInfiniteScroller.Item>
+            ))}
           </HorizontalInfiniteScroller>
         </Container>
       ) : null}
