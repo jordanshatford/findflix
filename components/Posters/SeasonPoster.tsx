@@ -11,7 +11,7 @@ interface Props {
 const SeasonPoster = ({ show, season, isHoverable = true }: Props) => {
   return (
     <Poster
-      imageUrl={tmdb.getImageLink(season.poster_path)}
+      imageUrl={tmdb.getImageLink(season?.poster_path ?? show?.poster_path)}
       href={{
         pathname: '/[type]/[id]/[name]/season/[seasonId]',
         query: {

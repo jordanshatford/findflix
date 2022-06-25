@@ -14,7 +14,7 @@ const SeasonsContainer = ({ show }: Props) => {
   return (
     <>
       {show?.seasons?.length ? (
-        <Container title="Seasons:">
+        <Container title={`Seasons (${show.seasons.length}):`}>
           <HorizontalInfiniteScroller hasMore={false} onLoadMore={() => {}}>
             {show.seasons
               .filter((s) => s.season_number > 0)

@@ -18,13 +18,13 @@ const RelatedMediaContainer = ({ results, type, title }: Props) => {
         <Container title={title}>
           <HorizontalInfiniteScroller hasMore={false} onLoadMore={() => {}}>
             {results.results.map((item) => (
-                <HorizontalInfiniteScroller.Item
-                  key={item.id}
-                  itemId={`${item.id}`}
-                >
-                  <MediaPoster item={item} type={type} />
-                </HorizontalInfiniteScroller.Item>
-              ))}
+              <HorizontalInfiniteScroller.Item
+                key={item.id}
+                itemId={`${item.id}`}
+              >
+                <MediaPoster item={item} type={type} />
+              </HorizontalInfiniteScroller.Item>
+            ))}
           </HorizontalInfiniteScroller>
         </Container>
       ) : null}
