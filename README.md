@@ -8,7 +8,7 @@
 [![Postcss](https://img.shields.io/badge/style-postcss-%23DD3A0A?style=flat&logo=postcss)](https://postcss.org)
 [![Prettier](https://img.shields.io/badge/code--formatter-prettier-%23F7B93E?style=flat&logo=prettier)](https://prettier.io/)
 [![Eslint](https://img.shields.io/badge/linter-eslint-%234B32C3?style=flat&logo=eslint)](https://eslint.org/)
-[![Hosted On Vercel](https://img.shields.io/badge/hosted%20on-vercel-%23000000.svg?style=flat&logo=vercel)](https://vercel.com/)
+[![Hosted On Netlify](https://img.shields.io/badge/hosted%20on-netlify-%2300C7B7.svg?style=flat&logo=netlify)](https://www.netlify.com/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat&logo=license)](https://github.com/jordanshatford/clip-queue/blob/main/LICENSE.md)
 
 FindFlix is a Next.js application created to allow users to find movies and television shows they want to watch. It utilizes the TMDb API to provide users with updated information about trending content.

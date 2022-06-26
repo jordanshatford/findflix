@@ -4,6 +4,6 @@
  * @return - string
  */
 export function toReadableString(str: string): string {
-  const spacedString = str.replaceAll('_', ' ');
+  const spacedString = str.split('_').join(' ');
   return spacedString.charAt(0).toUpperCase() + spacedString.slice(1);
 }

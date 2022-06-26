@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { MediaTypeEnum, MovieListEnum, TVShowListEnum } from '@/services/tmdb';
+import { toReadableString } from '@/common/utils';
 
 const MediaCategoryTabs = () => {
   const router = useRouter();
@@ -32,7 +33,7 @@ const MediaCategoryTabs = () => {
                     : 'text-zinc-100'
                 }`}
               >
-                {category.replaceAll('_', ' ')}
+                {toReadableString(category)}
               </a>
             </Link>
           ))}
