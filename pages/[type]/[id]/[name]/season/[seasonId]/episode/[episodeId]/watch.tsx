@@ -5,45 +5,35 @@ import tmdb, {
   Season,
   Episode,
 } from '@/services/tmdb';
-import { SeasonPoster } from '@/components/Posters';
-import { toURLSafe } from '@/common/utils';
-import MediaStats from '@/components/MediaStats';
-import MetaHead from '@/components/MetaHead';
-import BackdropImage from '@/components/BackdropImage';
-import MediaTags from '@/components/MediaTags';
 import {
+  MediaWatchPageContainer,
   EpisodesContainer,
   SeasonsContainer,
-  MediaPageContainer,
 } from '@/components/Containers';
-import { Text, Title } from '@/components/Typography';
+import MetaHead from '@/components/MetaHead';
+import MediaStats from '@/components/MediaStats';
+import { Title, Text } from '@/components/Typography';
 
 interface Props {
   show: DetailedTVShow;
   season: Season;
   episode: Episode;
+  watchLink: string;
 }
 
-const EpisodeDetailPage: NextPage<Props> = ({
+const EpisodeWatchPage: NextPage<Props> = ({
   show,
   season,
   episode,
+  watchLink,
 }: Props) => {
   return (
     <>
       <MetaHead
-        title={`S${season.season_number}E${episode.episode_number} - ${show.name}`}
+        title={`Watch S${season.season_number}E${episode.episode_number} - ${show.name}`}
       />
-      <BackdropImage
-        src={tmdb.getImageLink(
-          episode?.still_path ?? show.backdrop_path,
-          'original'
-        )}
-      />
-      <MediaPageContainer
-        poster={
-          <SeasonPoster show={show} season={season} isHoverable={false} />
-        }
+      <MediaWatchPageContainer
+        url={watchLink}
         additional={
           <>
             <EpisodesContainer show={show} season={season} />
@@ -58,17 +48,18 @@ const EpisodeDetailPage: NextPage<Props> = ({
         <MediaStats
           airDate={tmdb.toDate(episode.air_date)}
           voteAverage={episode.vote_average}
+          seasons={show.number_of_seasons}
+          episodes={season.episodes?.length ?? 0}
         />
-        <MediaTags values={show?.genres} />
         <Text>
           {episode.overview ? episode.overview : 'No overview available.'}
         </Text>
-      </MediaPageContainer>
+      </MediaWatchPageContainer>
     </>
   );
 };
 
-export default EpisodeDetailPage;
+export default EpisodeWatchPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params?.id as string;
@@ -81,23 +72,19 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   try {
     const show = await tmdb.getTVShowDetails(id);
     const season = await tmdb.getTVShowSeason(id, seasonId);
-    const episodeNumber = parseInt(episodeId, 10);
-    const episode = season?.episodes?.find(
-      (e) => e.episode_number === episodeNumber
-    );
-
-    if (episode === undefined) {
-      return {
-        redirect: {
-          destination: `/${MediaTypeEnum.TV_SHOW}/${show.id}/${toURLSafe(
-            show.name
-          )}/season/${season.season_number}`,
-          permanent: true,
-        },
-      };
+    const eNum = parseInt(episodeId, 10);
+    const episode = season?.episodes?.find((e) => e.episode_number === eNum);
+    if (episode === undefined || !tmdb.isWatchable(episode)) {
+      return { notFound: true };
     }
+    const watchLink = tmdb.getTVShowEpisodeWatchLink(show, episode);
     return {
-      props: { show, season, episode },
+      props: {
+        show,
+        season,
+        episode,
+        watchLink,
+      },
     };
   } catch (e) {
     return { notFound: true };

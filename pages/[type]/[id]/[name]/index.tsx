@@ -66,7 +66,8 @@ const MediaDetailPage: NextPage<Props> = ({ item, type }: Props) => {
 export default MediaDetailPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { id, type } = params as { id: string; type: MediaTypeEnum };
+  const id = params?.id as string;
+  const type = params?.type as MediaTypeEnum;
   switch (type) {
     case MediaTypeEnum.MOVIE:
     case MediaTypeEnum.TV_SHOW: {

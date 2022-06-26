@@ -66,11 +66,9 @@ const SeasonDetailPage: NextPage<Props> = ({ show, season }: Props) => {
 export default SeasonDetailPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const { id, type, seasonId } = params as {
-    id: string;
-    type: MediaTypeEnum;
-    seasonId: string;
-  };
+  const id = params?.id as string;
+  const type = params?.type as MediaTypeEnum;
+  const seasonId = params?.seasonId as string;
   if (type !== MediaTypeEnum.TV_SHOW) {
     return { notFound: true };
   }
