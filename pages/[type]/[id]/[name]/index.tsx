@@ -35,11 +35,13 @@ const MediaDetailPage: NextPage<Props> = ({ item, type }: Props) => {
             )}
             <RelatedMediaContainer
               title="Similiar:"
+              url={`/api/${type}/${item.id}/similar`}
               results={item.similar}
               type={type}
             />
             <RelatedMediaContainer
               title="Recommendations:"
+              url={`/api/${type}/${item.id}/recommendations`}
               results={item.recommendations}
               type={type}
             />

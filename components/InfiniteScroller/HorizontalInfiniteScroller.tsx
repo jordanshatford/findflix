@@ -68,7 +68,7 @@ const RightArrow = ({ hasMore, onLoadMore }: RightArrowProps) => {
   );
 
   useEffect(() => {
-    if (isLastItemVisible) {
+    if (isLastItemVisible && hasMore) {
       onLoadMore();
     }
     if (!hasMore) {

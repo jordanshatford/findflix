@@ -3,9 +3,7 @@ import tmdb, {
   type PagedResults,
   type Movie,
   TVShow,
-  MovieListEnum,
   MediaTypeEnum,
-  TVShowListEnum,
 } from '@/services/tmdb';
 
 export default async function handler(
@@ -13,25 +11,22 @@ export default async function handler(
   res: NextApiResponse<Partial<PagedResults<Partial<Movie & TVShow>>>>
 ) {
   const type = req.query.type as MediaTypeEnum;
+  const id = req.query.id as string;
   const page: number = parseInt(req.query.page as string) || 1;
+
+  if (!id) {
+    res.status(404).json({});
+    return;
+  }
+
   switch (type) {
     case MediaTypeEnum.MOVIE: {
-      const list = req.query.list as MovieListEnum;
-      if (!Object.values(MovieListEnum).includes(list)) {
-        res.status(404).json({});
-        return;
-      }
-      const results = await tmdb.getMovieListPagedResults(list, page);
+      const results = await tmdb.getMovieRecommendations(id, page);
       res.status(200).json(results);
       break;
     }
     case MediaTypeEnum.TV_SHOW: {
-      const list = req.query.list as TVShowListEnum;
-      if (!Object.values(TVShowListEnum).includes(list)) {
-        res.status(404).json({});
-        return;
-      }
-      const results = await tmdb.getTVShowListPagedResults(list, page);
+      const results = await tmdb.getTVRecommendations(id, page);
       res.status(200).json(results);
       break;
     }

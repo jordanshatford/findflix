@@ -34,11 +34,13 @@ const SeasonDetailPage: NextPage<Props> = ({ show, season }: Props) => {
             <SeasonsContainer show={show} />
             <RelatedMediaContainer
               title="Similiar:"
+              url={`/api/${MediaTypeEnum.TV_SHOW}/${show.id}/similar`}
               results={show.similar}
               type={MediaTypeEnum.TV_SHOW}
             />
             <RelatedMediaContainer
               title="Recommendations:"
+              url={`/api/${MediaTypeEnum.TV_SHOW}/${show.id}/recommendations`}
               results={show.recommendations}
               type={MediaTypeEnum.TV_SHOW}
             />

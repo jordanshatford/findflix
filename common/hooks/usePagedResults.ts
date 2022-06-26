@@ -22,6 +22,9 @@ export default function usePagedResults<T>(
   }, []);
 
   const getNextPage = async () => {
+    if (loading) {
+      return;
+    }
     setLoading(true);
     try {
       const response = await axios.get<PagedResults<T>>(url, {

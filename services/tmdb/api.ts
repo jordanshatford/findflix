@@ -58,6 +58,32 @@ export async function getMovieDetails(
   return data.data;
 }
 
+export async function getMovieSimilar(
+  id: string,
+  page: number = 1
+): Promise<types.PagedResults<types.Movie>> {
+  const data = await v3Client.get<types.PagedResults<types.Movie>>(
+    `/movie/${id}/similar`,
+    {
+      params: { page },
+    }
+  );
+  return data.data;
+}
+
+export async function getMovieRecommendations(
+  id: string,
+  page: number = 1
+): Promise<types.PagedResults<types.Movie>> {
+  const data = await v3Client.get<types.PagedResults<types.Movie>>(
+    `/movie/${id}/recommendations`,
+    {
+      params: { page },
+    }
+  );
+  return data.data;
+}
+
 export async function getTVShowListPagedResults(
   list: types.TVShowListEnum,
   page: number = 1
@@ -94,6 +120,32 @@ export async function getTVShowSeason(
   seasonId: string
 ): Promise<types.Season> {
   const data = await v3Client.get<types.Season>(`/tv/${id}/season/${seasonId}`);
+  return data.data;
+}
+
+export async function getTVSimilar(
+  id: string,
+  page: number = 1
+): Promise<types.PagedResults<types.TVShow>> {
+  const data = await v3Client.get<types.PagedResults<types.TVShow>>(
+    `/tv/${id}/similar`,
+    {
+      params: { page },
+    }
+  );
+  return data.data;
+}
+
+export async function getTVRecommendations(
+  id: string,
+  page: number = 1
+): Promise<types.PagedResults<types.TVShow>> {
+  const data = await v3Client.get<types.PagedResults<types.TVShow>>(
+    `/tv/${id}/recommendations`,
+    {
+      params: { page },
+    }
+  );
   return data.data;
 }
 
