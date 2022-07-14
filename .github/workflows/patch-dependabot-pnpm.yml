@@ -20,6 +20,7 @@ jobs:
         with:
           version: 7.5.1
       - run: pnpm i --lockfile-only
+      - run: pnpm format:fix
       - run: |
           git config --global user.name github-actions[bot]
           git config --global user.email github-actions[bot]@users.noreply.github.com
