@@ -3,15 +3,15 @@
 
 version: 2
 updates:
-  - package-ecosystem: "docker"
-    directory: "/"
+  - package-ecosystem: 'docker'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     assignees:
-      - "jordanshatford"
-  - package-ecosystem: "github-actions"
-    directory: "/"
+      - 'jordanshatford'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
     assignees:
-      - "jordanshatford"
+      - 'jordanshatford'
