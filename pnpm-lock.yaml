@@ -18,7 +18,7 @@ specifiers:
   phosphor-react: ^1.4.1
   postcss: ^8.4.14
   prettier: ^2.6.2
-  react: 18.1.0
+  react: 18.2.0
   react-dom: 18.1.0
   react-horizontal-scrolling-menu: ^3.0.1
   react-infinite-scroll-hook: ^4.0.3
@@ -29,14 +29,14 @@ dependencies:
   '@fontsource/poppins': 4.5.8
   '@tailwindcss/line-clamp': 0.4.0_tailwindcss@3.0.24
   axios: 0.27.2
-  framer-motion: 6.3.3_ef5jwxihqo6n7gxfmzogljlgcm
-  next: 12.1.6_ef5jwxihqo6n7gxfmzogljlgcm
+  framer-motion: 6.3.3_3cfkrkynzts6qfsozcm5ednswi
+  next: 12.1.6_3cfkrkynzts6qfsozcm5ednswi
   nprogress: 0.2.0
-  phosphor-react: 1.4.1_react@18.1.0
-  react: 18.1.0
-  react-dom: 18.1.0_react@18.1.0
-  react-horizontal-scrolling-menu: 3.0.1_react@18.1.0
-  react-infinite-scroll-hook: 4.0.3_react@18.1.0
+  phosphor-react: 1.4.1_react@18.2.0
+  react: 18.2.0
+  react-dom: 18.1.0_react@18.2.0
+  react-horizontal-scrolling-menu: 3.0.1_react@18.2.0
+  react-infinite-scroll-hook: 4.0.3_react@18.2.0
 
 devDependencies:
   '@types/node': 18.0.4
@@ -1540,7 +1540,7 @@ packages:
       }
     dev: true
 
-  /framer-motion/6.3.3_ef5jwxihqo6n7gxfmzogljlgcm:
+  /framer-motion/6.3.3_3cfkrkynzts6qfsozcm5ednswi:
     resolution:
       {
         integrity: sha512-wo0dCnoq5vn4L8YVOPO9W54dliH78vDaX0Lj+bSPUys6Nt5QaehrS3uaYa0q5eVeikUgtTjz070UhQ94thI5Sw==,
@@ -1552,8 +1552,8 @@ packages:
       framesync: 6.0.1
       hey-listen: 1.0.8
       popmotion: 11.0.3
-      react: 18.1.0
-      react-dom: 18.1.0_react@18.1.0
+      react: 18.2.0
+      react-dom: 18.1.0_react@18.2.0
       style-value-types: 5.0.0
       tslib: 2.4.0
     optionalDependencies:
@@ -2162,7 +2162,7 @@ packages:
     resolution: { integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc= }
     dev: true
 
-  /next/12.1.6_ef5jwxihqo6n7gxfmzogljlgcm:
+  /next/12.1.6_3cfkrkynzts6qfsozcm5ednswi:
     resolution:
       {
         integrity: sha512-cebwKxL3/DhNKfg9tPZDQmbRKjueqykHHbgaoG4VBRH3AHQJ2HO0dbKFiS1hPhe1/qgc2d/hFeadsbPicmLD+A==,
@@ -2186,9 +2186,9 @@ packages:
       '@next/env': 12.1.6
       caniuse-lite: 1.0.30001341
       postcss: 8.4.5
-      react: 18.1.0
-      react-dom: 18.1.0_react@18.1.0
-      styled-jsx: 5.0.2_react@18.1.0
+      react: 18.2.0
+      react-dom: 18.1.0_react@18.2.0
+      styled-jsx: 5.0.2_react@18.2.0
     optionalDependencies:
       '@next/swc-android-arm-eabi': 12.1.6
       '@next/swc-android-arm64': 12.1.6
@@ -2413,7 +2413,7 @@ packages:
     engines: { node: '>=8' }
     dev: true
 
-  /phosphor-react/1.4.1_react@18.1.0:
+  /phosphor-react/1.4.1_react@18.2.0:
     resolution:
       {
         integrity: sha512-gO5j7U0xZrdglTAYDYPACU4xDOFBTJmptrrB/GeR+tHhCZF3nUMyGmV/0hnloKjuTrOmpSFlbfOY78H39rgjUQ==,
@@ -2422,7 +2422,7 @@ packages:
     peerDependencies:
       react: '>=16'
     dependencies:
-      react: 18.1.0
+      react: 18.2.0
     dev: false
 
   /picocolors/1.0.0:
@@ -2581,7 +2581,7 @@ packages:
       }
     engines: { node: '>=10' }
 
-  /react-dom/18.1.0_react@18.1.0:
+  /react-dom/18.1.0_react@18.2.0:
     resolution:
       {
         integrity: sha512-fU1Txz7Budmvamp7bshe4Zi32d0ll7ect+ccxNu9FlObT605GOEB8BfO4tmRJ39R5Zj831VCpvQ05QPBW5yb+w==,
@@ -2590,11 +2590,11 @@ packages:
       react: ^18.1.0
     dependencies:
       loose-envify: 1.4.0
-      react: 18.1.0
+      react: 18.2.0
       scheduler: 0.22.0
     dev: false
 
-  /react-horizontal-scrolling-menu/3.0.1_react@18.1.0:
+  /react-horizontal-scrolling-menu/3.0.1_react@18.2.0:
     resolution:
       {
         integrity: sha512-9gVeTVxIgnsQ3mcs1Pzg/GlZ+DtQ1l5SOqM2MjDHyeWPL9+4KIwWVFV0ejCBt01C/C9M1+qCBLuE0x1XueUpXA==,
@@ -2602,11 +2602,11 @@ packages:
     peerDependencies:
       react: '>=16.8'
     dependencies:
-      react: 18.1.0
+      react: 18.2.0
       smooth-scroll-into-view-if-needed: 1.1.33
     dev: false
 
-  /react-infinite-scroll-hook/4.0.3_react@18.1.0:
+  /react-infinite-scroll-hook/4.0.3_react@18.2.0:
     resolution:
       {
         integrity: sha512-5B3YuWODFq9j2m1J+Shk24QR2WDV0U9oQAaxR8ddFge8oC8Ls54EmkQxwelOjyv1jub4bP0jjSK7v+fM5QwWmg==,
@@ -2615,11 +2615,11 @@ packages:
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
-      react: 18.1.0
-      react-intersection-observer-hook: 2.0.4_react@18.1.0
+      react: 18.2.0
+      react-intersection-observer-hook: 2.0.4_react@18.2.0
     dev: false
 
-  /react-intersection-observer-hook/2.0.4_react@18.1.0:
+  /react-intersection-observer-hook/2.0.4_react@18.2.0:
     resolution:
       {
         integrity: sha512-bBZSuv5+CNAH3eA5U52McmkR/Obn23igBL3/MuYzlRvALrweSxqvT35cwWnaFkqUh6SjvYRfJncDpaqejAr9oA==,
@@ -2627,7 +2627,7 @@ packages:
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
-      react: 18.1.0
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:
@@ -2637,10 +2637,10 @@ packages:
       }
     dev: true
 
-  /react/18.1.0:
+  /react/18.2.0:
     resolution:
       {
-        integrity: sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ==,
+        integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==,
       }
     engines: { node: '>=0.10.0' }
     dependencies:
@@ -2901,7 +2901,7 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /styled-jsx/5.0.2_react@18.1.0:
+  /styled-jsx/5.0.2_react@18.2.0:
     resolution:
       {
         integrity: sha512-LqPQrbBh3egD57NBcHET4qcgshPks+yblyhPlH2GY8oaDgKs8SK4C3dBh3oSJjgzJ3G5t1SYEZGHkP+QEpX9EQ==,
@@ -2917,7 +2917,7 @@ packages:
       babel-plugin-macros:
         optional: true
     dependencies:
-      react: 18.1.0
+      react: 18.2.0
     dev: false
 
   /supports-color/7.2.0:
