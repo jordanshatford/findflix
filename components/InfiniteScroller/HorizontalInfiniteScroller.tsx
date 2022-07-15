@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState, useContext } from 'react';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
-import { CaretLeft, CaretRight } from 'phosphor-react';
+import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/outline';
 
 interface ArrowProps {
   children: ReactNode;
@@ -45,7 +45,7 @@ const LeftArrow = () => {
       disabled={disabled}
       onClick={() => scrollPrev()}
     >
-      <CaretLeft size={30} className="h-full flex align-middle text-white" />
+      <ChevronLeftIcon className="w-7 h-7 h-full flex align-middle text-white" />
     </Arrow>
   );
 };
@@ -82,7 +82,7 @@ const RightArrow = ({ hasMore, onLoadMore }: RightArrowProps) => {
       disabled={disabled}
       onClick={() => scrollNext()}
     >
-      <CaretRight size={30} className="h-full flex align-middle text-white" />
+      <ChevronRightIcon className="w-7 h-7 h-full flex align-middle text-white" />
     </Arrow>
   );
 };

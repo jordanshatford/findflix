@@ -1,5 +1,5 @@
-import { MagnifyingGlass } from 'phosphor-react';
 import { useState } from 'react';
+import { SearchIcon } from '@heroicons/react/outline';
 
 interface Props {
   onSearch: (value: string) => void;
@@ -24,7 +24,7 @@ const SearchBar = ({ onSearch, value = '' }: Props) => {
         onClick={() => onSearch(innerValue)}
         className="bg-zinc-800 border rounded-tr-lg rounded-br-lg border-zinc-800 hover:bg-zinc-700"
       >
-        <MagnifyingGlass size={25} className="my-auto mx-2 text-zinc-200" />
+        <SearchIcon className="w-6 h-6 my-auto mx-2 text-zinc-200" />
       </button>
     </div>
   );

@@ -1,8 +1,8 @@
-import { List, X } from 'phosphor-react';
-import NavbarItem from '@/components/Navbar/NavbarItem';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import { MediaTypeEnum } from '@/services/tmdb';
+import NavbarItem from '@/components/Navbar/NavbarItem';
 
 const Navbar = () => {
   const router = useRouter();
@@ -36,17 +36,15 @@ const Navbar = () => {
         <div className="relative flex items-center justify-between h-16">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden text-zinc-200">
             {showMobileMenu && (
-              <X
-                size={30}
+              <XIcon
                 onClick={() => setShowMobileMenu(false)}
-                className="cursor-pointer hover:text-red-800"
+                className="w-8 h-8 cursor-pointer hover:text-red-800"
               />
             )}
             {!showMobileMenu && (
-              <List
-                size={30}
+              <MenuIcon
                 onClick={() => setShowMobileMenu(true)}
-                className="cursor-pointer"
+                className="w-8 h-8 cursor-pointer"
               />
             )}
           </div>

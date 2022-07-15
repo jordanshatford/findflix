@@ -12,12 +12,12 @@
   },
   "dependencies": {
     "@fontsource/poppins": "^4.5.8",
+    "@heroicons/react": "^1.0.6",
     "@tailwindcss/line-clamp": "^0.4.0",
     "axios": "^0.27.2",
     "framer-motion": "^6.3.3",
     "next": "12.2.2",
     "nprogress": "^0.2.0",
-    "phosphor-react": "^1.4.1",
     "react": "18.2.0",
     "react-dom": "18.1.0",
     "react-horizontal-scrolling-menu": "^3.0.1",
