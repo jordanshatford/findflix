@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@fontsource/poppins': ^4.5.8
+  '@heroicons/react': ^1.0.6
   '@tailwindcss/line-clamp': ^0.4.0
   '@types/node': 18.0.4
   '@types/nprogress': ^0.2.0
@@ -15,7 +16,6 @@ specifiers:
   framer-motion: ^6.3.3
   next: 12.2.2
   nprogress: ^0.2.0
-  phosphor-react: ^1.4.1
   postcss: ^8.4.14
   prettier: ^2.6.2
   react: 18.2.0
@@ -27,12 +27,12 @@ specifiers:
 
 dependencies:
   '@fontsource/poppins': 4.5.8
+  '@heroicons/react': 1.0.6_react@18.2.0
   '@tailwindcss/line-clamp': 0.4.0_tailwindcss@3.0.24
   axios: 0.27.2
   framer-motion: 6.3.3_3cfkrkynzts6qfsozcm5ednswi
   next: 12.2.2_3cfkrkynzts6qfsozcm5ednswi
   nprogress: 0.2.0
-  phosphor-react: 1.4.1_react@18.2.0
   react: 18.2.0
   react-dom: 18.1.0_react@18.2.0
   react-horizontal-scrolling-menu: 3.0.1_react@18.2.0
@@ -118,6 +118,17 @@ packages:
       {
         integrity: sha512-HE9yLDxYJEcxooVrYvvEhtyxaYU32hQIx1+npKegVefceE0l0zi0ePqKWWxYxkFpyy6WuZSQ+9rai3INnYKEJA==,
       }
+    dev: false
+
+  /@heroicons/react/1.0.6_react@18.2.0:
+    resolution:
+      {
+        integrity: sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==,
+      }
+    peerDependencies:
+      react: '>= 16'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@humanwhocodes/config-array/0.9.5:
@@ -2436,18 +2447,6 @@ packages:
       }
     engines: { node: '>=8' }
     dev: true
-
-  /phosphor-react/1.4.1_react@18.2.0:
-    resolution:
-      {
-        integrity: sha512-gO5j7U0xZrdglTAYDYPACU4xDOFBTJmptrrB/GeR+tHhCZF3nUMyGmV/0hnloKjuTrOmpSFlbfOY78H39rgjUQ==,
-      }
-    engines: { node: '>=10' }
-    peerDependencies:
-      react: '>=16'
-    dependencies:
-      react: 18.2.0
-    dev: false
 
   /picocolors/1.0.0:
     resolution:

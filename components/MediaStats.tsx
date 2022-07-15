@@ -1,10 +1,9 @@
 import {
-  IconContext,
-  Calendar,
-  Clock,
-  Star,
-  MonitorPlay,
-} from 'phosphor-react';
+  CalendarIcon,
+  ClockIcon,
+  StarIcon,
+  DesktopComputerIcon,
+} from '@heroicons/react/solid';
 import { toHourMinutes, toReadableDate } from '@/common/utils';
 
 interface Props {
@@ -21,43 +20,36 @@ const MediaStats = (props: Props) => {
     <div
       className={`flex gap-1 items-center text-xs text-zinc-300 ${props.className}`}
     >
-      <IconContext.Provider
-        value={{
-          size: 20,
-          weight: 'fill',
-        }}
-      >
-        {props.airDate && (
-          <>
-            <Calendar />
-            <span>{toReadableDate(props.airDate)}</span>
-          </>
-        )}
-        {props.voteAverage && (
-          <>
-            <Star className="ml-1" />
-            <span>{props.voteAverage}</span>
-          </>
-        )}
-        {props.duration && (
-          <>
-            <Clock className="ml-1" />
-            <span>{toHourMinutes(props.duration)}</span>
-          </>
-        )}
-        {props.seasons && (
-          <>
-            <MonitorPlay className="ml-1" />
-            <span>{props.seasons} season(s)</span>
-          </>
-        )}
-        {props.episodes && (
-          <>
-            <MonitorPlay className="ml-1" />
-            <span>{props.episodes} episode(s)</span>
-          </>
-        )}
-      </IconContext.Provider>
+      {props.airDate && (
+        <>
+          <CalendarIcon className="w-5 h-5" />
+          <span>{toReadableDate(props.airDate)}</span>
+        </>
+      )}
+      {props.voteAverage && (
+        <>
+          <StarIcon className="ml-1 w-5 h-5" />
+          <span>{props.voteAverage}</span>
+        </>
+      )}
+      {props.duration && (
+        <>
+          <ClockIcon className="ml-1 w-5 h-5" />
+          <span>{toHourMinutes(props.duration)}</span>
+        </>
+      )}
+      {props.seasons && (
+        <>
+          <DesktopComputerIcon className="ml-1 w-5 h-5" />
+          <span>{props.seasons} season(s)</span>
+        </>
+      )}
+      {props.episodes && (
+        <>
+          <DesktopComputerIcon className="ml-1 w-5 h-5" />
+          <span>{props.episodes} episode(s)</span>
+        </>
+      )}
     </div>
   );
 };

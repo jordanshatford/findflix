@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
-import { ArrowSquareOut } from 'phosphor-react';
+import { ExternalLinkIcon } from '@heroicons/react/outline';
 
 const TMDbPage: NextPage = () => {
   const tmdbLink = 'https://www.themoviedb.org/';
@@ -30,7 +30,7 @@ const TMDbPage: NextPage = () => {
             className="mt-2 flex gap-x-1 justify-center align-middle cursor-pointer text-xl hover:text-red-700"
           >
             Link
-            <ArrowSquareOut size={24} />
+            <ExternalLinkIcon className="w-6 h-6" />
           </a>
         </div>
       </div>
