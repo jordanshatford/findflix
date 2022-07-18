@@ -16,7 +16,7 @@ The frontend also utilizes other technologies like:
 
 To setup the frontend for local development you must first ensure that you have the following dependencies installed:
 
-- [NodeJS](https://nodejs.org/en/) (version v15 or above)
+- [NodeJS](https://nodejs.org/en/)
 - [PNPM](https://pnpm.io/)
 
 Now you can install the project specific dependencies using:
